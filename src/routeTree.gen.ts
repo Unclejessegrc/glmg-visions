@@ -9,8 +9,68 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkRouteImport } from './routes/work'
+import { Route as WeddingsRouteImport } from './routes/weddings'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PackagesRouteImport } from './routes/packages'
+import { Route as MusicVideosRouteImport } from './routes/music-videos'
+import { Route as EventsRecapsRouteImport } from './routes/events-recaps'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BusinessVideoRouteImport } from './routes/business-video'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WorkRoute = WorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeddingsRoute = WeddingsRouteImport.update({
+  id: '/weddings',
+  path: '/weddings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PackagesRoute = PackagesRouteImport.update({
+  id: '/packages',
+  path: '/packages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MusicVideosRoute = MusicVideosRouteImport.update({
+  id: '/music-videos',
+  path: '/music-videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRecapsRoute = EventsRecapsRouteImport.update({
+  id: '/events-recaps',
+  path: '/events-recaps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BusinessVideoRoute = BusinessVideoRouteImport.update({
+  id: '/business-video',
+  path: '/business-video',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +79,172 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/business-video': typeof BusinessVideoRoute
+  '/contact': typeof ContactRoute
+  '/events-recaps': typeof EventsRecapsRoute
+  '/music-videos': typeof MusicVideosRoute
+  '/packages': typeof PackagesRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/weddings': typeof WeddingsRoute
+  '/work': typeof WorkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/business-video': typeof BusinessVideoRoute
+  '/contact': typeof ContactRoute
+  '/events-recaps': typeof EventsRecapsRoute
+  '/music-videos': typeof MusicVideosRoute
+  '/packages': typeof PackagesRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/weddings': typeof WeddingsRoute
+  '/work': typeof WorkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/business-video': typeof BusinessVideoRoute
+  '/contact': typeof ContactRoute
+  '/events-recaps': typeof EventsRecapsRoute
+  '/music-videos': typeof MusicVideosRoute
+  '/packages': typeof PackagesRoute
+  '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/weddings': typeof WeddingsRoute
+  '/work': typeof WorkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/business-video'
+    | '/contact'
+    | '/events-recaps'
+    | '/music-videos'
+    | '/packages'
+    | '/services'
+    | '/sitemap.xml'
+    | '/weddings'
+    | '/work'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/business-video'
+    | '/contact'
+    | '/events-recaps'
+    | '/music-videos'
+    | '/packages'
+    | '/services'
+    | '/sitemap.xml'
+    | '/weddings'
+    | '/work'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/business-video'
+    | '/contact'
+    | '/events-recaps'
+    | '/music-videos'
+    | '/packages'
+    | '/services'
+    | '/sitemap.xml'
+    | '/weddings'
+    | '/work'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BusinessVideoRoute: typeof BusinessVideoRoute
+  ContactRoute: typeof ContactRoute
+  EventsRecapsRoute: typeof EventsRecapsRoute
+  MusicVideosRoute: typeof MusicVideosRoute
+  PackagesRoute: typeof PackagesRoute
+  ServicesRoute: typeof ServicesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  WeddingsRoute: typeof WeddingsRoute
+  WorkRoute: typeof WorkRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/work': {
+      id: '/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof WorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weddings': {
+      id: '/weddings'
+      path: '/weddings'
+      fullPath: '/weddings'
+      preLoaderRoute: typeof WeddingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/packages': {
+      id: '/packages'
+      path: '/packages'
+      fullPath: '/packages'
+      preLoaderRoute: typeof PackagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/music-videos': {
+      id: '/music-videos'
+      path: '/music-videos'
+      fullPath: '/music-videos'
+      preLoaderRoute: typeof MusicVideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events-recaps': {
+      id: '/events-recaps'
+      path: '/events-recaps'
+      fullPath: '/events-recaps'
+      preLoaderRoute: typeof EventsRecapsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/business-video': {
+      id: '/business-video'
+      path: '/business-video'
+      fullPath: '/business-video'
+      preLoaderRoute: typeof BusinessVideoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +257,17 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BusinessVideoRoute: BusinessVideoRoute,
+  ContactRoute: ContactRoute,
+  EventsRecapsRoute: EventsRecapsRoute,
+  MusicVideosRoute: MusicVideosRoute,
+  PackagesRoute: PackagesRoute,
+  ServicesRoute: ServicesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  WeddingsRoute: WeddingsRoute,
+  WorkRoute: WorkRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

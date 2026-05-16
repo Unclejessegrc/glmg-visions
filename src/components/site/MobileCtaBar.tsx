@@ -1,0 +1,35 @@
+import { Link } from "@tanstack/react-router";
+import { Phone, MessageSquare, DollarSign } from "lucide-react";
+
+export function MobileCtaBar() {
+  return (
+    <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur border-t border-border">
+      <div className="grid grid-cols-3 divide-x divide-border">
+        <a
+          href="tel:+14015551234"
+          className="flex flex-col items-center py-3 text-foreground"
+          data-analytics="click_call"
+        >
+          <Phone className="w-5 h-5 mb-0.5" />
+          <span className="text-xs uppercase tracking-wider">Call</span>
+        </a>
+        <a
+          href="sms:+14015551234"
+          className="flex flex-col items-center py-3 text-foreground"
+          data-analytics="click_text"
+        >
+          <MessageSquare className="w-5 h-5 mb-0.5" />
+          <span className="text-xs uppercase tracking-wider">Text</span>
+        </a>
+        <Link
+          to="/contact"
+          className="flex flex-col items-center py-3 bg-primary text-primary-foreground"
+          data-analytics="cta_click_pricing"
+        >
+          <DollarSign className="w-5 h-5 mb-0.5" />
+          <span className="text-xs uppercase tracking-wider font-semibold">Pricing</span>
+        </Link>
+      </div>
+    </div>
+  );
+}
