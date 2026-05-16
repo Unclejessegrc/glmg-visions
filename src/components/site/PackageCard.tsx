@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 
 export interface PackageData {
@@ -36,15 +35,13 @@ export function PackageCard({ pkg }: { pkg: PackageData }) {
           </li>
         ))}
       </ul>
-      <Link
-        to="/contact"
-        search={{ projectType: pkg.category, package: pkg.name } as any}
+      <a
         href={`/contact?${params.toString()}`}
         className="mt-6 inline-flex justify-center items-center bg-primary text-primary-foreground px-5 py-3 rounded-md uppercase tracking-wider text-sm font-medium hover:opacity-90"
         data-analytics="cta_click_pricing"
       >
         Request this package
-      </Link>
+      </a>
     </div>
   );
 }
