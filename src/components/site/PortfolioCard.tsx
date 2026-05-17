@@ -37,8 +37,12 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
           <div className="relative">
             <h3 className="font-display text-xl md:text-2xl uppercase">{item.title}</h3>
             <p className="text-sm text-zinc-300/90 mt-1">{item.description}</p>
-            <span className="mt-3 inline-flex text-xs uppercase tracking-widest text-primary">
-              I want something like this →
+            {item.deliverables && (
+              <p className="text-xs text-zinc-300/80 mt-2">Deliverables: {item.deliverables}</p>
+            )}
+            <span className="mt-3 inline-flex flex-wrap gap-x-4 gap-y-1 text-xs uppercase tracking-widest text-primary">
+              <span>I want something like this →</span>
+              <span>Get a quote →</span>
             </span>
           </div>
         </button>
