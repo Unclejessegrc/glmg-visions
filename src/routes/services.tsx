@@ -139,9 +139,17 @@ function ServicesPage() {
                   <p className="timecode">Pricing</p>
                   <p className="font-display text-2xl text-primary">{s.price}</p>
                 </div>
-                <Link to={s.to as any} className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90">
-                  Explore <ArrowRight className="w-4 h-4" />
-                </Link>
+                <div className="grid gap-2 w-full md:w-auto">
+                  <Link to={s.to as any} className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90">
+                    View package <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <a
+                    href={`/contact?projectType=${encodeURIComponent(s.title)}`}
+                    className="inline-flex items-center justify-center border border-foreground/30 px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10"
+                  >
+                    I need this filmed
+                  </a>
+                </div>
               </div>
             </article>
           ))}
