@@ -25,7 +25,7 @@ function WorkPage() {
 
   return (
     <SiteLayout>
-      <section className="pt-20 pb-12 md:pt-28 md:pb-16">
+      <section className="pt-24 pb-12 md:pt-28 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="timecode mb-3">● PORTFOLIO</p>
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] max-w-4xl">
@@ -37,7 +37,7 @@ function WorkPage() {
         </div>
       </section>
 
-      <section className="pb-8">
+      <section className="pb-8 scroll-mt-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-2">
             {CATEGORIES.map(c => (
