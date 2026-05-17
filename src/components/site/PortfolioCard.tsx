@@ -14,7 +14,7 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
             <img
               src={item.thumbnailUrl}
               alt={item.title}
-              className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-300"
+              className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/15" />
