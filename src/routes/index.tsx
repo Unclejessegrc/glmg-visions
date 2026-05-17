@@ -6,8 +6,7 @@ import { PORTFOLIO } from "@/data/portfolio";
 import { CONTACT } from "@/data/contact";
 import heroImage from "@/assets/hero.jpg";
 import {
-  Heart, Briefcase, Music, PartyPopper, Mic2, Sparkles, Dog, Film,
-  Baby, Video, Play, ArrowRight, Phone, MessageSquare
+  Heart, Briefcase, Music, PartyPopper, Sparkles, Play, ArrowRight, Phone, MessageSquare
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -30,11 +29,37 @@ export const Route = createFileRoute("/")({
         image: "/og.jpg",
         description: "Rhode Island video production and videography. Weddings, music videos, business ads, events.",
         address: { "@type": "PostalAddress", addressRegion: "RI", addressCountry: "US" },
-        areaServed: "Rhode Island",
+        areaServed: [
+          "Rhode Island",
+          "Providence",
+          "Warwick",
+          "Cranston",
+          "Pawtucket",
+          "Newport",
+          "East Providence",
+          "New England",
+        ],
         url: "/",
-        telephone: "+1-401-465-1529",
+        telephone: CONTACT.phoneDisplay,
+        email: CONTACT.email,
         priceRange: "$$",
         foundingDate: "2018",
+        sameAs: [CONTACT.instagramUrl, CONTACT.youtubeUrl],
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+1-401-465-1529",
+          contactType: "customer service",
+          areaServed: "US-RI",
+          availableLanguage: "English",
+        },
+        makesOffer: [
+          "Wedding videography",
+          "Business video production",
+          "Event recap videos",
+          "Music video production",
+          "Short-form social content",
+          "Custom documentary and personal story films",
+        ],
       }),
     }],
   }),
@@ -42,16 +67,11 @@ export const Route = createFileRoute("/")({
 });
 
 const SERVICES = [
-  { icon: Heart, label: "Weddings", to: "/weddings" },
-  { icon: Baby, label: "Baby Showers & Family", to: "/services#family" },
-  { icon: Briefcase, label: "Business & Commercials", to: "/business-video" },
+  { icon: Heart, label: "Weddings & Milestones", to: "/weddings" },
+  { icon: Briefcase, label: "Business & Commercial Video", to: "/business-video" },
+  { icon: PartyPopper, label: "Events & Recaps", to: "/events-recaps" },
   { icon: Music, label: "Music Videos", to: "/music-videos" },
-  { icon: Mic2, label: "Live Shows", to: "/events-recaps" },
-  { icon: PartyPopper, label: "Parties & Recaps", to: "/events-recaps" },
-  { icon: Video, label: "YouTube & Social", to: "/services#social" },
-  { icon: Dog, label: "Pet Videos", to: "/services#pets" },
-  { icon: Film, label: "Documentaries", to: "/services#docs" },
-  { icon: Sparkles, label: "Custom Projects", to: "/contact" },
+  { icon: Sparkles, label: "Custom Stories", to: "/services#custom" },
 ];
 
 function HomePage() {
@@ -72,12 +92,10 @@ function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
           <p className="timecode mb-5">● REC · RHODE ISLAND · SINCE 2018</p>
           <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase leading-[0.9] max-w-5xl text-balance">
-            Rhode Island Videography for{" "}
-            <span className="text-primary">real moments</span>, big events, and brands that need to be seen.
+            Rhode Island Videography for Weddings, Events, Businesses, Music Videos, and Stories Worth <span className="text-primary">Remembering.</span>
           </h1>
           <p className="mt-6 text-base md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            Good Looks Media Group is a two-person video production team filming weddings, music videos,
-            business ads, events, parties, pets, documentaries, and custom stories across Rhode Island and New England.
+            Good Looks Media Group is a two-person Rhode Island video production team filming weddings, baby showers, business ads, commercials, music videos, parties, live shows, pet films, documentaries, and custom creative projects since 2018.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to="/contact" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90 red-glow" data-analytics="cta_click_pricing">
@@ -91,8 +109,14 @@ function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl">
-            {["Filming since 2018", "Rhode Island based", "Weddings, events, business, music", "Small team, personal attention"].map(t => (
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-3 max-w-5xl">
+            {[
+              "Filming since 2018",
+              "Rhode Island based",
+              "Weddings, events, business, music, social content",
+              `Call or text: ${CONTACT.textDisplay}`,
+              CONTACT.textResponseNote,
+            ].map(t => (
               <div key={t} className="text-xs sm:text-sm text-muted-foreground border-l-2 border-primary pl-3">{t}</div>
             ))}
           </div>
@@ -155,11 +179,13 @@ function HomePage() {
       <section className="py-20 md:py-28 bg-card/40 border-y border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Pricing" title="Simple packages, custom quotes." subtitle="Three core lanes. Every project gets a custom quote based on date, coverage, and edit complexity." />
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {[
               { name: "Weddings & Milestones", price: "$1,800", desc: "Cinematic wedding films, teasers, full-day storytelling.", to: "/weddings" },
               { name: "Business & Commercial", price: "$900", desc: "Promos, brand video, social ads, testimonials.", to: "/business-video" },
               { name: "Events, Recaps & Live Shows", price: "$600", desc: "Parties, festivals, performances, community.", to: "/events-recaps" },
+              { name: "Music Videos", price: "$750", desc: "Artist visuals, performance videos, and release promos.", to: "/music-videos" },
+              { name: "Custom Projects", price: "Custom", desc: "Pets, documentaries, family stories, and unusual ideas.", to: "/contact" },
             ].map((p) => (
               <Link key={p.name} to={p.to as any} className="bg-card border border-border rounded-2xl p-7 hover:border-primary hover:-translate-y-1 transition">
                 <p className="timecode">Starting at</p>
@@ -170,6 +196,9 @@ function HomePage() {
               </Link>
             ))}
           </div>
+          <p className="mt-6 text-sm text-muted-foreground max-w-4xl">
+            Final pricing depends on date, location, coverage time, number of deliverables, editing complexity, turnaround needs, travel, and whether extra crew is needed.
+          </p>
           <div className="text-center mt-10">
             <Link to="/packages" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-block hover:opacity-90">See all packages</Link>
           </div>
