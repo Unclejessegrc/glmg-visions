@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube, Mail, Phone, MessageSquare } from "lucide-react";
+import { CONTACT } from "@/data/contact";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -16,19 +17,19 @@ export function Footer() {
             Weddings, music videos, business ads, events, and stories worth remembering.
           </p>
           <div className="flex gap-3 mt-5">
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="Instagram">
+            <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="Instagram">
               <Instagram className="w-4 h-4" />
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="YouTube">
+            <a href={CONTACT.youtubeUrl} target="_blank" rel="noopener noreferrer" className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="YouTube">
               <Youtube className="w-4 h-4" />
             </a>
-            <a href="mailto:hello@goodlooksmedia.com" className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="Email">
+            <a href={CONTACT.emailHref} className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="Email">
               <Mail className="w-4 h-4" />
             </a>
-            <a href="tel:+14015551234" className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="Phone">
+            <a href={CONTACT.telHref} className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="Phone">
               <Phone className="w-4 h-4" />
             </a>
-            <a href="sms:+14015551234" className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="Text">
+            <a href={CONTACT.smsHref} className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition" aria-label="Text">
               <MessageSquare className="w-4 h-4" />
             </a>
           </div>
