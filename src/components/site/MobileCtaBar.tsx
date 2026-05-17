@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, MessageSquare, DollarSign } from "lucide-react";
+import { CONTACT } from "@/data/contact";
 
 export function MobileCtaBar() {
   return (
     <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur border-t border-border">
       <div className="grid grid-cols-3 divide-x divide-border">
         <a
-          href="tel:+14015551234"
+          href={CONTACT.telHref}
           className="flex flex-col items-center py-3 text-foreground"
           data-analytics="click_call"
         >
@@ -14,7 +15,7 @@ export function MobileCtaBar() {
           <span className="text-xs uppercase tracking-wider">Call</span>
         </a>
         <a
-          href="sms:+14015551234"
+          href={CONTACT.smsHref}
           className="flex flex-col items-center py-3 text-foreground"
           data-analytics="click_text"
         >
