@@ -13,6 +13,7 @@ import { Route as WorkRouteImport } from './routes/work'
 import { Route as WeddingsRouteImport } from './routes/weddings'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PackagesRouteImport } from './routes/packages'
 import { Route as MusicVideosRouteImport } from './routes/music-videos'
 import { Route as EventsRecapsRouteImport } from './routes/events-recaps'
@@ -39,6 +40,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PackagesRoute = PackagesRouteImport.update({
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/events-recaps': typeof EventsRecapsRoute
   '/music-videos': typeof MusicVideosRoute
   '/packages': typeof PackagesRoute
+  '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/weddings': typeof WeddingsRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/events-recaps': typeof EventsRecapsRoute
   '/music-videos': typeof MusicVideosRoute
   '/packages': typeof PackagesRoute
+  '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/weddings': typeof WeddingsRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/events-recaps': typeof EventsRecapsRoute
   '/music-videos': typeof MusicVideosRoute
   '/packages': typeof PackagesRoute
+  '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/weddings': typeof WeddingsRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/events-recaps'
     | '/music-videos'
     | '/packages'
+    | '/portfolio'
     | '/services'
     | '/sitemap.xml'
     | '/weddings'
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/events-recaps'
     | '/music-videos'
     | '/packages'
+    | '/portfolio'
     | '/services'
     | '/sitemap.xml'
     | '/weddings'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/events-recaps'
     | '/music-videos'
     | '/packages'
+    | '/portfolio'
     | '/services'
     | '/sitemap.xml'
     | '/weddings'
@@ -167,6 +179,7 @@ export interface RootRouteChildren {
   EventsRecapsRoute: typeof EventsRecapsRoute
   MusicVideosRoute: typeof MusicVideosRoute
   PackagesRoute: typeof PackagesRoute
+  PortfolioRoute: typeof PortfolioRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WeddingsRoute: typeof WeddingsRoute
@@ -201,6 +214,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/packages': {
@@ -263,6 +283,7 @@ const rootRouteChildren: RootRouteChildren = {
   EventsRecapsRoute: EventsRecapsRoute,
   MusicVideosRoute: MusicVideosRoute,
   PackagesRoute: PackagesRoute,
+  PortfolioRoute: PortfolioRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   WeddingsRoute: WeddingsRoute,
