@@ -148,12 +148,12 @@ function HomePage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
           <SectionHeading eyebrow="The reel" title="See how we shoot." align="center" />
           <div className="relative aspect-video rounded-2xl overflow-hidden border border-border bg-black red-glow">
-            {/* NOTE: Replace with real YouTube embed ID from Good Looks Media Group */}
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+              src="https://www.youtube.com/embed/0q_7tljwQHY?si=uum0jp0_yTGuWCrr&rel=0&modestbranding=1"
               className="w-full h-full"
-              title="Good Looks Media Group Reel"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              title="Good Looks Media Group Director Reel"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
               loading="lazy"
             />
@@ -181,19 +181,19 @@ function HomePage() {
           <SectionHeading eyebrow="Pricing" title="Simple packages, custom quotes." subtitle="Three core lanes. Every project gets a custom quote based on date, coverage, and edit complexity." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {[
-              { name: "Weddings & Milestones", price: "$1,800", desc: "Cinematic wedding films, teasers, full-day storytelling.", to: "/weddings" },
-              { name: "Business & Commercial", price: "$900", desc: "Promos, brand video, social ads, testimonials.", to: "/business-video" },
-              { name: "Events, Recaps & Live Shows", price: "$600", desc: "Parties, festivals, performances, community.", to: "/events-recaps" },
-              { name: "Music Videos", price: "$750", desc: "Artist visuals, performance videos, and release promos.", to: "/music-videos" },
-              { name: "Custom Projects", price: "Custom", desc: "Pets, documentaries, family stories, and unusual ideas.", to: "/contact" },
+              { name: "Weddings & Milestones", price: "$1,800–$6,000", desc: "Cinematic wedding films, teasers, full-day storytelling.", to: "/packages#weddings" },
+              { name: "Business & Commercial", price: "$900–$7,500", desc: "Promos, brand video, social ads, testimonials.", to: "/packages#business-video" },
+              { name: "Events, Recaps & Live Shows", price: "$600–$3,000+", desc: "Parties, festivals, performances, community.", to: "/packages#events-recaps" },
+              { name: "Music Videos", price: "$750–$3,000+", desc: "Artist visuals, performance videos, and release promos.", to: "/packages#music-videos" },
+              { name: "Custom Projects", price: "Custom", desc: "Pets, documentaries, family stories, and unusual ideas.", to: "/packages#custom-projects" },
             ].map((p) => (
-              <Link key={p.name} to={p.to as any} className="bg-card border border-border rounded-2xl p-7 hover:border-primary hover:-translate-y-1 transition">
-                <p className="timecode">Starting at</p>
+              <a key={p.name} href={p.to} className="bg-card border border-border rounded-2xl p-7 hover:border-primary hover:-translate-y-1 transition">
+                <p className="timecode">Typical range</p>
                 <p className="font-display text-5xl text-primary mt-1">{p.price}</p>
                 <h3 className="font-display text-xl uppercase mt-3">{p.name}</h3>
                 <p className="text-sm text-muted-foreground mt-2">{p.desc}</p>
                 <span className="mt-5 inline-flex text-sm uppercase tracking-widest text-foreground">See details →</span>
-              </Link>
+              </a>
             ))}
           </div>
           <p className="mt-6 text-sm text-muted-foreground max-w-4xl">
