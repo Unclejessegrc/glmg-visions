@@ -4,7 +4,7 @@ export const WEDDING_PACKAGES: PackageData[] = [
   {
     category: "Weddings",
     name: "The Teaser",
-    price: "$1,800",
+    price: "$1,800–$2,400",
     bestFor: "Elopements, small weddings, courthouse weddings, and couples who want a short cinematic memory.",
     includes: [
       "Up to 4 hours coverage",
@@ -18,7 +18,7 @@ export const WEDDING_PACKAGES: PackageData[] = [
   {
     category: "Weddings",
     name: "The Highlight",
-    price: "$2,800",
+    price: "$2,800–$3,800",
     featured: true,
     bestFor: "Best for most weddings — the sweet spot of coverage and story.",
     includes: [
@@ -34,11 +34,11 @@ export const WEDDING_PACKAGES: PackageData[] = [
   {
     category: "Weddings",
     name: "The Full Story",
-    price: "$4,500",
+    price: "$4,500–$6,000",
     bestFor: "Larger weddings and couples who want the full day preserved.",
     includes: [
       "Up to 8 hours coverage",
-      "1–2 videographers (per quote)",
+      "1–2 videographers",
       "5–8 minute cinematic highlight",
       "Ceremony edit",
       "Toasts + key speeches edit",
@@ -52,7 +52,7 @@ export const BUSINESS_PACKAGES: PackageData[] = [
   {
     category: "Business",
     name: "Social Starter",
-    price: "$900",
+    price: "$900–$1,500",
     bestFor: "Small businesses that need quick promotional content.",
     includes: [
       "Up to 2 hours filming",
@@ -66,7 +66,7 @@ export const BUSINESS_PACKAGES: PackageData[] = [
   {
     category: "Business",
     name: "Brand Builder",
-    price: "$1,800",
+    price: "$1,800–$3,500",
     featured: true,
     bestFor: "Businesses that need website, social, and ad content.",
     includes: [
@@ -81,7 +81,7 @@ export const BUSINESS_PACKAGES: PackageData[] = [
   {
     category: "Business",
     name: "Campaign Kit",
-    price: "$3,500",
+    price: "$4,500–$7,500",
     bestFor: "Businesses that need a full content library.",
     includes: [
       "Half-day production",
@@ -98,7 +98,7 @@ export const EVENT_PACKAGES: PackageData[] = [
   {
     category: "Events",
     name: "Quick Recap",
-    price: "$600",
+    price: "$600–$1,200",
     bestFor: "Small parties, pop-ups, birthdays, baby showers, short events.",
     includes: [
       "Up to 2 hours coverage",
@@ -111,7 +111,7 @@ export const EVENT_PACKAGES: PackageData[] = [
   {
     category: "Events",
     name: "Main Event",
-    price: "$1,500",
+    price: "$1,500–$2,800",
     featured: true,
     bestFor: "Larger parties, live shows, community events, milestones.",
     includes: [
@@ -125,12 +125,25 @@ export const EVENT_PACKAGES: PackageData[] = [
   },
   {
     category: "Events",
+    name: "Mid Event",
+    price: "$2,200–$2,600",
+    bestFor: "Events that need more coverage and a stronger recap without a full-day scope.",
+    includes: [
+      "Up to 5 hours coverage",
+      "1–2 videographers",
+      "2–3 minute recap",
+      "3 vertical clips",
+      "Online delivery",
+    ],
+  },
+  {
+    category: "Events",
     name: "Full Experience",
     price: "$3,000+",
     bestFor: "Festivals, large parties, live performances, corporate events.",
     includes: [
       "Up to 6 hours coverage",
-      "1–2 videographers (per quote)",
+      "1–2 videographers",
       "2–4 minute recap",
       "3–5 vertical clips",
       "Optional interviews",
@@ -143,7 +156,7 @@ export const MUSIC_PACKAGES: PackageData[] = [
   {
     category: "Music",
     name: "Performance Visual",
-    price: "$750",
+    price: "$750–$1,500",
     bestFor: "Single-location performance edits for artists building their reel.",
     includes: [
       "Up to 2 hours filming",
@@ -156,7 +169,7 @@ export const MUSIC_PACKAGES: PackageData[] = [
   {
     category: "Music",
     name: "Artist Video",
-    price: "$1,500",
+    price: "$1,500–$3,000",
     featured: true,
     bestFor: "Artists who want performance + story elements.",
     includes: [
@@ -184,9 +197,28 @@ export const MUSIC_PACKAGES: PackageData[] = [
   },
 ];
 
+export const CUSTOM_PACKAGES: PackageData[] = [
+  {
+    category: "Custom",
+    name: "Custom Project",
+    price: "Custom quote",
+    priceLabel: "Scoped to your project",
+    bestFor: "Pets, documentaries, legacy films, memorial videos, personal stories, and creative projects outside the usual lanes.",
+    includes: [
+      "Discovery call",
+      "Custom scope and timeline",
+      "Coverage plan based on story needs",
+      "Edited final video",
+      "Optional social cutdowns",
+      "Online delivery",
+    ],
+  },
+];
+
 export const ALL_PACKAGES = [
   ...WEDDING_PACKAGES,
   ...BUSINESS_PACKAGES,
   ...EVENT_PACKAGES,
   ...MUSIC_PACKAGES,
+  ...CUSTOM_PACKAGES,
 ];
