@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { PortfolioCard } from "@/components/site/PortfolioCard";
 import { PORTFOLIO } from "@/data/portfolio";
 import { CONTACT } from "@/data/contact";
+import { SHOW_PORTFOLIO } from "@/config/features";
 import heroImage from "@/assets/hero.jpg";
 import {
   Heart, Briefcase, Music, PartyPopper, Sparkles, Play, ArrowRight, Phone, MessageSquare
@@ -104,9 +105,9 @@ function HomePage() {
             <Link to="/contact" className="border border-foreground/30 text-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10" data-analytics="cta_click_availability">
               Check Availability
             </Link>
-            <Link to="/work" className="text-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-flex items-center gap-2 hover:text-primary">
-              <Play className="w-4 h-4 fill-current" /> Watch Our Work
-            </Link>
+            <a href="#director-reel" className="text-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-flex items-center gap-2 hover:text-primary">
+              <Play className="w-4 h-4 fill-current" /> Watch the Reel
+            </a>
           </div>
 
           <div className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-3 max-w-5xl">
@@ -144,7 +145,7 @@ function HomePage() {
       </section>
 
       {/* FEATURED REEL */}
-      <section className="py-20 md:py-28 bg-card/40 border-y border-border">
+      <section id="director-reel" className="scroll-mt-32 py-20 md:py-28 bg-card/40 border-y border-border">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
           <SectionHeading eyebrow="The reel" title="See how we shoot." align="center" />
           <div className="relative aspect-video rounded-2xl overflow-hidden border border-border bg-black red-glow">
@@ -162,18 +163,50 @@ function HomePage() {
         </div>
       </section>
 
-      {/* PORTFOLIO PREVIEW */}
-      <section className="py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-10 gap-4 flex-wrap">
-            <SectionHeading eyebrow="Selected work" title="Stories we filmed." />
-            <Link to="/work" className="text-primary uppercase tracking-widest text-sm hover:underline whitespace-nowrap">View full portfolio →</Link>
+      {/* PORTFOLIO PREVIEW / START HERE */}
+      {SHOW_PORTFOLIO ? (
+        <section className="py-20 md:py-28">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-end mb-10 gap-4 flex-wrap">
+              <SectionHeading eyebrow="Selected work" title="Stories we filmed." />
+              <Link to="/work" className="text-primary uppercase tracking-widest text-sm hover:underline whitespace-nowrap">View full portfolio →</Link>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {PORTFOLIO.slice(0, 6).map((p) => <PortfolioCard key={p.id} item={p} />)}
+            </div>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {PORTFOLIO.slice(0, 6).map((p) => <PortfolioCard key={p.id} item={p} />)}
+        </section>
+      ) : (
+        <section className="py-20 md:py-28">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Start Here"
+              title="Choose the kind of video you need."
+              subtitle="Whether you need a wedding film, business promo, event recap, music video, reel, pet video, documentary, or custom project, start with the service lane that fits best. We will help you shape the right package."
+            />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+              {[
+                { name: "Weddings & Milestones", to: "/packages#weddings", icon: Heart },
+                { name: "Business & Commercial Video", to: "/packages#business-video", icon: Briefcase },
+                { name: "Events & Recaps", to: "/packages#events-recaps", icon: PartyPopper },
+                { name: "Music Videos", to: "/packages#music-videos", icon: Music },
+                { name: "Custom Projects", to: "/packages#custom-projects", icon: Sparkles },
+              ].map(({ name, to, icon: Icon }) => (
+                <a key={name} href={to} className="group relative bg-card border border-border rounded-2xl p-6 hover:border-primary hover:-translate-y-1 transition flex flex-col gap-4">
+                  <Icon className="w-7 h-7 text-primary" />
+                  <span className="font-display text-xl uppercase">{name}</span>
+                  <ArrowRight className="w-4 h-4 text-muted-foreground absolute top-6 right-6 group-hover:text-primary group-hover:translate-x-1 transition" />
+                </a>
+              ))}
+            </div>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link to="/services" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90 red-glow">See Services</Link>
+              <Link to="/packages" className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10">See Packages</Link>
+              <Link to="/contact" className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10">Get Pricing</Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* PACKAGE PREVIEW */}
       <section className="py-20 md:py-28 bg-card/40 border-y border-border">
