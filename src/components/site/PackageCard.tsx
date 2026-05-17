@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 export interface PackageData {
   name: string;
   price: string;
+  priceLabel?: string;
   bestFor: string;
   includes: string[];
   category: string;
@@ -25,7 +26,7 @@ export function PackageCard({ pkg }: { pkg: PackageData }) {
       <p className="timecode">{pkg.category}</p>
       <h3 className="font-display text-2xl md:text-3xl uppercase mt-1">{pkg.name}</h3>
       <p className="mt-2 text-3xl md:text-4xl font-display text-primary">{pkg.price}</p>
-      <p className="text-xs uppercase tracking-wider text-muted-foreground mt-1">Starting at</p>
+      <p className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{pkg.priceLabel ?? "Typical range"}</p>
       <p className="mt-4 text-sm text-muted-foreground">{pkg.bestFor}</p>
       <ul className="mt-5 space-y-2.5 text-sm flex-1">
         {pkg.includes.map((i) => (
