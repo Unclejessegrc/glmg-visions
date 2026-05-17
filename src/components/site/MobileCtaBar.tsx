@@ -23,7 +23,7 @@ export function MobileCtaBar() {
           <span className="text-xs uppercase tracking-wider">Text</span>
         </a>
         <Link
-          to="/contact"
+          to="/packages"
           className="flex flex-col items-center py-3 bg-primary text-primary-foreground"
           data-analytics="cta_click_pricing"
         >
