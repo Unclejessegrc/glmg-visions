@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PackageCard } from "@/components/site/PackageCard";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
-import { WEDDING_PACKAGES, BUSINESS_PACKAGES, EVENT_PACKAGES, MUSIC_PACKAGES } from "@/data/packages";
+import { WEDDING_PACKAGES, BUSINESS_PACKAGES, EVENT_PACKAGES, MUSIC_PACKAGES, CUSTOM_PACKAGES } from "@/data/packages";
 
 export const Route = createFileRoute("/packages")({
   head: () => ({
@@ -28,7 +29,46 @@ const FAQ = [
   { q: "How is final pricing calculated?", a: "Final quote depends on date, location, coverage time, number of videos, turnaround needs, travel, and editing complexity. Most freelance shoots are built around a 4-hour baseline; additional time may be billed hourly." },
 ];
 
+const ADD_ONS = [
+  "Extra hour: $100–$150",
+  "Second videographer: from $500",
+  "Drone footage: from $300",
+  "48-hour teaser: from $250",
+  "Raw footage: from $300",
+  "Rehearsal or additional event coverage: custom quote",
+  "Vertical social clip bundle: from $250",
+];
+
+const PACKAGE_GROUPS = [
+  { id: "weddings", title: "Weddings & Milestones", packages: WEDDING_PACKAGES },
+  { id: "business-video", title: "Business & Commercial", packages: BUSINESS_PACKAGES },
+  { id: "events-recaps", title: "Events, Recaps & Live Shows", packages: EVENT_PACKAGES },
+  { id: "music-videos", title: "Music Videos", packages: MUSIC_PACKAGES },
+  { id: "custom-projects", title: "Custom Projects", packages: CUSTOM_PACKAGES },
+] as const;
+
 function PackagesPage() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (!hash) return;
+
+      window.requestAnimationFrame(() => {
+        try {
+          document.querySelector(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        } catch {
+          // Ignore malformed hashes; expected package anchors are controlled links.
+        }
+      });
+    };
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+    return () => window.removeEventListener("hashchange", scrollToHash);
+  }, []);
+
   return (
     <SiteLayout>
       <section className="pt-20 pb-12 md:pt-28 md:pb-16">
@@ -43,17 +83,22 @@ function PackagesPage() {
         </div>
       </section>
 
-      {[
-        { title: "Weddings & Milestones", packages: WEDDING_PACKAGES },
-        { title: "Business & Commercial", packages: BUSINESS_PACKAGES },
-        { title: "Events, Recaps & Live Shows", packages: EVENT_PACKAGES },
-        { title: "Music Videos", packages: MUSIC_PACKAGES },
-      ].map((group, i) => (
-        <section key={group.title} className={`py-14 md:py-20 ${i % 2 === 0 ? "" : "bg-card/40 border-y border-border"}`}>
+      {PACKAGE_GROUPS.map((group, i) => (
+        <section
+          key={group.id}
+          id={group.id}
+          className={`scroll-mt-32 py-14 md:py-20 ${i % 2 === 0 ? "" : "bg-card/40 border-y border-border"}`}
+        >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeading title={group.title} />
             <div className="grid md:grid-cols-3 gap-6">
               {group.packages.map(p => <PackageCard key={p.name} pkg={p} />)}
+            </div>
+            <div className="mt-7 border border-border rounded-2xl bg-background/40 p-5 md:p-6">
+              <p className="timecode mb-3">Typical add-ons</p>
+              <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 text-sm text-muted-foreground">
+                {ADD_ONS.map(addOn => <li key={addOn}>{addOn}</li>)}
+              </ul>
             </div>
             <p className="mt-6 text-sm text-muted-foreground max-w-4xl">
               Final pricing depends on date, location, coverage time, number of deliverables, editing complexity, turnaround needs, travel, and whether extra crew is needed.
@@ -70,25 +115,27 @@ function PackagesPage() {
               <thead className="bg-card text-left uppercase tracking-widest text-xs">
                 <tr>
                   <th className="p-4">Lane</th>
-                  <th className="p-4">Starting at</th>
+                  <th className="p-4">Range</th>
                   <th className="p-4">Coverage</th>
                   <th className="p-4">Best for</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {[
-                  ["Weddings — Teaser", "$1,800", "Up to 4 hrs", "Elopements, small weddings"],
-                  ["Weddings — Highlight", "$2,800", "Up to 6 hrs", "Most weddings"],
-                  ["Weddings — Full Story", "$4,500", "Up to 8 hrs", "Larger weddings, full day"],
-                  ["Business — Social Starter", "$900", "Up to 2 hrs", "Quick promos"],
-                  ["Business — Brand Builder", "$1,800", "Up to 4 hrs", "Website + social + ads"],
-                  ["Business — Campaign Kit", "$3,500", "Half-day", "Full content library"],
-                  ["Events — Quick Recap", "$600", "Up to 2 hrs", "Small parties, pop-ups"],
-                  ["Events — Main Event", "$1,500", "Up to 4 hrs", "Larger parties, live shows"],
+                  ["Weddings — Teaser", "$1,800–$2,400", "Up to 4 hrs", "Elopements, small weddings"],
+                  ["Weddings — Highlight", "$2,800–$3,800", "Up to 6 hrs", "Most weddings"],
+                  ["Weddings — Full Story", "$4,500–$6,000", "Up to 8 hrs", "Larger weddings, full day"],
+                  ["Business — Social Starter", "$900–$1,500", "Up to 2 hrs", "Quick promos"],
+                  ["Business — Brand Builder", "$1,800–$3,500", "Up to 4 hrs", "Website + social + ads"],
+                  ["Business — Campaign Kit", "$4,500–$7,500", "Half-day", "Full content library"],
+                  ["Events — Quick Recap", "$600–$1,200", "Up to 2 hrs", "Small parties, pop-ups"],
+                  ["Events — Main Event", "$1,500–$2,800", "Up to 4 hrs", "Larger parties, live shows"],
+                  ["Events — Mid Event", "$2,200–$2,600", "Up to 5 hrs", "Deeper event coverage"],
                   ["Events — Full Experience", "$3,000+", "Up to 6 hrs", "Festivals, big corporate"],
-                  ["Music — Performance Visual", "$750", "Up to 2 hrs", "Single performance"],
-                  ["Music — Artist Video", "$1,500", "Up to 4 hrs", "Performance + story"],
+                  ["Music — Performance Visual", "$750–$1,500", "Up to 2 hrs", "Single performance"],
+                  ["Music — Artist Video", "$1,500–$3,000", "Up to 4 hrs", "Performance + story"],
                   ["Music — Full Concept", "$3,000+", "Half-day", "Concept-driven"],
+                  ["Custom Projects", "Custom quote", "Scoped", "Pets, documentaries, personal stories"],
                 ].map(row => (
                   <tr key={row[0]} className="hover:bg-card/60">
                     <td className="p-4 font-medium">{row[0]}</td>
