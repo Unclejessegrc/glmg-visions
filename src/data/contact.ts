@@ -1,6 +1,5 @@
 export const CONTACT = {
-  phoneDisplay: "(401) 465-1529",
-  textDisplay: "401-465-1529",
+  phoneDisplay: "401-465-1529",
   textResponseNote: "Fast replies, usually same day.",
   telHref: "tel:4014651529",
   smsHref: "sms:4014651529",
