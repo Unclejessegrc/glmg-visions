@@ -1,6 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { SectionHeading } from "@/components/site/SectionHeading";
 import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/services")({
@@ -24,26 +23,29 @@ const SERVICES = [
     copy: "Cinematic wedding films, teasers, ceremony edits, reception moments, social clips, and full-day storytelling.",
     bestFor: "Couples who want their day preserved in a way that actually feels like the day.",
     deliverables: "Highlight film, ceremony edit, social clips, online delivery.",
-    price: "Starting at $1,800",
-    to: "/weddings",
+    price: "$1,800–$6,000",
+    packageHref: "/packages#weddings",
+    packageLabel: "View Wedding Packages",
   },
   {
     id: "family",
-    title: "Baby Showers and Family Milestones",
+    title: "Baby Showers & Family Milestones",
     copy: "Beautiful coverage for baby showers, birthdays, anniversaries, graduations, family parties, and once-in-a-lifetime milestones.",
     bestFor: "Families who want a real keepsake — not just phone photos.",
     deliverables: "Recap film, social cutdowns, online delivery.",
-    price: "Starting at $600",
-    to: "/events-recaps",
+    price: "$600–$3,000+",
+    packageHref: "/packages#events-recaps",
+    packageLabel: "View Event Packages",
   },
   {
     id: "business",
-    title: "Business Ads and Commercials",
+    title: "Business Ads & Commercials",
     copy: "Promotional videos, website videos, social ads, service explainers, testimonials, product videos, and brand story content for local businesses.",
     bestFor: "Owners who need video that helps people understand, trust, and buy.",
     deliverables: "Main brand video, vertical clips, captions, multi-format delivery.",
-    price: "Starting at $900",
-    to: "/business-video",
+    price: "$900–$7,500",
+    packageHref: "/packages#business-video",
+    packageLabel: "View Business Packages",
   },
   {
     id: "music",
@@ -51,17 +53,19 @@ const SERVICES = [
     copy: "Performance videos, story-driven music videos, artist promo clips, behind-the-scenes edits, and release-ready visuals.",
     bestFor: "Artists building a real catalog of visuals.",
     deliverables: "Final music video, vertical promo clips, optional BTS.",
-    price: "Starting at $750",
-    to: "/music-videos",
+    price: "$750–$3,000+",
+    packageHref: "/packages#music-videos",
+    packageLabel: "View Music Video Packages",
   },
   {
     id: "events",
-    title: "Events and Recaps",
+    title: "Events & Recaps",
     copy: "Recap videos for parties, live shows, festivals, community events, pop-ups, nightlife, fundraisers, and private events.",
     bestFor: "Promoters, organizers, and hosts who need next year's promo.",
     deliverables: "Recap film, vertical clips, online delivery.",
-    price: "Starting at $600",
-    to: "/events-recaps",
+    price: "$600–$3,000+",
+    packageHref: "/packages#events-recaps",
+    packageLabel: "View Event Packages",
   },
   {
     id: "live-shows",
@@ -69,8 +73,9 @@ const SERVICES = [
     copy: "Coverage for concerts, showcases, performances, release events, and venue recaps with the energy of the room intact.",
     bestFor: "Artists, promoters, venues, and event teams.",
     deliverables: "Performance recap, social clips, online delivery.",
-    price: "Starting at $600",
-    to: "/events-recaps",
+    price: "$600–$3,000+",
+    packageHref: "/packages#events-recaps",
+    packageLabel: "View Event Packages",
   },
   {
     id: "parties",
@@ -78,17 +83,19 @@ const SERVICES = [
     copy: "Recap films for birthdays, private parties, nightlife, celebrations, and one-night-only moments.",
     bestFor: "Hosts who want the night remembered and shared.",
     deliverables: "Party recap, vertical social clip, online delivery.",
-    price: "Starting at $600",
-    to: "/events-recaps",
+    price: "$600–$3,000+",
+    packageHref: "/packages#events-recaps",
+    packageLabel: "View Event Packages",
   },
   {
     id: "social",
-    title: "Reels and Short-Form Content",
+    title: "Reels & Short-Form Content",
     copy: "Vertical content packages for Instagram Reels, TikTok, YouTube Shorts, ads, and launch campaigns.",
     bestFor: "Brands and creators rolling out campaigns.",
     deliverables: "Short-form vertical clips with captions.",
-    price: "Custom quote",
-    to: "/contact",
+    price: "$900–$7,500",
+    packageHref: "/packages#business-video",
+    packageLabel: "View Business Packages",
   },
   {
     id: "pets",
@@ -97,16 +104,18 @@ const SERVICES = [
     bestFor: "Pet parents, rescues, and pet businesses.",
     deliverables: "Short film + social clips.",
     price: "Custom quote",
-    to: "/contact",
+    packageHref: "/packages#custom-projects",
+    packageLabel: "View Custom Packages",
   },
   {
     id: "docs",
-    title: "Documentaries and Legacy Films",
+    title: "Documentaries & Legacy Films",
     copy: "Mini-documentaries, personal stories, family legacy interviews, artist stories, brand documentaries, and community features.",
     bestFor: "Anyone with a story worth preserving.",
     deliverables: "Edited mini-documentary, raw interview archive available.",
     price: "Custom quote",
-    to: "/contact",
+    packageHref: "/packages#custom-projects",
+    packageLabel: "View Custom Packages",
   },
   {
     id: "custom",
@@ -115,7 +124,8 @@ const SERVICES = [
     bestFor: "Anything outside the usual lanes.",
     deliverables: "Scoped to your project.",
     price: "Custom quote",
-    to: "/contact",
+    packageHref: "/packages#custom-projects",
+    packageLabel: "View Custom Packages",
   },
 ];
 
@@ -158,9 +168,9 @@ function ServicesPage() {
                   <p className="font-display text-2xl text-primary">{s.price}</p>
                 </div>
                 <div className="grid gap-2 w-full md:w-auto">
-                  <Link to={s.to as any} className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90">
-                    View package <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  <a href={s.packageHref} className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90">
+                    {s.packageLabel} <ArrowRight className="w-4 h-4" />
+                  </a>
                   <a
                     href={`/contact?projectType=${encodeURIComponent(s.title)}`}
                     className="inline-flex items-center justify-center border border-foreground/30 px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10"
