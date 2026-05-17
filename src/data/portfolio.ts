@@ -41,7 +41,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     embedUrl: "https://www.youtube.com/embed/0q_7tljwQHY?si=FmZMZDjSTBfAJCB5",
     autoplayEmbedUrl: "https://www.youtube.com/embed/0q_7tljwQHY?si=FmZMZDjSTBfAJCB5&autoplay=1&rel=0&modestbranding=1",
     iframeTitle: "Good Looks Media Group Director Reel",
-    ctaLabel: "I want something like this →",
+    ctaLabel: "I want something like this",
     posterGradient: "from-red-900 via-zinc-900 to-black",
   },
   { id: "music-dwhjfxguif0", title: "Good Looks Music Video 01", category: "Music Videos", description: "Good Looks Media Group music video.", deliverables: "Final music video, artist visual, promo cutdowns", youtubeId: "DwHJFxguIf0", youtubeUrl: "https://youtu.be/DwHJFxguIf0", thumbnailUrl: "https://img.youtube.com/vi/DwHJFxguIf0/maxresdefault.jpg", embedUrl: "https://www.youtube.com/embed/DwHJFxguIf0", posterGradient: "from-red-900 via-zinc-900 to-black" },
