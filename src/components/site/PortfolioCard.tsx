@@ -4,7 +4,9 @@ import type { PortfolioItem } from "@/data/portfolio";
 
 export function PortfolioCard({ item }: { item: PortfolioItem }) {
   const [open, setOpen] = useState(false);
-  const embedSrc = item.embedUrl ? `${item.embedUrl}?autoplay=1` : `https://www.youtube.com/embed/${item.youtubeId}?autoplay=1`;
+  const hasVideo = Boolean(item.youtubeId || item.embedUrl || item.autoplayEmbedUrl);
+  const embedSrc = getAutoplayEmbedSrc(item);
+  const ctaLabel = item.ctaLabel ?? "I want something like this →";
 
   return (
     <>
@@ -24,7 +26,9 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
         )}
         <div className="absolute inset-0 film-grain" />
         <button
+          type="button"
           onClick={() => setOpen(true)}
+          aria-label={`Play ${item.title}`}
           className="absolute inset-0 flex flex-col justify-end p-5 text-left"
           data-analytics="portfolio_video_play"
         >
@@ -41,8 +45,8 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
               <p className="text-xs text-zinc-300/80 mt-2">Deliverables: {item.deliverables}</p>
             )}
             <span className="mt-3 inline-flex flex-wrap gap-x-4 gap-y-1 text-xs uppercase tracking-widest text-primary">
-              <span>I want something like this →</span>
-              <span>Get a quote →</span>
+              <span>{ctaLabel}</span>
+              {!item.ctaLabel && <span>Get a quote →</span>}
             </span>
           </div>
         </button>
@@ -52,13 +56,14 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
         <div className="fixed inset-0 z-[60] bg-black/90 backdrop-blur flex items-center justify-center p-4" onClick={() => setOpen(false)}>
           <button className="absolute top-4 right-4 text-white p-2" aria-label="Close"><X className="w-6 h-6" /></button>
           <div className="w-full max-w-5xl aspect-video bg-black border border-border rounded-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            {item.youtubeId ? (
+            {hasVideo ? (
               <iframe
                 src={embedSrc}
                 className="w-full h-full"
-                allow="autoplay; encrypted-media"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
-                title={item.title}
+                title={item.iframeTitle ?? item.title}
               />
             ) : (
               <div className={`w-full h-full bg-gradient-to-br ${item.posterGradient} flex items-center justify-center text-center p-8`}>
@@ -74,4 +79,13 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
       )}
     </>
   );
+}
+
+function getAutoplayEmbedSrc(item: PortfolioItem) {
+  if (item.autoplayEmbedUrl) return item.autoplayEmbedUrl;
+  if (item.embedUrl) {
+    const joiner = item.embedUrl.includes("?") ? "&" : "?";
+    return `${item.embedUrl}${joiner}autoplay=1&rel=0&modestbranding=1`;
+  }
+  return `https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&rel=0&modestbranding=1`;
 }
