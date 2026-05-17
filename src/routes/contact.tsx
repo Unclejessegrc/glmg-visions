@@ -89,7 +89,7 @@ function ContactPage() {
           <form
             onSubmit={onSubmit}
             data-analytics="form_start"
-            className="lg:col-span-2 bg-card border border-border rounded-2xl p-6 md:p-10 grid gap-5"
+            className="order-2 lg:order-1 lg:col-span-2 bg-card border border-border rounded-2xl p-6 md:p-10 grid gap-5"
           >
             {preset.pkg && (
               <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-sm">
@@ -132,8 +132,8 @@ function ContactPage() {
             </button>
           </form>
 
-          <aside className="space-y-4">
-            <SectionHeading eyebrow="Other ways" title="Reach out." />
+          <aside className="order-1 lg:order-2 space-y-4">
+            <SectionHeading eyebrow="Direct contact" title="Reach out." />
             <a href={CONTACT.telHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_call">
               <Phone className="w-6 h-6 text-primary" />
               <div>
