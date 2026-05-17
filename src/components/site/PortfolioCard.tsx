@@ -4,10 +4,24 @@ import type { PortfolioItem } from "@/data/portfolio";
 
 export function PortfolioCard({ item }: { item: PortfolioItem }) {
   const [open, setOpen] = useState(false);
+  const embedSrc = item.embedUrl ? `${item.embedUrl}?autoplay=1` : `https://www.youtube.com/embed/${item.youtubeId}?autoplay=1`;
+
   return (
     <>
       <div className="group relative overflow-hidden rounded-2xl border border-border bg-card aspect-video">
-        <div className={`absolute inset-0 bg-gradient-to-br ${item.posterGradient} opacity-90 group-hover:opacity-100 transition`} />
+        {item.thumbnailUrl ? (
+          <>
+            <img
+              src={item.thumbnailUrl}
+              alt={item.title}
+              className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-300"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/15" />
+          </>
+        ) : (
+          <div className={`absolute inset-0 bg-gradient-to-br ${item.posterGradient} opacity-90 group-hover:opacity-100 transition`} />
+        )}
         <div className="absolute inset-0 film-grain" />
         <button
           onClick={() => setOpen(true)}
@@ -36,7 +50,7 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
           <div className="w-full max-w-5xl aspect-video bg-black border border-border rounded-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
             {item.youtubeId ? (
               <iframe
-                src={`https://www.youtube.com/embed/${item.youtubeId}?autoplay=1`}
+                src={embedSrc}
                 className="w-full h-full"
                 allow="autoplay; encrypted-media"
                 allowFullScreen
