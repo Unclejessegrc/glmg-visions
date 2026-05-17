@@ -40,7 +40,7 @@ export function Footer() {
           <ul className="space-y-2 text-sm">
             <li><Link to="/weddings" className="hover:text-primary">Weddings</Link></li>
             <li><Link to="/business-video" className="hover:text-primary">Business Video</Link></li>
-            <li><Link to="/events-recaps" className="hover:text-primary">Events and Recaps</Link></li>
+            <li><Link to="/events-recaps" className="hover:text-primary">Events & Recaps</Link></li>
             <li><Link to="/music-videos" className="hover:text-primary">Music Videos</Link></li>
             <li><Link to="/services" className="hover:text-primary">All Services</Link></li>
             <li><Link to="/packages" className="hover:text-primary">Packages</Link></li>
