@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { CONTACT } from "@/data/contact";
@@ -20,13 +20,27 @@ export const Route = createFileRoute("/contact")({
 });
 
 const PROJECT_TYPES = [
-  "Wedding", "Baby shower", "Birthday or party", "Business promo", "Commercial",
-  "Music video", "Live show", "Event recap", "YouTube/short-form content",
-  "Pet video", "Documentary", "Custom project",
+  "Wedding",
+  "Baby shower",
+  "Birthday/party",
+  "Business promo",
+  "Commercial",
+  "Music video",
+  "Live show",
+  "Event recap",
+  "Reels & social content",
+  "Pet video",
+  "Documentary",
+  "Custom project",
 ];
 
 const BUDGETS = [
-  "Under $600", "$600 to $1,200", "$1,200 to $2,500", "$2,500 to $4,500", "$4,500+", "Not sure yet",
+  "Under $600",
+  "$600–$1,200",
+  "$1,200–$2,500",
+  "$2,500–$4,500",
+  "$4,500+",
+  "Not sure yet",
 ];
 
 function ContactPage() {
@@ -42,10 +56,9 @@ function ContactPage() {
     });
   }, []);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // NOTE: Wire this up to your form backend (Formspree, Resend, Supabase, etc.).
-    // For now we just confirm so leads aren't dropped silently in production.
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -56,9 +69,9 @@ function ContactPage() {
         <section className="min-h-[60vh] flex items-center justify-center text-center px-4 py-24">
           <div className="max-w-xl">
             <CheckCircle2 className="w-16 h-16 text-primary mx-auto mb-6" />
-            <h1 className="font-display text-4xl md:text-5xl uppercase">Thanks.</h1>
+            <h1 className="font-display text-4xl md:text-5xl uppercase">Thanks!</h1>
             <p className="mt-4 text-muted-foreground text-lg">
-              We got your project request. We'll review the details and reach out as soon as possible with next steps.
+              We got your project request. We will review the details and reach out as soon as possible with next steps.
             </p>
             <div className="mt-8 flex justify-center gap-3 flex-wrap">
               <a href={CONTACT.telHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">Call us</a>
@@ -79,72 +92,25 @@ function ContactPage() {
             Tell us about your <span className="text-primary">project.</span>
           </h1>
           <p className="mt-5 text-muted-foreground text-lg max-w-2xl">
-            Fill this out and we'll come back with next steps. Prefer call or text? Use the buttons.
+            Fill this out and we'll come back with next steps. Prefer call or text? Use the direct options below.
           </p>
         </div>
       </section>
 
       <section className="pb-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-10">
-          <form
-            onSubmit={onSubmit}
-            data-analytics="form_start"
-            className="order-2 lg:order-1 lg:col-span-2 bg-card border border-border rounded-2xl p-6 md:p-10 grid gap-5"
-          >
-            {preset.pkg && (
-              <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-sm">
-                Requesting: <strong className="text-primary">{preset.pkg}</strong>
-              </div>
-            )}
-            <div className="grid md:grid-cols-2 gap-5">
-              <Field label="Name" name="name" required />
-              <Field label="Email" name="email" type="email" required />
-              <Field label="Phone" name="phone" type="tel" />
-              <Select label="Preferred contact" name="contactPref" options={["Call", "Text", "Email"]} />
-            </div>
-            <div className="grid md:grid-cols-2 gap-5">
-              <Select label="Project type" name="projectType" options={PROJECT_TYPES} defaultValue={preset.projectType} />
-              <Field label="Event date / deadline" name="date" type="date" />
-            </div>
-            <div className="grid md:grid-cols-2 gap-5">
-              <Field label="Location (city/venue)" name="location" />
-              <Select label="Budget range" name="budget" options={BUDGETS} />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Project description</label>
-              <textarea
-                name="description"
-                rows={5}
-                className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
-                placeholder="What are you imagining? Vibe, vision, references — anything helps."
-              />
-            </div>
-            <label className="flex items-start gap-3 text-sm">
-              <input type="checkbox" name="helpChoose" className="mt-1 w-4 h-4 accent-[oklch(0.55_0.21_25)]" />
-              <span>I want help choosing the right package.</span>
-            </label>
-            <button
-              type="submit"
-              className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90 red-glow"
-              data-analytics="form_submit"
-            >
-              Send My Project
-            </button>
-          </form>
-
-          <aside className="order-1 lg:order-2 space-y-4">
-            <SectionHeading eyebrow="Direct contact" title="Reach out." />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 grid md:grid-cols-3 gap-4">
             <a href={CONTACT.telHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_call">
               <Phone className="w-6 h-6 text-primary" />
               <div>
-                <p className="font-medium">Call us</p>
+                <p className="font-medium">Call</p>
                 <p className="text-sm text-muted-foreground">{CONTACT.phoneDisplay}</p>
               </div>
             </a>
             <a href={CONTACT.smsHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_text">
               <MessageSquare className="w-6 h-6 text-primary" />
               <div>
-                <p className="font-medium">Text us</p>
+                <p className="font-medium">Text</p>
                 <p className="text-sm text-muted-foreground">{CONTACT.textDisplay}</p>
                 <p className="text-sm text-muted-foreground">{CONTACT.textResponseNote}</p>
               </div>
@@ -156,28 +122,93 @@ function ContactPage() {
                 <p className="text-sm text-muted-foreground">{CONTACT.email}</p>
               </div>
             </a>
-            <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
-              <Instagram className="w-6 h-6 text-primary" />
-              <div>
-                <p className="font-medium">Instagram</p>
-                <p className="text-sm text-muted-foreground">{CONTACT.instagramLabel}</p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-10">
+            <form
+              onSubmit={onSubmit}
+              data-analytics="form_start"
+              className="order-2 lg:order-1 lg:col-span-2 bg-card border border-border rounded-2xl p-6 md:p-10 grid gap-5"
+            >
+              {preset.pkg && (
+                <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-sm">
+                  Requesting: <strong className="text-primary">{preset.pkg}</strong>
+                </div>
+              )}
+              <div className="grid md:grid-cols-2 gap-5">
+                <Field label="Name" name="name" required />
+                <Field label="Email" name="email" type="email" required />
+                <Field label="Phone" name="phone" type="tel" required />
+                <Select label="Preferred contact method" name="contactPref" options={["Call", "Text", "Email"]} required />
               </div>
-            </a>
-            <a href={CONTACT.youtubeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
-              <Youtube className="w-6 h-6 text-primary" />
-              <div>
-                <p className="font-medium">YouTube</p>
-                <p className="text-sm text-muted-foreground">{CONTACT.youtubeLabel}</p>
+              <div className="grid md:grid-cols-2 gap-5">
+                <Select label="Project type" name="projectType" options={PROJECT_TYPES} defaultValue={preset.projectType} required />
+                <Field label="Event date / deadline" name="date" placeholder="Date, deadline, or not sure yet" required />
               </div>
-            </a>
-          </aside>
+              <div className="grid md:grid-cols-2 gap-5">
+                <Field label="Location" name="location" placeholder="City, venue, or service area" required />
+                <Select label="Budget range" name="budget" options={BUDGETS} required />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Short project description<span className="text-primary"> *</span></label>
+                <textarea
+                  name="description"
+                  rows={5}
+                  required
+                  className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="What are you imagining? Vibe, vision, references — anything helps."
+                />
+              </div>
+              <label className="flex items-start gap-3 text-sm">
+                <input type="checkbox" name="helpChoose" className="mt-1 w-4 h-4 accent-[oklch(0.55_0.21_25)]" />
+                <span>I want help choosing the right package.</span>
+              </label>
+              <button
+                type="submit"
+                className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90 red-glow"
+                data-analytics="form_submit"
+              >
+                Send My Project
+              </button>
+            </form>
+
+            <aside className="order-1 lg:order-2 space-y-4">
+              <SectionHeading eyebrow="Social" title="See more." />
+              <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
+                <Instagram className="w-6 h-6 text-primary" />
+                <div>
+                  <p className="font-medium">Instagram</p>
+                  <p className="text-sm text-muted-foreground">{CONTACT.instagramLabel}</p>
+                </div>
+              </a>
+              <a href={CONTACT.youtubeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
+                <Youtube className="w-6 h-6 text-primary" />
+                <div>
+                  <p className="font-medium">YouTube</p>
+                  <p className="text-sm text-muted-foreground">{CONTACT.youtubeLabel}</p>
+                </div>
+              </a>
+            </aside>
+          </div>
         </div>
       </section>
     </SiteLayout>
   );
 }
 
-function Field({ label, name, type = "text", required }: { label: string; name: string; type?: string; required?: boolean }) {
+function Field({
+  label,
+  name,
+  type = "text",
+  required,
+  placeholder,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  required?: boolean;
+  placeholder?: string;
+}) {
   return (
     <div>
       <label className="block text-sm font-medium mb-2">{label}{required && <span className="text-primary"> *</span>}</label>
@@ -185,19 +216,33 @@ function Field({ label, name, type = "text", required }: { label: string; name: 
         type={type}
         name={name}
         required={required}
+        placeholder={placeholder}
         className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
       />
     </div>
   );
 }
 
-function Select({ label, name, options, defaultValue }: { label: string; name: string; options: readonly string[]; defaultValue?: string }) {
+function Select({
+  label,
+  name,
+  options,
+  defaultValue,
+  required,
+}: {
+  label: string;
+  name: string;
+  options: readonly string[];
+  defaultValue?: string;
+  required?: boolean;
+}) {
   return (
     <div>
-      <label className="block text-sm font-medium mb-2">{label}</label>
+      <label className="block text-sm font-medium mb-2">{label}{required && <span className="text-primary"> *</span>}</label>
       <select
         name={name}
         defaultValue={defaultValue}
+        required={required}
         className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
       >
         <option value="">Select…</option>
