@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube, Mail, Phone, MessageSquare } from "lucide-react";
 import { CONTACT } from "@/data/contact";
+import { SHOW_PORTFOLIO } from "@/config/features";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -44,6 +45,7 @@ export function Footer() {
             <li><Link to="/music-videos" className="hover:text-primary">Music Videos</Link></li>
             <li><Link to="/services" className="hover:text-primary">All Services</Link></li>
             <li><Link to="/packages" className="hover:text-primary">Packages</Link></li>
+            {SHOW_PORTFOLIO && <li><Link to="/work" className="hover:text-primary">Work</Link></li>}
           </ul>
         </div>
 
