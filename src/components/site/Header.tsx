@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
+import { CONTACT } from "@/data/contact";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -56,7 +57,7 @@ export function Header() {
 
         <div className="hidden lg:flex items-center gap-3">
           <a
-            href="tel:+14015551234"
+            href={CONTACT.telHref}
             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1.5"
             data-analytics="click_call"
           >
