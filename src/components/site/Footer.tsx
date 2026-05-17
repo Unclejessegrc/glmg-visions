@@ -40,7 +40,7 @@ export function Footer() {
           <ul className="space-y-2 text-sm">
             <li><Link to="/weddings" className="hover:text-primary">Weddings</Link></li>
             <li><Link to="/business-video" className="hover:text-primary">Business Video</Link></li>
-            <li><Link to="/events-recaps" className="hover:text-primary">Events & Recaps</Link></li>
+            <li><Link to="/events-recaps" className="hover:text-primary">Events and Recaps</Link></li>
             <li><Link to="/music-videos" className="hover:text-primary">Music Videos</Link></li>
             <li><Link to="/services" className="hover:text-primary">All Services</Link></li>
             <li><Link to="/packages" className="hover:text-primary">Packages</Link></li>
@@ -52,7 +52,8 @@ export function Footer() {
           <ul className="space-y-2 text-sm">
             <li><Link to="/contact" className="hover:text-primary">Get Pricing</Link></li>
             <li><Link to="/contact" className="hover:text-primary">Check Availability</Link></li>
-            <li><Link to="/about" className="hover:text-primary">About</Link></li>
+            <li><Link to="/contact" className="hover:text-primary">Contact</Link></li>
+            <li><a href={CONTACT.telHref} className="hover:text-primary">Call</a></li>
             <li className="text-muted-foreground text-xs pt-2">
               Service area: Rhode Island — Providence, Warwick, Newport, Cranston, Pawtucket, East Providence. Massachusetts & New England by quote.
             </li>
