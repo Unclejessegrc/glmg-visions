@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { CONTACT } from "@/data/contact";
 import { Phone, MessageSquare, Mail, Instagram, Youtube, CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
@@ -60,8 +61,8 @@ function ContactPage() {
               We got your project request. We'll review the details and reach out as soon as possible with next steps.
             </p>
             <div className="mt-8 flex justify-center gap-3 flex-wrap">
-              <a href="tel:+14015551234" className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">Call us</a>
-              <a href="sms:+14015551234" className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">Text us</a>
+              <a href={CONTACT.telHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">Call us</a>
+              <a href={CONTACT.smsHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">Text us</a>
             </div>
           </div>
         </section>
@@ -133,39 +134,40 @@ function ContactPage() {
 
           <aside className="space-y-4">
             <SectionHeading eyebrow="Other ways" title="Reach out." />
-            <a href="tel:+14015551234" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_call">
+            <a href={CONTACT.telHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_call">
               <Phone className="w-6 h-6 text-primary" />
               <div>
                 <p className="font-medium">Call us</p>
-                <p className="text-sm text-muted-foreground">(401) 555-1234</p>
+                <p className="text-sm text-muted-foreground">{CONTACT.phoneDisplay}</p>
               </div>
             </a>
-            <a href="sms:+14015551234" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_text">
+            <a href={CONTACT.smsHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_text">
               <MessageSquare className="w-6 h-6 text-primary" />
               <div>
                 <p className="font-medium">Text us</p>
-                <p className="text-sm text-muted-foreground">Fast replies, usually same day.</p>
+                <p className="text-sm text-muted-foreground">{CONTACT.textDisplay}</p>
+                <p className="text-sm text-muted-foreground">{CONTACT.textResponseNote}</p>
               </div>
             </a>
-            <a href="mailto:hello@goodlooksmedia.com" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
+            <a href={CONTACT.emailHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
               <Mail className="w-6 h-6 text-primary" />
               <div>
                 <p className="font-medium">Email</p>
-                <p className="text-sm text-muted-foreground">hello@goodlooksmedia.com</p>
+                <p className="text-sm text-muted-foreground">{CONTACT.email}</p>
               </div>
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
+            <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
               <Instagram className="w-6 h-6 text-primary" />
               <div>
                 <p className="font-medium">Instagram</p>
-                <p className="text-sm text-muted-foreground">@goodlooksmedia</p>
+                <p className="text-sm text-muted-foreground">{CONTACT.instagramLabel}</p>
               </div>
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
+            <a href={CONTACT.youtubeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
               <Youtube className="w-6 h-6 text-primary" />
               <div>
                 <p className="font-medium">YouTube</p>
-                <p className="text-sm text-muted-foreground">See more work</p>
+                <p className="text-sm text-muted-foreground">{CONTACT.youtubeLabel}</p>
               </div>
             </a>
           </aside>
