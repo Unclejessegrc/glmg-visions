@@ -115,8 +115,8 @@ function HomePage() {
               "Filming since 2018",
               "Rhode Island based",
               "Weddings, events, business, music, social content",
-              `Call or text: ${CONTACT.textDisplay}`,
-              CONTACT.textResponseNote,
+              "Fast replies by call, text, or email.",
+              "Usually same day.",
             ].map(t => (
               <div key={t} className="text-xs sm:text-sm text-muted-foreground border-l-2 border-primary pl-3">{t}</div>
             ))}
