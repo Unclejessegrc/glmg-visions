@@ -55,6 +55,9 @@ function PackagesPage() {
             <div className="grid md:grid-cols-3 gap-6">
               {group.packages.map(p => <PackageCard key={p.name} pkg={p} />)}
             </div>
+            <p className="mt-6 text-sm text-muted-foreground max-w-4xl">
+              Final pricing depends on date, location, coverage time, number of deliverables, editing complexity, turnaround needs, travel, and whether extra crew is needed.
+            </p>
           </div>
         </section>
       ))}
