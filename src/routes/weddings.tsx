@@ -55,7 +55,15 @@ function WeddingsPage() {
       <section className="py-12">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="relative aspect-video rounded-2xl overflow-hidden border border-border bg-black red-glow">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" className="w-full h-full" loading="lazy" title="Wedding reel" allowFullScreen />
+            <iframe
+              src="https://www.youtube.com/embed/0q_7tljwQHY?si=uum0jp0_yTGuWCrr&rel=0&modestbranding=1"
+              className="w-full h-full"
+              loading="lazy"
+              title="Good Looks Media Group Director Reel"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
           </div>
         </div>
       </section>
