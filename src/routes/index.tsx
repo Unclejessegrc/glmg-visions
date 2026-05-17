@@ -3,6 +3,7 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PortfolioCard } from "@/components/site/PortfolioCard";
 import { PORTFOLIO } from "@/data/portfolio";
+import { CONTACT } from "@/data/contact";
 import heroImage from "@/assets/hero.jpg";
 import {
   Heart, Briefcase, Music, PartyPopper, Mic2, Sparkles, Dog, Film,
@@ -31,7 +32,7 @@ export const Route = createFileRoute("/")({
         address: { "@type": "PostalAddress", addressRegion: "RI", addressCountry: "US" },
         areaServed: "Rhode Island",
         url: "/",
-        telephone: "+1-401-555-1234",
+        telephone: "+1-401-465-1529",
         priceRange: "$$",
         foundingDate: "2018",
       }),
@@ -259,10 +260,10 @@ function HomePage() {
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Link to="/contact" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold red-glow">Get Pricing</Link>
             <Link to="/contact" className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold">Check Availability</Link>
-            <a href="sms:+14015551234" className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-flex items-center gap-2" data-analytics="click_text">
+            <a href={CONTACT.smsHref} className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-flex items-center gap-2" data-analytics="click_text">
               <MessageSquare className="w-4 h-4" /> Text Us
             </a>
-            <a href="tel:+14015551234" className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-flex items-center gap-2" data-analytics="click_call">
+            <a href={CONTACT.telHref} className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-flex items-center gap-2" data-analytics="click_call">
               <Phone className="w-4 h-4" /> Call
             </a>
           </div>
