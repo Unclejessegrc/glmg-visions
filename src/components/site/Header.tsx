@@ -2,10 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { CONTACT } from "@/data/contact";
+import { SHOW_PORTFOLIO } from "@/config/features";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/work", label: "Work" },
+  ...(SHOW_PORTFOLIO ? [{ to: "/work", label: "Work" }] : []),
   { to: "/services", label: "Services" },
   { to: "/packages", label: "Packages" },
   { to: "/about", label: "About" },
