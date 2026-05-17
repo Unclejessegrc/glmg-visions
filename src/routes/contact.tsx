@@ -110,8 +110,7 @@ function ContactPage() {
             <a href={CONTACT.smsHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_text">
               <MessageSquare className="w-6 h-6 text-primary" />
               <div>
-                <p className="font-medium">Text</p>
-                <p className="text-sm text-muted-foreground">{CONTACT.textDisplay}</p>
+                <p className="font-medium">Text us</p>
                 <p className="text-sm text-muted-foreground">{CONTACT.textResponseNote}</p>
               </div>
             </a>
