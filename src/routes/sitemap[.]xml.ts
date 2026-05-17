@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { SHOW_PORTFOLIO } from "@/config/features";
 
 const BASE_URL = "";
 
@@ -15,7 +16,7 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/work", changefreq: "weekly", priority: "0.9" },
+          ...(SHOW_PORTFOLIO ? [{ path: "/work", changefreq: "weekly" as const, priority: "0.9" }] : []),
           { path: "/services", changefreq: "monthly", priority: "0.9" },
           { path: "/weddings", changefreq: "monthly", priority: "0.9" },
           { path: "/business-video", changefreq: "monthly", priority: "0.9" },
