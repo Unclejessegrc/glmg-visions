@@ -3,23 +3,36 @@ import { useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PortfolioCard } from "@/components/site/PortfolioCard";
+import { PortfolioHiddenPage } from "@/components/site/PortfolioHiddenPage";
 import { PORTFOLIO, CATEGORIES } from "@/data/portfolio";
+import { SHOW_PORTFOLIO } from "@/config/features";
 
 export const Route = createFileRoute("/work")({
   head: () => ({
-    meta: [
-      { title: "Our Work | Rhode Island Video Portfolio | Good Looks Media Group" },
-      { name: "description", content: "Browse wedding films, music videos, business ads, event recaps, and more from Rhode Island videographer Good Looks Media Group." },
-      { property: "og:title", content: "Our Work — Good Looks Media Group" },
-      { property: "og:description", content: "Filterable portfolio of Rhode Island video production work." },
-      { property: "og:url", content: "/work" },
-    ],
+    meta: SHOW_PORTFOLIO
+      ? [
+          { title: "Our Work | Rhode Island Video Portfolio | Good Looks Media Group" },
+          { name: "description", content: "Browse wedding films, music videos, business ads, event recaps, and more from Rhode Island videographer Good Looks Media Group." },
+          { property: "og:title", content: "Our Work — Good Looks Media Group" },
+          { property: "og:description", content: "Filterable portfolio of Rhode Island video production work." },
+          { property: "og:url", content: "/work" },
+        ]
+      : [
+          { title: "Portfolio Being Curated | Good Looks Media Group" },
+          { name: "description", content: "The Good Looks Media Group portfolio is being curated. Watch the director reel, view services, or request pricing." },
+          { name: "robots", content: "noindex, nofollow" },
+          { property: "og:title", content: "Portfolio Being Curated — Good Looks Media Group" },
+          { property: "og:description", content: "Watch the director reel, view services, or request pricing while the full portfolio is being curated." },
+          { property: "og:url", content: "/work" },
+        ],
     links: [{ rel: "canonical", href: "/work" }],
   }),
-  component: WorkPage,
+  // Portfolio is temporarily hidden until enough real project examples are ready.
+  // Change SHOW_PORTFOLIO to true to restore the full Work page publicly.
+  component: SHOW_PORTFOLIO ? WorkPage : PortfolioHiddenPage,
 });
 
-function WorkPage() {
+export function WorkPage() {
   const [cat, setCat] = useState<string>("All");
   const filtered = cat === "All" ? PORTFOLIO : PORTFOLIO.filter(p => p.category === cat);
 
