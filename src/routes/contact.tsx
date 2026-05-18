@@ -3,18 +3,27 @@ import { useEffect, useState, type FormEvent } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { CONTACT } from "@/data/contact";
+import { absoluteUrl, pageJsonLd } from "@/data/seo";
 import { Phone, MessageSquare, Mail, Instagram, Youtube, CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact | Get a Quote | Good Looks Media Group" },
-      { name: "description", content: "Get pricing or check availability for video production in Rhode Island. Quick lead form, call, text, or email." },
+      { title: "Book a Rhode Island Videographer | Good Looks Media Group" },
+      { name: "description", content: "Request pricing or check availability for Rhode Island, Connecticut, Massachusetts, and New England video production. Weddings, event media, business video, music videos, reels, and custom projects." },
       { property: "og:title", content: "Contact — Good Looks Media Group" },
-      { property: "og:description", content: "Tell us about your project. We'll come back fast with next steps." },
-      { property: "og:url", content: "/contact" },
+      { property: "og:description", content: "Tell us about your project and get next steps for video production across RI, CT, MA, and New England." },
+      { property: "og:url", content: absoluteUrl("/contact") },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/contact") }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify(pageJsonLd({
+        name: "Book a Rhode Island Videographer",
+        description: "Contact Good Looks Media Group for videography and video production pricing across Rhode Island, Connecticut, Massachusetts, and New England.",
+        path: "/contact",
+      })),
+    }],
   }),
   component: ContactPage,
 });

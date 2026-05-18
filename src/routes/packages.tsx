@@ -5,17 +5,26 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { PackageCard } from "@/components/site/PackageCard";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { WEDDING_PACKAGES, BUSINESS_PACKAGES, EVENT_PACKAGES, MUSIC_PACKAGES, CUSTOM_PACKAGES } from "@/data/packages";
+import { absoluteUrl, pageJsonLd } from "@/data/seo";
 
 export const Route = createFileRoute("/packages")({
   head: () => ({
     meta: [
-      { title: "Packages & Pricing | Good Looks Media Group" },
-      { name: "description", content: "Transparent starting prices for wedding films, business video, event recaps, music videos, and custom projects in Rhode Island." },
+      { title: "Videography Packages & Pricing RI, CT & MA | Good Looks Media Group" },
+      { name: "description", content: "Videography packages and starting price ranges for Rhode Island, Connecticut, Massachusetts, and New England weddings, event media, business video, music videos, and custom projects." },
       { property: "og:title", content: "Packages & Pricing — Good Looks Media Group" },
-      { property: "og:description", content: "Starting prices for every lane we film." },
-      { property: "og:url", content: "/packages" },
+      { property: "og:description", content: "Starting price ranges for wedding films, event recaps, business video, music videos, and custom projects across New England." },
+      { property: "og:url", content: absoluteUrl("/packages") },
     ],
-    links: [{ rel: "canonical", href: "/packages" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/packages") }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify(pageJsonLd({
+        name: "Videography Packages and Pricing for Rhode Island, Connecticut, Massachusetts, and New England",
+        description: "Starting price ranges for wedding videography, Rhode Island event media, business video production, music videos, and custom video projects.",
+        path: "/packages",
+      })),
+    }],
   }),
   component: PackagesPage,
 });

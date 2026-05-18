@@ -3,17 +3,26 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PackageCard } from "@/components/site/PackageCard";
 import { EVENT_PACKAGES } from "@/data/packages";
+import { absoluteUrl, serviceJsonLd } from "@/data/seo";
 
 export const Route = createFileRoute("/events-recaps")({
   head: () => ({
     meta: [
-      { title: "Event Videographer Rhode Island | Party & Recap Films" },
-      { name: "description", content: "Event recap videos for parties, live shows, festivals, baby showers, fundraisers, and community events across Rhode Island. Starting at $600." },
+      { title: "Rhode Island Event Media | Event Videographer CT, MA & New England" },
+      { name: "description", content: "Rhode Island event media and New England event videography for parties, live shows, festivals, baby showers, fundraisers, corporate events, and recaps. Starting at $600." },
       { property: "og:title", content: "Event & Recap Videos — Good Looks Media Group" },
-      { property: "og:description", content: "Event recaps that make people wish they were there." },
-      { property: "og:url", content: "/events-recaps" },
+      { property: "og:description", content: "Event recap videos for Rhode Island, Connecticut, Massachusetts, and New England events." },
+      { property: "og:url", content: absoluteUrl("/events-recaps") },
     ],
-    links: [{ rel: "canonical", href: "/events-recaps" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/events-recaps") }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify(serviceJsonLd({
+        name: "Rhode Island Event Media and New England Event Videography",
+        description: "Event recap videos for parties, live shows, festivals, baby showers, fundraisers, corporate events, and private events across RI, CT, MA, and New England.",
+        path: "/events-recaps",
+      })),
+    }],
   }),
   component: EventsPage,
 });

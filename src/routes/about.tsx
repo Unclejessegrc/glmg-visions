@@ -1,17 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { absoluteUrl, pageJsonLd } from "@/data/seo";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About | Good Looks Media Group | Rhode Island Video Team" },
-      { name: "description", content: "Good Looks Media Group is a two-person Rhode Island video production team filming weddings, music videos, business content, and personal stories since 2018." },
+      { title: "About Good Looks Media Group | Rhode Island Video Production Team" },
+      { name: "description", content: "Good Looks Media Group is a Rhode Island based two-person video production team serving RI, CT, MA, and New England with weddings, events, business video, music videos, and stories since 2018." },
       { property: "og:title", content: "About — Good Looks Media Group" },
-      { property: "og:description", content: "A small Rhode Island video team. You work directly with the people filming and editing." },
-      { property: "og:url", content: "/about" },
+      { property: "og:description", content: "A small Rhode Island video team serving New England. You work directly with the people filming and editing." },
+      { property: "og:url", content: absoluteUrl("/about") },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/about") }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify(pageJsonLd({
+        name: "About Good Looks Media Group",
+        description: "Good Looks Media Group is a Rhode Island based video production team serving Rhode Island, Connecticut, Massachusetts, and New England.",
+        path: "/about",
+      })),
+    }],
   }),
   component: AboutPage,
 });

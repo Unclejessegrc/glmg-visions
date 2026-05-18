@@ -4,17 +4,26 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { PackageCard } from "@/components/site/PackageCard";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { WEDDING_PACKAGES } from "@/data/packages";
+import { absoluteUrl, serviceJsonLd } from "@/data/seo";
 
 export const Route = createFileRoute("/weddings")({
   head: () => ({
     meta: [
-      { title: "Wedding Videographer Rhode Island | Good Looks Media Group" },
-      { name: "description", content: "Cinematic wedding films in Rhode Island, Providence, Newport, and across New England. Highlight films, ceremony edits, social clips. Packages starting at $1,800." },
+      { title: "Wedding Videographer Rhode Island, CT & MA | Good Looks Media Group" },
+      { name: "description", content: "Cinematic wedding videographer for Rhode Island, Connecticut, Massachusetts, and New England weddings. Highlight films, ceremony edits, social clips, and full-day storytelling from $1,800." },
       { property: "og:title", content: "Wedding Videographer Rhode Island | Good Looks Media Group" },
-      { property: "og:description", content: "Wedding films that feel like the day, not just a recap." },
-      { property: "og:url", content: "/weddings" },
+      { property: "og:description", content: "Wedding films across Rhode Island, Connecticut, Massachusetts, and New England that feel like the day, not just a recap." },
+      { property: "og:url", content: absoluteUrl("/weddings") },
     ],
-    links: [{ rel: "canonical", href: "/weddings" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/weddings") }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify(serviceJsonLd({
+        name: "Wedding Videography in Rhode Island, Connecticut, Massachusetts, and New England",
+        description: "Cinematic wedding films, highlight videos, ceremony edits, social clips, and full-day storytelling for New England couples.",
+        path: "/weddings",
+      })),
+    }],
   }),
   component: WeddingsPage,
 });

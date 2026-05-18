@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { OG_IMAGE, SITE_NAME } from "@/data/seo";
 
 function NotFoundComponent() {
   return (
@@ -73,18 +74,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#1a0a0a" },
-      { title: "Good Looks Media Group | Rhode Island Video Production" },
-      { name: "description", content: "Rhode Island videography & video production since 2018. Weddings, music videos, business ads, events." },
-      { name: "author", content: "Good Looks Media Group" },
-      { property: "og:site_name", content: "Good Looks Media Group" },
+      { title: "Good Looks Media Group | Rhode Island Videographer & New England Video Production" },
+      { name: "description", content: "Rhode Island videographer and New England video production team for weddings, event media, business commercials, music videos, reels, and custom stories." },
+      { name: "author", content: SITE_NAME },
+      { property: "og:site_name", content: SITE_NAME },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "Good Looks Media Group | Rhode Island Video Production" },
-      { name: "twitter:title", content: "Good Looks Media Group | Rhode Island Video Production" },
-      { property: "og:description", content: "Rhode Island videography & video production since 2018. Weddings, music videos, business ads, events." },
-      { name: "twitter:description", content: "Rhode Island videography & video production since 2018. Weddings, music videos, business ads, events." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/73fa5981-b0b2-4bb4-bbf0-0217ea63b5d4/id-preview-dee7a45a--c960d588-e9bd-406c-bb13-7d348a108e08.lovable.app-1778958773703.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/73fa5981-b0b2-4bb4-bbf0-0217ea63b5d4/id-preview-dee7a45a--c960d588-e9bd-406c-bb13-7d348a108e08.lovable.app-1778958773703.png" },
+      { property: "og:title", content: "Good Looks Media Group | Rhode Island Videographer & New England Video Production" },
+      { name: "twitter:title", content: "Good Looks Media Group | Rhode Island Videographer & New England Video Production" },
+      { property: "og:description", content: "Rhode Island videographer and New England video production team for weddings, event media, business commercials, music videos, reels, and custom stories." },
+      { name: "twitter:description", content: "Rhode Island videographer and New England video production team for weddings, event media, business commercials, music videos, reels, and custom stories." },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

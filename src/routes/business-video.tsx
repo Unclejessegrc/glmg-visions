@@ -3,17 +3,26 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PackageCard } from "@/components/site/PackageCard";
 import { BUSINESS_PACKAGES } from "@/data/packages";
+import { absoluteUrl, serviceJsonLd } from "@/data/seo";
 
 export const Route = createFileRoute("/business-video")({
   head: () => ({
     meta: [
-      { title: "Business Video Production Rhode Island | Commercial Videographer" },
-      { name: "description", content: "Brand videos, commercials, social ads, and testimonials for Rhode Island businesses. Multi-format content for web, social, and ads. Starting at $900." },
+      { title: "Business Video Production Rhode Island, CT & MA | Good Looks Media Group" },
+      { name: "description", content: "Business video production for Rhode Island, Connecticut, and Massachusetts companies. Commercials, brand videos, testimonials, social ads, reels, and website video starting at $900." },
       { property: "og:title", content: "Business Video Production Rhode Island | Good Looks Media Group" },
-      { property: "og:description", content: "Video content that helps people understand, trust, and buy from your business." },
-      { property: "og:url", content: "/business-video" },
+      { property: "og:description", content: "Commercial video, brand films, website video, and social content for businesses across Rhode Island, Connecticut, Massachusetts, and New England." },
+      { property: "og:url", content: absoluteUrl("/business-video") },
     ],
-    links: [{ rel: "canonical", href: "/business-video" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/business-video") }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify(serviceJsonLd({
+        name: "Business Video Production in Rhode Island, Connecticut, and Massachusetts",
+        description: "Commercials, brand videos, social ads, testimonials, reels, and website video for New England businesses.",
+        path: "/business-video",
+      })),
+    }],
   }),
   component: BusinessPage,
 });

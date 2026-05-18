@@ -1,17 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ArrowRight } from "lucide-react";
+import { absoluteUrl, pageJsonLd } from "@/data/seo";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services | Rhode Island Video Production | Good Looks Media Group" },
-      { name: "description", content: "Wedding films, business videos, music videos, event recaps, pet videos, documentaries, and custom projects. Rhode Island videographer since 2018." },
+      { title: "Video Production Services RI, CT & MA | Good Looks Media Group" },
+      { name: "description", content: "Rhode Island videographer serving RI, CT, MA, and New England with wedding films, event media, business commercials, music videos, reels, pet videos, documentaries, and custom projects." },
       { property: "og:title", content: "Services — Good Looks Media Group" },
-      { property: "og:description", content: "Full range of Rhode Island video production services." },
-      { property: "og:url", content: "/services" },
+      { property: "og:description", content: "Video production services across Rhode Island, Connecticut, Massachusetts, and New England." },
+      { property: "og:url", content: absoluteUrl("/services") },
     ],
-    links: [{ rel: "canonical", href: "/services" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/services") }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify(pageJsonLd({
+        name: "Video Production Services in Rhode Island, Connecticut, Massachusetts, and New England",
+        description: "Service lanes for wedding videography, Rhode Island event media, business video production, music videos, reels, pet videos, documentaries, and custom projects.",
+        path: "/services",
+      })),
+    }],
   }),
   component: ServicesPage,
 });

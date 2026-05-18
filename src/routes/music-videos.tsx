@@ -3,17 +3,26 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PackageCard } from "@/components/site/PackageCard";
 import { MUSIC_PACKAGES } from "@/data/packages";
+import { absoluteUrl, serviceJsonLd } from "@/data/seo";
 
 export const Route = createFileRoute("/music-videos")({
   head: () => ({
     meta: [
-      { title: "Music Video Production Rhode Island | Artist Videographer" },
-      { name: "description", content: "Music videos, performance films, and artist visuals in Rhode Island. Performance, story-driven, and concept videos. Starting at $750." },
+      { title: "Music Video Production Rhode Island, CT & MA | Good Looks Media Group" },
+      { name: "description", content: "Music video production for artists in Rhode Island, Connecticut, Massachusetts, and New England. Performance visuals, story-driven videos, release promos, and artist reels from $750." },
       { property: "og:title", content: "Music Video Production Rhode Island | Good Looks Media Group" },
-      { property: "og:description", content: "Music videos, performance films, and artist visuals with real energy." },
-      { property: "og:url", content: "/music-videos" },
+      { property: "og:description", content: "Music videos, performance films, release promos, and artist visuals across Rhode Island, Connecticut, Massachusetts, and New England." },
+      { property: "og:url", content: absoluteUrl("/music-videos") },
     ],
-    links: [{ rel: "canonical", href: "/music-videos" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/music-videos") }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify(serviceJsonLd({
+        name: "Music Video Production in Rhode Island, Connecticut, Massachusetts, and New England",
+        description: "Performance music videos, artist visuals, release promos, and concept videos for New England artists.",
+        path: "/music-videos",
+      })),
+    }],
   }),
   component: MusicPage,
 });

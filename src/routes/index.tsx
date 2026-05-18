@@ -5,6 +5,7 @@ import { PortfolioCard } from "@/components/site/PortfolioCard";
 import { PORTFOLIO } from "@/data/portfolio";
 import { CONTACT } from "@/data/contact";
 import { SHOW_PORTFOLIO } from "@/config/features";
+import { absoluteUrl, businessJsonLd, pageJsonLd, websiteJsonLd } from "@/data/seo";
 import heroImage from "@/assets/hero.jpg";
 import {
   Heart, Briefcase, Music, PartyPopper, Sparkles, Play, ArrowRight, Phone, MessageSquare
@@ -13,53 +14,27 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Good Looks Media Group | Rhode Island Videographer & Video Production" },
-      { name: "description", content: "Rhode Island videography for weddings, music videos, business ads, events, and stories worth remembering. Cinematic video production based in Providence since 2018." },
-      { property: "og:title", content: "Good Looks Media Group | Rhode Island Videographer" },
-      { property: "og:description", content: "Cinematic video for weddings, events, businesses, artists, and everything worth remembering." },
+      { title: "Rhode Island Videographer | New England Video Production | Good Looks Media Group" },
+      { name: "description", content: "Rhode Island videographer and New England video production team for weddings, Rhode Island event media, business commercials, music videos, reels, and custom projects across RI, CT, and MA." },
+      { property: "og:title", content: "Rhode Island Videographer | Good Looks Media Group" },
+      { property: "og:description", content: "Video production for weddings, events, businesses, artists, and stories across Rhode Island, Connecticut, Massachusetts, and New England." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: absoluteUrl("/") },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/") }],
     scripts: [{
       type: "application/ld+json",
       children: JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        name: "Good Looks Media Group",
-        image: "/og.jpg",
-        description: "Rhode Island video production and videography. Weddings, music videos, business ads, events.",
-        address: { "@type": "PostalAddress", addressRegion: "RI", addressCountry: "US" },
-        areaServed: [
-          "Rhode Island",
-          "Providence",
-          "Warwick",
-          "Cranston",
-          "Pawtucket",
-          "Newport",
-          "East Providence",
-          "New England",
-        ],
-        url: "/",
-        telephone: CONTACT.phoneDisplay,
-        email: CONTACT.email,
-        priceRange: "$$",
-        foundingDate: "2018",
-        sameAs: [CONTACT.instagramUrl, CONTACT.youtubeUrl],
-        contactPoint: {
-          "@type": "ContactPoint",
-          telephone: "+1-401-465-1529",
-          contactType: "customer service",
-          areaServed: "US-RI",
-          availableLanguage: "English",
-        },
-        makesOffer: [
-          "Wedding videography",
-          "Business video production",
-          "Event recap videos",
-          "Music video production",
-          "Short-form social content",
-          "Custom documentary and personal story films",
+        "@graph": [
+          businessJsonLd(),
+          websiteJsonLd(),
+          pageJsonLd({
+            name: "Rhode Island Videographer and New England Video Production",
+            description:
+              "Good Looks Media Group films weddings, event media, business commercials, music videos, reels, and custom video projects across Rhode Island, Connecticut, Massachusetts, and New England.",
+            path: "/",
+          }),
         ],
       }),
     }],
