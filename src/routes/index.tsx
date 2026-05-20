@@ -75,7 +75,7 @@ function HomePage() {
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to="/contact" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90 red-glow" data-analytics="cta_click_pricing">
-              Get Pricing
+              Get Intro Pricing
             </Link>
             <Link to="/contact" className="border border-foreground/30 text-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10" data-analytics="cta_click_availability">
               Check Availability
@@ -186,18 +186,18 @@ function HomePage() {
       {/* PACKAGE PREVIEW */}
       <section className="py-20 md:py-28 bg-card/40 border-y border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Pricing" title="Simple packages, custom quotes." subtitle="Three core lanes. Every project gets a custom quote based on date, coverage, and edit complexity." />
+          <SectionHeading eyebrow="Pricing" title="Introductory starting rates." subtitle="Accessible packages built for small businesses, families, artists, and local events. Every project still gets a custom final quote based on date, coverage, and edit complexity." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {[
-              { name: "Weddings & Milestones", price: "$1,800–$6,000", desc: "Cinematic wedding films, teasers, full-day storytelling.", to: "/packages#weddings" },
-              { name: "Business & Commercial", price: "$900–$7,500", desc: "Promos, brand video, social ads, testimonials.", to: "/packages#business-video" },
-              { name: "Events, Recaps & Live Shows", price: "$600–$3,000+", desc: "Parties, festivals, performances, community.", to: "/packages#events-recaps" },
-              { name: "Music Videos", price: "$750–$3,000+", desc: "Artist visuals, performance videos, and release promos.", to: "/packages#music-videos" },
-              { name: "Custom Projects", price: "Custom", desc: "Pets, documentaries, family stories, and unusual ideas.", to: "/packages#custom-projects" },
+              { name: "Weddings & Milestones", price: "Starting at $1,200", desc: "Cinematic wedding films, teasers, full-day storytelling.", to: "/packages#weddings" },
+              { name: "Business & Commercial", price: "Starting at $600", desc: "Promos, brand video, social ads, testimonials.", to: "/packages#business-video" },
+              { name: "Events, Recaps & Live Shows", price: "Starting at $400", desc: "Parties, festivals, performances, community.", to: "/packages#events-recaps" },
+              { name: "Music Videos", price: "Starting at $500", desc: "Artist visuals, performance videos, and release promos.", to: "/packages#music-videos" },
+              { name: "Custom Projects", price: "Starting at $400+", desc: "Pets, documentaries, family stories, and unusual ideas.", to: "/packages#custom-projects" },
             ].map((p) => (
               <a key={p.name} href={p.to} className="bg-card border border-border rounded-2xl p-7 hover:border-primary hover:-translate-y-1 transition">
-                <p className="timecode">Typical range</p>
-                <p className="font-display text-5xl text-primary mt-1">{p.price}</p>
+                <p className="timecode">Intro starting rate</p>
+                <p className="font-display text-3xl text-primary mt-1">{p.price}</p>
                 <h3 className="font-display text-xl uppercase mt-3">{p.name}</h3>
                 <p className="text-sm text-muted-foreground mt-2">{p.desc}</p>
                 <span className="mt-5 inline-flex text-sm uppercase tracking-widest text-foreground">See details →</span>
@@ -205,10 +205,10 @@ function HomePage() {
             ))}
           </div>
           <p className="mt-6 text-sm text-muted-foreground max-w-4xl">
-            Final pricing depends on date, location, coverage time, number of deliverables, editing complexity, turnaround needs, travel, and whether extra crew is needed.
+            These are introductory starting ranges. Final pricing depends on date, location, coverage time, number of videos, editing complexity, turnaround needs, travel, and whether extra crew is needed.
           </p>
           <div className="text-center mt-10">
-            <Link to="/packages" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-block hover:opacity-90">See all packages</Link>
+            <Link to="/packages" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-block hover:opacity-90">Find the Right Package</Link>
           </div>
         </div>
       </section>
@@ -251,7 +251,7 @@ function HomePage() {
           <ol className="grid md:grid-cols-5 gap-4">
             {[
               ["01", "Tell us what you need"],
-              ["02", "Pick a package or custom quote"],
+              ["02", "Find the right package"],
               ["03", "Plan the shoot"],
               ["04", "We film"],
               ["05", "You get polished video"],
@@ -295,7 +295,7 @@ function HomePage() {
             Ready to make your project look <span className="text-primary">good?</span>
           </h2>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <Link to="/contact" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold red-glow">Get Pricing</Link>
+            <Link to="/contact" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold red-glow">Get Intro Pricing</Link>
             <Link to="/contact" className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold">Check Availability</Link>
             <a href={CONTACT.smsHref} className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-flex items-center gap-2" data-analytics="click_text">
               <MessageSquare className="w-4 h-4" /> Text Us
