@@ -31,13 +31,13 @@ export const Route = createFileRoute("/contact")({
 const PROJECT_TYPES = [
   "Wedding",
   "Baby shower",
-  "Birthday/party",
+  "Birthday or party",
   "Business promo",
   "Commercial",
   "Music video",
   "Live show",
   "Event recap",
-  "Reels & social content",
+  "Reels and social content",
   "Pet video",
   "Documentary",
   "Custom project",
@@ -80,7 +80,7 @@ function ContactPage() {
     setStatus("submitting");
 
     try {
-      const response = await fetch("/", {
+      const response = await fetch("/forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: body.toString(),
@@ -193,7 +193,7 @@ function ContactPage() {
               data-analytics="form_start"
               className="order-2 lg:order-1 lg:col-span-2 bg-card border border-border rounded-2xl p-6 md:p-10 grid gap-5"
             >
-              {/* Netlify dashboard step: After deploy, go to Netlify -> Project configuration -> Notifications -> Emails and webhooks -> Form submission notifications. Create an email notification for the form "goodlooks-contact" and send it to goodlooksmediagroup@gmail.com. */}
+              {/* Netlify dashboard step required: After deploy, go to Netlify -> Project configuration -> Notifications -> Emails and webhooks -> Form submission notifications. Create an email notification for the form "goodlooks-contact". Recipient: goodlooksmediagroup@gmail.com. Subject: New Good Looks Media Group inquiry. This dashboard step is required so Netlify emails a copy of each verified form submission. */}
               <input type="hidden" name="form-name" value="goodlooks-contact" />
               <input type="hidden" name="subject" value="New Good Looks Media Group inquiry from %{formName} (%{submissionId})" />
               <p style={{ display: "none" }}>
