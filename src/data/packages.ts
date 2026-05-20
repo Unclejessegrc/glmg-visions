@@ -4,8 +4,9 @@ export const WEDDING_PACKAGES: PackageData[] = [
   {
     category: "Weddings",
     name: "The Teaser",
-    price: "$1,800–$2,400",
-    bestFor: "Elopements, small weddings, courthouse weddings, and couples who want a short cinematic memory.",
+    price: "$1,200–$1,800",
+    priceLabel: "Introductory range",
+    bestFor: "Best for elopements, small weddings, courthouse weddings, and couples who want a short cinematic memory.",
     includes: [
       "Up to 4 hours coverage",
       "1 videographer",
@@ -18,9 +19,10 @@ export const WEDDING_PACKAGES: PackageData[] = [
   {
     category: "Weddings",
     name: "The Highlight",
-    price: "$2,800–$3,800",
+    price: "$2,000–$2,800",
+    priceLabel: "Introductory range",
     featured: true,
-    bestFor: "Best for most weddings — the sweet spot of coverage and story.",
+    bestFor: "Best for most weddings and couples who want the main story of the day captured clearly.",
     includes: [
       "Up to 6 hours coverage",
       "1 videographer",
@@ -34,8 +36,9 @@ export const WEDDING_PACKAGES: PackageData[] = [
   {
     category: "Weddings",
     name: "The Full Story",
-    price: "$4,500–$6,000",
-    bestFor: "Larger weddings and couples who want the full day preserved.",
+    price: "$3,200–$4,500",
+    priceLabel: "Introductory range",
+    bestFor: "Best for larger weddings and couples who want more of the day preserved.",
     includes: [
       "Up to 8 hours coverage",
       "1–2 videographers",
@@ -52,8 +55,9 @@ export const BUSINESS_PACKAGES: PackageData[] = [
   {
     category: "Business",
     name: "Social Starter",
-    price: "$900–$1,500",
-    bestFor: "Small businesses that need quick promotional content.",
+    price: "$600–$1,000",
+    priceLabel: "Introductory range",
+    bestFor: "Best for small businesses that need quick promotional content, reels, short ads, or a simple brand clip.",
     includes: [
       "Up to 2 hours filming",
       "1 location",
@@ -66,7 +70,8 @@ export const BUSINESS_PACKAGES: PackageData[] = [
   {
     category: "Business",
     name: "Brand Builder",
-    price: "$1,800–$3,500",
+    price: "$1,200–$2,200",
+    priceLabel: "Introductory range",
     featured: true,
     bestFor: "Businesses that need website, social, and ad content.",
     includes: [
@@ -81,8 +86,9 @@ export const BUSINESS_PACKAGES: PackageData[] = [
   {
     category: "Business",
     name: "Campaign Kit",
-    price: "$4,500–$7,500",
-    bestFor: "Businesses that need a full content library.",
+    price: "$2,800–$4,500",
+    priceLabel: "Introductory range",
+    bestFor: "Best for businesses that need a small content library with one main video and multiple short-form clips.",
     includes: [
       "Half-day production",
       "1 main brand video",
@@ -98,8 +104,9 @@ export const EVENT_PACKAGES: PackageData[] = [
   {
     category: "Events",
     name: "Quick Recap",
-    price: "$600–$1,200",
-    bestFor: "Small parties, pop-ups, birthdays, baby showers, short events.",
+    price: "$400–$800",
+    priceLabel: "Introductory range",
+    bestFor: "Best for small parties, pop-ups, birthdays, baby showers, short events, and basic recap needs.",
     includes: [
       "Up to 2 hours coverage",
       "1 videographer",
@@ -111,9 +118,10 @@ export const EVENT_PACKAGES: PackageData[] = [
   {
     category: "Events",
     name: "Main Event",
-    price: "$1,500–$2,800",
+    price: "$900–$1,500",
+    priceLabel: "Introductory range",
     featured: true,
-    bestFor: "Larger parties, live shows, community events, milestones.",
+    bestFor: "Best for larger parties, live shows, community events, milestone events, and social-ready recaps.",
     includes: [
       "Up to 4 hours coverage",
       "1 videographer",
@@ -126,11 +134,12 @@ export const EVENT_PACKAGES: PackageData[] = [
   {
     category: "Events",
     name: "Mid Event",
-    price: "$2,200–$2,600",
-    bestFor: "Events that need more coverage and a stronger recap without a full-day scope.",
+    price: "$1,600–$2,200",
+    priceLabel: "Introductory range",
+    bestFor: "Best for medium events that need more coverage, stronger editing, and multiple deliverables.",
     includes: [
       "Up to 5 hours coverage",
-      "1–2 videographers",
+      "1–2 videographers depending on quote",
       "2–3 minute recap",
       "3 vertical clips",
       "Online delivery",
@@ -139,8 +148,9 @@ export const EVENT_PACKAGES: PackageData[] = [
   {
     category: "Events",
     name: "Full Experience",
-    price: "$3,000+",
-    bestFor: "Festivals, large parties, live performances, corporate events.",
+    price: "$2,400+",
+    priceLabel: "Introductory range",
+    bestFor: "Best for festivals, large private events, live performances, corporate events, and bigger productions.",
     includes: [
       "Up to 6 hours coverage",
       "1–2 videographers",
@@ -156,8 +166,9 @@ export const MUSIC_PACKAGES: PackageData[] = [
   {
     category: "Music",
     name: "Performance Visual",
-    price: "$750–$1,500",
-    bestFor: "Single-location performance edits for artists building their reel.",
+    price: "$500–$900",
+    priceLabel: "Introductory range",
+    bestFor: "Best for single-location performance videos and artists building their visual catalog.",
     includes: [
       "Up to 2 hours filming",
       "1 location",
@@ -169,9 +180,10 @@ export const MUSIC_PACKAGES: PackageData[] = [
   {
     category: "Music",
     name: "Artist Video",
-    price: "$1,500–$3,000",
+    price: "$900–$1,800",
+    priceLabel: "Introductory range",
     featured: true,
-    bestFor: "Artists who want performance + story elements.",
+    bestFor: "Best for artists who want performance plus simple story elements.",
     includes: [
       "Up to 4 hours filming",
       "1–2 locations",
@@ -184,8 +196,9 @@ export const MUSIC_PACKAGES: PackageData[] = [
   {
     category: "Music",
     name: "Full Concept Video",
-    price: "$3,000+",
-    bestFor: "Concept-driven music videos with multiple scenes and treatments.",
+    price: "$2,000+",
+    priceLabel: "Introductory range",
+    bestFor: "Best for concept-driven music videos with multiple scenes, planning, and a more detailed edit.",
     includes: [
       "Concept planning",
       "Half-day shoot",
@@ -200,10 +213,10 @@ export const MUSIC_PACKAGES: PackageData[] = [
 export const CUSTOM_PACKAGES: PackageData[] = [
   {
     category: "Custom",
-    name: "Custom Project",
-    price: "Custom quote",
-    priceLabel: "Scoped to your project",
-    bestFor: "Pets, documentaries, legacy films, memorial videos, personal stories, and creative projects outside the usual lanes.",
+    name: "Custom Projects",
+    price: "Starting at $400+",
+    priceLabel: "Intro starting rate",
+    bestFor: "Best for pet videos, documentary-style projects, family legacy films, custom creative ideas, and unusual projects.",
     includes: [
       "Discovery call",
       "Custom scope and timeline",
