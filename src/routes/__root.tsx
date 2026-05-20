@@ -108,7 +108,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {/* Hidden static fallback so Netlify detects the React inquiry form at build time. */}
-        <form name="goodlooks-contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <form name="goodlooks-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
           <input type="hidden" name="form-name" value="goodlooks-contact" />
           <input type="hidden" name="subject" value="New Good Looks Media Group inquiry from %{formName} (%{submissionId})" />
           <input type="text" name="name" />
