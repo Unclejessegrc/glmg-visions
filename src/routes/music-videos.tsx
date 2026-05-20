@@ -9,7 +9,7 @@ export const Route = createFileRoute("/music-videos")({
   head: () => ({
     meta: [
       { title: "Music Video Production Rhode Island, CT & MA | Good Looks Media Group" },
-      { name: "description", content: "Music video production for artists in Rhode Island, Connecticut, Massachusetts, and New England. Performance visuals, story-driven videos, release promos, and artist reels from $750." },
+      { name: "description", content: "Music video production for artists in Rhode Island, Connecticut, Massachusetts, and New England with accessible starting ranges for performance visuals, story-driven videos, release promos, and artist reels." },
       { property: "og:title", content: "Music Video Production Rhode Island | Good Looks Media Group" },
       { property: "og:description", content: "Music videos, performance films, release promos, and artist visuals across Rhode Island, Connecticut, Massachusetts, and New England." },
       { property: "og:url", content: absoluteUrl("/music-videos") },
