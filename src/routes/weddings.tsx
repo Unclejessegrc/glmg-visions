@@ -10,7 +10,7 @@ export const Route = createFileRoute("/weddings")({
   head: () => ({
     meta: [
       { title: "Wedding Videographer Rhode Island, CT & MA | Good Looks Media Group" },
-      { name: "description", content: "Cinematic wedding videographer for Rhode Island, Connecticut, Massachusetts, and New England weddings. Highlight films, ceremony edits, social clips, and full-day storytelling from $1,800." },
+      { name: "description", content: "Cinematic wedding videographer for Rhode Island, Connecticut, Massachusetts, and New England weddings with accessible starting ranges for highlight films, ceremony edits, social clips, and full-day storytelling." },
       { property: "og:title", content: "Wedding Videographer Rhode Island | Good Looks Media Group" },
       { property: "og:description", content: "Wedding films across Rhode Island, Connecticut, Massachusetts, and New England that feel like the day, not just a recap." },
       { property: "og:url", content: absoluteUrl("/weddings") },
@@ -29,13 +29,13 @@ export const Route = createFileRoute("/weddings")({
 });
 
 const ADDONS = [
-  ["Extra coverage hour", "$100–$150 / hr"],
-  ["Second videographer", "from $500"],
-  ["Drone footage", "from $300 (weather + airspace permitting)"],
-  ["Raw footage", "from $300"],
-  ["48-hour teaser", "from $250"],
+  ["Extra coverage hour", "$75–$125 / hr"],
+  ["Second videographer", "Starting at $350"],
+  ["Drone footage", "Starting at $200 (weather, location, airspace rules, and licensing permitting)"],
+  ["Raw footage", "Starting at $200"],
+  ["48-hour teaser", "Starting at $150"],
   ["Rehearsal dinner coverage", "Custom quote"],
-  ["Vertical social clip bundle", "from $250"],
+  ["Vertical social clip bundle", "Starting at $150"],
 ];
 
 const FAQ = [
@@ -79,7 +79,7 @@ function WeddingsPage() {
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="Packages" title="Three ways to film your day." subtitle="Every wedding gets a custom quote. These are starting points." />
+          <SectionHeading eyebrow="Packages" title="Three ways to film your day." subtitle="Every wedding gets a custom final quote. These are introductory starting ranges." />
           <div className="grid md:grid-cols-3 gap-6 mt-8">
             {WEDDING_PACKAGES.map(p => <PackageCard key={p.name} pkg={p} />)}
           </div>
