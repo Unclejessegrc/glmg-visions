@@ -9,7 +9,7 @@ export const Route = createFileRoute("/events-recaps")({
   head: () => ({
     meta: [
       { title: "Rhode Island Event Media | Event Videographer CT, MA & New England" },
-      { name: "description", content: "Rhode Island event media and New England event videography for parties, live shows, festivals, baby showers, fundraisers, corporate events, and recaps. Starting at $600." },
+      { name: "description", content: "Rhode Island event media and New England event videography with accessible starting ranges for parties, live shows, festivals, baby showers, fundraisers, corporate events, and recaps." },
       { property: "og:title", content: "Event & Recap Videos — Good Looks Media Group" },
       { property: "og:description", content: "Event recap videos for Rhode Island, Connecticut, Massachusetts, and New England events." },
       { property: "og:url", content: absoluteUrl("/events-recaps") },
