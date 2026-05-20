@@ -9,7 +9,7 @@ export const Route = createFileRoute("/business-video")({
   head: () => ({
     meta: [
       { title: "Business Video Production Rhode Island, CT & MA | Good Looks Media Group" },
-      { name: "description", content: "Business video production for Rhode Island, Connecticut, and Massachusetts companies. Commercials, brand videos, testimonials, social ads, reels, and website video starting at $900." },
+      { name: "description", content: "Business video production for Rhode Island, Connecticut, and Massachusetts companies with accessible starting ranges for commercials, brand videos, testimonials, social ads, reels, and website video." },
       { property: "og:title", content: "Business Video Production Rhode Island | Good Looks Media Group" },
       { property: "og:description", content: "Commercial video, brand films, website video, and social content for businesses across Rhode Island, Connecticut, Massachusetts, and New England." },
       { property: "og:url", content: absoluteUrl("/business-video") },
@@ -28,13 +28,13 @@ export const Route = createFileRoute("/business-video")({
 });
 
 const ADDONS = [
-  ["Extra filming hour", "$100–$150"],
-  ["Extra vertical clip", "$75–$150"],
+  ["Extra coverage hour", "$75–$125 per hour"],
+  ["Extra vertical reel", "$50–$100 each"],
   ["Captions / subtitles", "from $100"],
-  ["Script help", "from $150"],
-  ["Additional location", "from $150"],
-  ["Rush edit", "Custom quote"],
-  ["Monthly content retainer", "from $1,200 / month"],
+  ["Script or concept help", "Starting at $100"],
+  ["Additional location", "Starting at $100"],
+  ["Rush editing", "Custom quote"],
+  ["Vertical social clip bundle", "Starting at $150"],
 ];
 
 function BusinessPage() {
@@ -61,11 +61,11 @@ function BusinessPage() {
 
           <div className="mt-10 bg-gradient-to-r from-primary/15 via-card to-card border border-primary/30 rounded-2xl p-7 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <p className="timecode mb-2">● PREMIUM CUSTOM CAMPAIGNS</p>
-              <h3 className="font-display text-2xl md:text-3xl uppercase">Starting at $4,500+</h3>
-              <p className="text-muted-foreground mt-2 max-w-xl">Larger campaigns, multi-location shoots, commercials, training videos, recruitment videos, launch campaigns, or monthly content retainers.</p>
+              <p className="timecode mb-2">● CUSTOM CAMPAIGNS</p>
+              <h3 className="font-display text-2xl md:text-3xl uppercase">Custom final quotes</h3>
+              <p className="text-muted-foreground mt-2 max-w-xl">Larger campaigns, multi-location shoots, commercials, training videos, recruitment videos, launch campaigns, or monthly content retainers are scoped around the deliverables you need.</p>
             </div>
-            <Link to="/contact" className="bg-primary text-primary-foreground px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold whitespace-nowrap">Talk strategy</Link>
+            <Link to="/contact" className="bg-primary text-primary-foreground px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold whitespace-nowrap">Request a Custom Quote</Link>
           </div>
         </div>
       </section>
@@ -87,7 +87,7 @@ function BusinessPage() {
       <section className="py-20 text-center">
         <div className="mx-auto max-w-3xl px-4">
           <h2 className="font-display text-4xl md:text-5xl uppercase">Get a quote for your business.</h2>
-          <Link to="/contact" className="mt-7 inline-block bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold red-glow">Request a quote</Link>
+          <Link to="/contact" className="mt-7 inline-block bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold red-glow">Request a Custom Quote</Link>
         </div>
       </section>
     </SiteLayout>
