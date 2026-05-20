@@ -53,7 +53,7 @@ const BUDGETS = [
 ];
 
 function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [preset, setPreset] = useState<{ projectType?: string; pkg?: string }>({});
 
   useEffect(() => {
@@ -65,14 +65,39 @@ function ContactPage() {
     });
   }, []);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // NOTE: Wire this up to your form backend (Formspree, Resend, Supabase, etc.).
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const body = new URLSearchParams();
+
+    formData.forEach((value, key) => {
+      body.append(key, value.toString());
+    });
+
+    setStatus("submitting");
+
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      setStatus("success");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch {
+      setStatus("error");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
-  if (submitted) {
+  if (status === "success") {
     return (
       <SiteLayout>
         <section className="min-h-[60vh] flex items-center justify-center text-center px-4 py-24">
@@ -80,11 +105,36 @@ function ContactPage() {
             <CheckCircle2 className="w-16 h-16 text-primary mx-auto mb-6" />
             <h1 className="font-display text-4xl md:text-5xl uppercase">Thanks!</h1>
             <p className="mt-4 text-muted-foreground text-lg">
-              We got your project request. We will review the details and reach out as soon as possible with next steps.
+              Thanks! We got your project request. We will review the details and reach out as soon as possible.
+            </p>
+            <p className="mt-4 text-muted-foreground">
+              Need a faster reply? Call us directly.
             </p>
             <div className="mt-8 flex justify-center gap-3 flex-wrap">
               <a href={CONTACT.telHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">Call us</a>
-              <a href={CONTACT.smsHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">Text us</a>
+            </div>
+          </div>
+        </section>
+      </SiteLayout>
+    );
+  }
+
+  if (status === "error") {
+    return (
+      <SiteLayout>
+        <section className="min-h-[60vh] flex items-center justify-center text-center px-4 py-24">
+          <div className="max-w-xl">
+            <h1 className="font-display text-4xl md:text-5xl uppercase">Message not sent.</h1>
+            <p className="mt-4 text-muted-foreground text-lg">
+              Something went wrong and your message may not have gone through. Please call or email us directly.
+            </p>
+            <div className="mt-8 flex justify-center gap-3 flex-wrap">
+              <a href={CONTACT.emailHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">
+                Email {CONTACT.email}
+              </a>
+              <a href={CONTACT.telHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">
+                Call {CONTACT.phoneDisplay}
+              </a>
             </div>
           </div>
         </section>
@@ -134,10 +184,23 @@ function ContactPage() {
 
           <div className="grid lg:grid-cols-3 gap-10">
             <form
+              name="goodlooks-contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
               onSubmit={onSubmit}
               data-analytics="form_start"
               className="order-2 lg:order-1 lg:col-span-2 bg-card border border-border rounded-2xl p-6 md:p-10 grid gap-5"
             >
+              {/* Netlify dashboard step: After deploy, go to Netlify -> Project configuration -> Notifications -> Emails and webhooks -> Form submission notifications. Create an email notification for the form "goodlooks-contact" and send it to goodlooksmediagroup@gmail.com. */}
+              <input type="hidden" name="form-name" value="goodlooks-contact" />
+              <input type="hidden" name="subject" value="New Good Looks Media Group inquiry from %{formName} (%{submissionId})" />
+              <p style={{ display: "none" }}>
+                <label>
+                  Do not fill this out:
+                  <input name="bot-field" />
+                </label>
+              </p>
               {preset.pkg && (
                 <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-sm">
                   Requesting: <strong className="text-primary">{preset.pkg}</strong>
@@ -147,20 +210,20 @@ function ContactPage() {
                 <Field label="Name" name="name" required />
                 <Field label="Email" name="email" type="email" required />
                 <Field label="Phone" name="phone" type="tel" required />
-                <Select label="Preferred contact method" name="contactPref" options={["Call", "Text", "Email"]} required />
+                <Select label="Preferred contact method" name="preferred_contact_method" options={["Call", "Text", "Email"]} required />
               </div>
               <div className="grid md:grid-cols-2 gap-5">
-                <Select label="Project type" name="projectType" options={PROJECT_TYPES} defaultValue={preset.projectType} required />
-                <Field label="Event date / deadline" name="date" placeholder="Date, deadline, or not sure yet" required />
+                <Select label="Project type" name="project_type" options={PROJECT_TYPES} defaultValue={preset.projectType} required />
+                <Field label="Event date / deadline" name="event_date_or_deadline" placeholder="Date, deadline, or not sure yet" required />
               </div>
               <div className="grid md:grid-cols-2 gap-5">
                 <Field label="Location" name="location" placeholder="City, venue, or service area" required />
-                <Select label="Budget range" name="budget" options={BUDGETS} required />
+                <Select label="Budget range" name="budget_range" options={BUDGETS} required />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Short project description<span className="text-primary"> *</span></label>
                 <textarea
-                  name="description"
+                  name="project_description"
                   rows={5}
                   required
                   className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
@@ -168,15 +231,16 @@ function ContactPage() {
                 />
               </div>
               <label className="flex items-start gap-3 text-sm">
-                <input type="checkbox" name="helpChoose" className="mt-1 w-4 h-4 accent-[oklch(0.55_0.21_25)]" />
+                <input type="checkbox" name="needs_package_help" value="Yes" className="mt-1 w-4 h-4 accent-[oklch(0.55_0.21_25)]" />
                 <span>I want help choosing the right package.</span>
               </label>
               <button
                 type="submit"
+                disabled={status === "submitting"}
                 className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90 red-glow"
                 data-analytics="form_submit"
               >
-                Send My Project
+                {status === "submitting" ? "Sending..." : "Send My Project"}
               </button>
             </form>
 
