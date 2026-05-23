@@ -6,16 +6,13 @@ import { SHOW_PORTFOLIO } from "@/config/features";
 
 const NAV = [
   { to: "/", label: "Home" },
-  ...(SHOW_PORTFOLIO ? [{ to: "/work", label: "Work" }] : []),
   { to: "/services", label: "Services" },
   { to: "/packages", label: "Packages" },
+  ...(SHOW_PORTFOLIO ? [{ to: "/work", label: "Portfolio" }] : []),
   { to: "/about", label: "About" },
 ] as const;
 
-const MOBILE_NAV = [
-  ...NAV,
-  { to: "/contact", label: "Contact" },
-] as const;
+const MOBILE_NAV = [...NAV, { to: "/for-businesses", label: "For Businesses" }, { to: "/contact", label: "Contact" }] as const;
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -57,6 +54,13 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-5 xl:gap-6">
+          <Link
+            to="/for-businesses"
+            className="inline-flex items-center border border-foreground/20 px-3.5 py-2 rounded-md text-xs font-medium uppercase tracking-wider text-foreground hover:border-primary hover:text-primary transition"
+            activeProps={{ className: "border-primary text-primary" }}
+          >
+            For Businesses
+          </Link>
           <Link
             to="/contact"
             className="text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition"
