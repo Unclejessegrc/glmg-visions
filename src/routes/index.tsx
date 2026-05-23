@@ -80,7 +80,7 @@ const SERVICES = [
     label: "Weddings & Elopements",
     to: "/weddings",
   },
-  { icon: Briefcase, label: "Business Ads & Commercials", to: "/business-video" },
+  { icon: Briefcase, label: "Business Ads & Commercials", to: "/for-businesses" },
   { icon: PartyPopper, label: "Events, Parties & Recaps", to: "/events-recaps" },
   { icon: Music, label: "Music Videos", to: "/music-videos" },
   { icon: Video, label: "Reels & Short-Form Content", to: "/services#social" },
@@ -243,7 +243,7 @@ function HomePage() {
                 },
                 {
                   name: "Business Ads & Commercials",
-                  to: "/packages#business-video",
+                  to: "/for-businesses",
                   icon: Briefcase,
                 },
                 { name: "Events, Parties & Recaps", to: "/packages#events-recaps", icon: PartyPopper },
@@ -310,7 +310,8 @@ function HomePage() {
                 name: "Business & Commercial",
                 price: "Starting at $600",
                 desc: "Promos, brand video, social ads, testimonials.",
-                to: "/packages#business-video",
+                to: "/for-businesses",
+                action: "For Businesses →",
               },
               {
                 name: "Events, Recaps & Live Shows",
@@ -341,7 +342,7 @@ function HomePage() {
                 <h3 className="font-display text-xl uppercase mt-3">{p.name}</h3>
                 <p className="text-sm text-muted-foreground mt-2">{p.desc}</p>
                 <span className="mt-5 inline-flex text-sm uppercase tracking-widest text-foreground">
-                  See details →
+                  {"action" in p ? p.action : "See details →"}
                 </span>
               </a>
             ))}
