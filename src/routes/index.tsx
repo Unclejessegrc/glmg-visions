@@ -17,37 +17,38 @@ import {
   ArrowRight,
   Phone,
   MessageSquare,
+  Video,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Rhode Island Wedding Videographer | Good Looks Media Group" },
+      { title: "Rhode Island Videographer & Media Company | Good Looks Media Group" },
       {
         name: "description",
         content:
-          "Good Looks Media Group is a Rhode Island wedding videographer creating cinematic wedding films, event videos, music videos, and brand content across RI, MA, and New England.",
+          "Good Looks Media Group is a Rhode Island videographer and media company filming weddings, events, business videos, music videos, reels, pet films, documentaries, and custom projects across RI and New England.",
       },
       { name: "robots", content: "index, follow" },
       {
         property: "og:title",
-        content: "Rhode Island Wedding Videographer | Good Looks Media Group",
+        content: "Rhode Island Videographer & Media Company | Good Looks Media Group",
       },
       {
         property: "og:description",
         content:
-          "Cinematic wedding films, event videos, music videos, and brand content from a Rhode Island wedding videographer serving RI, MA, and New England.",
+          "A Rhode Island videographer and media company filming weddings, events, business videos, music videos, reels, pet films, documentaries, and custom projects.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: absoluteUrl("/") },
       {
         name: "twitter:title",
-        content: "Rhode Island Wedding Videographer | Good Looks Media Group",
+        content: "Rhode Island Videographer & Media Company | Good Looks Media Group",
       },
       {
         name: "twitter:description",
         content:
-          "Good Looks Media Group creates cinematic wedding films, event videos, music videos, and brand content across RI, MA, and New England.",
+          "Good Looks Media Group films weddings, events, business videos, music videos, reels, pet films, documentaries, and custom projects across RI and New England.",
       },
     ],
     links: [{ rel: "canonical", href: absoluteUrl("/") }],
@@ -60,9 +61,9 @@ export const Route = createFileRoute("/")({
             businessJsonLd(),
             websiteJsonLd(),
             pageJsonLd({
-              name: "Rhode Island Wedding Videographer and New England Video Production",
+              name: "Rhode Island Videographer and Media Company",
               description:
-                "Good Looks Media Group is a Rhode Island wedding videographer and video production company serving couples, events, artists, and businesses across Rhode Island, Connecticut, Massachusetts, and New England.",
+                "Good Looks Media Group is a Rhode Island videographer and media company serving weddings, events, artists, businesses, families, pet films, documentaries, reels, and custom creative projects across Rhode Island and New England.",
               path: "/",
             }),
           ],
@@ -76,13 +77,14 @@ export const Route = createFileRoute("/")({
 const SERVICES = [
   {
     icon: Heart,
-    label: "Rhode Island wedding videographer",
+    label: "Weddings & Elopements",
     to: "/weddings",
   },
-  { icon: Briefcase, label: "Business & Commercial Video", to: "/business-video" },
-  { icon: PartyPopper, label: "Events & Recaps", to: "/events-recaps" },
+  { icon: Briefcase, label: "Business Ads & Commercials", to: "/business-video" },
+  { icon: PartyPopper, label: "Events, Parties & Recaps", to: "/events-recaps" },
   { icon: Music, label: "Music Videos", to: "/music-videos" },
-  { icon: Sparkles, label: "Custom Stories", to: "/services#custom" },
+  { icon: Video, label: "Reels & Short-Form Content", to: "/services#social" },
+  { icon: Sparkles, label: "Pet Films, Documentaries & Custom Stories", to: "/services#custom" },
 ];
 
 function HomePage() {
@@ -92,7 +94,7 @@ function HomePage() {
       <section className="relative min-h-[92vh] flex items-center overflow-hidden">
         <img
           src={heroImage}
-          alt="Rhode Island wedding videographer filming a cinematic Good Looks Media Group video at dusk"
+          alt="Good Looks Media Group Rhode Island videographer filming cinematic video production at dusk"
           className="absolute inset-0 w-full h-full object-cover"
           width={1920}
           height={1080}
@@ -101,15 +103,15 @@ function HomePage() {
         <div className="absolute inset-0 film-grain" />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24">
-          <p className="timecode mb-5">REC - RHODE ISLAND WEDDINGS - SINCE 2018</p>
+          <p className="timecode mb-5">REC - RHODE ISLAND VIDEO PRODUCTION - SINCE 2018</p>
           <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl uppercase leading-[0.9] max-w-5xl text-balance">
-            Rhode Island Wedding Videographer for Films Worth{" "}
-            <span className="text-primary">Remembering.</span>
+            Rhode Island Videographer & Media Company
           </h1>
           <p className="mt-6 text-base md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            Good Looks Media Group is a Rhode Island wedding videographer and video production
-            company serving couples, events, artists, and businesses with cinematic wedding films,
-            event videos, music videos, and brand content.
+            Good Looks Media Group is a Rhode Island video production team filming weddings,
+            events, business content, music videos, social reels, pet films, documentaries, and
+            custom stories since 2018. If it matters enough to remember, promote, launch, or share,
+            we can help film it the right way.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link
@@ -120,11 +122,11 @@ function HomePage() {
               Get Pricing Info
             </Link>
             <Link
-              to="/weddings"
+              to="/services"
               className="border border-foreground/30 text-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10"
-              data-analytics="cta_click_weddings"
+              data-analytics="cta_click_services"
             >
-              Wedding videography in Rhode Island
+              View Services
             </Link>
             <a
               href="#director-reel"
@@ -138,7 +140,7 @@ function HomePage() {
             {[
               "Filming since 2018",
               "Rhode Island based",
-              "Wedding films, events, business, music, social content",
+              "Weddings, events, business, music, reels, and custom stories",
               "Fast replies by call, text, or email.",
               "Usually same day.",
             ].map((t) => (
@@ -158,10 +160,10 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Choose your lane"
-            title="Rhode Island wedding videographer, built for more than one kind of story."
-            subtitle="Start with wedding videography packages, event coverage, brand content, music videos, or a custom project. We are based in Rhode Island and available throughout Warwick, Providence, Newport, South County, Massachusetts, Connecticut, and New England by quote."
+            title="Rhode Island video production, built for more than one kind of story."
+            subtitle="Start with the lane that fits your project: weddings, events, business videos, music videos, reels, pet films, documentaries, family milestones, or a custom idea. We are based in Rhode Island and available throughout Warwick, Providence, Newport, South County, Massachusetts, Connecticut, and New England by quote."
           />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {SERVICES.map(({ icon: Icon, label, to }) => (
               <a
                 key={label}
@@ -198,7 +200,7 @@ function HomePage() {
           <p className="mt-6 text-muted-foreground">
             Like this style?{" "}
             <Link to="/weddings" className="text-primary underline underline-offset-4">
-              Cinematic wedding films -&gt;
+              Cinematic wedding films →
             </Link>
           </p>
         </div>
@@ -214,7 +216,7 @@ function HomePage() {
                 to="/work"
                 className="text-primary uppercase tracking-widest text-sm hover:underline whitespace-nowrap"
               >
-                View full portfolio -&gt;
+                View full portfolio →
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -230,23 +232,28 @@ function HomePage() {
             <SectionHeading
               eyebrow="Start Here"
               title="Choose the kind of video you need."
-              subtitle="Whether you need a wedding film, business promo, event recap, music video, reel, pet video, documentary, or custom project, start with the service lane that fits best. We will help you shape the right package."
+              subtitle="Whether you need a wedding film, business promo, event recap, music video, reel, pet video, documentary, family milestone, or custom project, start with the service lane that fits best. We will help you shape the right package."
             />
-            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-5">
               {[
                 {
-                  name: "Rhode Island wedding videographer",
+                  name: "Weddings & Elopements",
                   to: "/weddings",
                   icon: Heart,
                 },
                 {
-                  name: "Business & Commercial Video",
+                  name: "Business Ads & Commercials",
                   to: "/packages#business-video",
                   icon: Briefcase,
                 },
-                { name: "Events & Recaps", to: "/packages#events-recaps", icon: PartyPopper },
+                { name: "Events, Parties & Recaps", to: "/packages#events-recaps", icon: PartyPopper },
                 { name: "Music Videos", to: "/packages#music-videos", icon: Music },
-                { name: "Custom Projects", to: "/packages#custom-projects", icon: Sparkles },
+                { name: "Reels & Short-Form Content", to: "/packages#business-video", icon: Video },
+                {
+                  name: "Pet Films, Documentaries & Custom Stories",
+                  to: "/packages#custom-projects",
+                  icon: Sparkles,
+                },
               ].map(({ name, to, icon: Icon }) => (
                 <a
                   key={name}
@@ -261,16 +268,16 @@ function HomePage() {
             </div>
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
-                to="/weddings"
+                to="/services"
                 className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90 red-glow"
               >
-                Rhode Island wedding videographer
+                Rhode Island video services
               </Link>
               <a
                 href="/packages#weddings"
                 className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10"
               >
-                Wedding Videography Packages
+                View wedding packages
               </a>
               <Link
                 to="/contact"
@@ -289,7 +296,7 @@ function HomePage() {
           <SectionHeading
             eyebrow="Pricing"
             title="Introductory starting rates."
-            subtitle="Accessible packages built for small businesses, families, artists, and local events. Every project still gets a custom final quote based on date, coverage, and edit complexity."
+            subtitle="Accessible starting ranges for different types of projects, from weddings and events to business videos, music videos, reels, family stories, and custom work. Every project still gets a custom final quote based on date, coverage, and edit complexity."
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {[
@@ -334,7 +341,7 @@ function HomePage() {
                 <h3 className="font-display text-xl uppercase mt-3">{p.name}</h3>
                 <p className="text-sm text-muted-foreground mt-2">{p.desc}</p>
                 <span className="mt-5 inline-flex text-sm uppercase tracking-widest text-foreground">
-                  See details -&gt;
+                  See details →
                 </span>
               </a>
             ))}
@@ -364,12 +371,13 @@ function HomePage() {
               {[
                 "You work directly with the people filming and editing.",
                 "No bloated agency process.",
-                "Creative direction, shooting, editing, and delivery - handled personally.",
+                "Creative direction, shooting, editing, and delivery are handled personally.",
                 "We help you figure out what kind of video you actually need.",
-                "Content that works for websites, social, ads, memories, and promotion.",
+                "Content can be built for websites, social media, ads, memories, launches, events, and promotion.",
+                "Local Rhode Island team. New England projects by quote.",
               ].map((t) => (
                 <li key={t} className="flex gap-3 text-base md:text-lg">
-                  <span className="text-primary font-display text-xl">REC</span>
+                  <span className="text-primary font-display text-xl">●</span>
                   <span>{t}</span>
                 </li>
               ))}
@@ -379,7 +387,7 @@ function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-br from-red-900 via-zinc-900 to-black" />
             <div className="absolute inset-0 film-grain" />
             <div className="absolute bottom-6 left-6 right-6">
-              <p className="timecode mb-2">02:14 - RUNTIME</p>
+              <p className="timecode mb-2">02:14 · RUNTIME</p>
               <p className="font-display text-3xl md:text-4xl uppercase">
                 Real people. Real stories. Filmed right.
               </p>
@@ -432,7 +440,7 @@ function HomePage() {
               },
             ].map((item) => (
               <article key={item.title} className="bg-card border border-border rounded-2xl p-7">
-                <p className="timecode mb-3">GOOD LOOKS MEDIA</p>
+                <p className="timecode mb-3">● GOOD LOOKS MEDIA</p>
                 <h3 className="font-display text-2xl uppercase">{item.title}</h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{item.copy}</p>
               </article>
@@ -445,7 +453,7 @@ function HomePage() {
       <section className="py-24 md:py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-background" />
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="timecode mb-4">READY WHEN YOU ARE</p>
+          <p className="timecode mb-4">● READY WHEN YOU ARE</p>
           <h2 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance">
             Ready to make your project look <span className="text-primary">good?</span>
           </h2>
