@@ -6,9 +6,9 @@ import { absoluteUrl, pageJsonLd } from "@/data/seo";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Video Production Services RI, CT & MA | Good Looks Media Group" },
+      { title: "Video Production Services in Rhode Island | Good Looks Media Group" },
       { name: "description", content: "Rhode Island videographer serving RI, CT, MA, and New England with wedding films, event media, business commercials, music videos, reels, pet videos, documentaries, and custom projects." },
-      { property: "og:title", content: "Services — Good Looks Media Group" },
+      { property: "og:title", content: "Video Production Services in Rhode Island | Good Looks Media Group" },
       { property: "og:description", content: "Video production services across Rhode Island, Connecticut, Massachusetts, and New England." },
       { property: "og:url", content: absoluteUrl("/services") },
     ],
@@ -148,7 +148,10 @@ function ServicesPage() {
             Everything we <span className="text-primary">film.</span>
           </h1>
           <p className="mt-5 text-muted-foreground text-lg max-w-2xl">
-            Organized into clear lanes so you can find what fits. Custom projects always welcome.
+            Good Looks Media Group is a Rhode Island media company built for real projects, not
+            one-size-fits-all video packages. Browse the video lane that fits your project, then
+            request pricing so we can shape the shoot, coverage, and final edits around what you
+            actually need.
           </p>
         </div>
       </section>
