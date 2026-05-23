@@ -10,9 +10,9 @@ import { absoluteUrl, pageJsonLd } from "@/data/seo";
 export const Route = createFileRoute("/packages")({
   head: () => ({
     meta: [
-      { title: "Videography Packages & Pricing RI, CT & MA | Good Looks Media Group" },
+      { title: "Videography Packages & Pricing in Rhode Island | Good Looks Media Group" },
       { name: "description", content: "Rhode Island videography packages with accessible starting ranges for weddings, events, business videos, music videos, and custom projects." },
-      { property: "og:title", content: "Packages & Pricing — Good Looks Media Group" },
+      { property: "og:title", content: "Videography Packages & Pricing in Rhode Island | Good Looks Media Group" },
       { property: "og:description", content: "Accessible starting ranges for wedding films, event recaps, business video, music videos, and custom projects across New England." },
       { property: "og:url", content: absoluteUrl("/packages") },
     ],
@@ -30,14 +30,13 @@ export const Route = createFileRoute("/packages")({
 });
 
 const FAQ = [
-  { q: "Is a deposit required?", a: "Yes — a non-refundable retainer reserves your date. Once your date is locked, that deposit holds the slot for you." },
-  { q: "What's the standard turnaround?", a: "Most edits are delivered in 4–10 weeks depending on package and complexity. Rush delivery is available as a custom add-on." },
-  { q: "How many revisions are included?", a: "One round of revisions on the final edit is standard. Additional rounds are billed hourly." },
-  { q: "Do you provide raw footage?", a: "Raw footage is available as a paid add-on. By default we deliver the finished edit only." },
-  { q: "Do you travel?", a: "Rhode Island is home base. MA and the rest of New England are by quote. Travel between planned locations during your shoot is part of the shoot schedule and accounted for in planning." },
-  { q: "How is final pricing calculated?", a: "Final quote depends on date, location, coverage time, number of videos, turnaround needs, travel, and editing complexity. Most freelance shoots are built around a 4-hour baseline; additional time may be billed hourly." },
+  { q: "Is a deposit required?", a: "Yes - a non-refundable retainer reserves your date. Once your date is locked, that deposit holds the slot for you." },
+  { q: "What's the standard turnaround?", a: "Turnaround depends on the project size, season, and editing complexity. Smaller recaps and reels are usually faster. Weddings, commercials, documentary-style edits, and larger projects take longer. We will give you an estimated delivery window before booking." },
+  { q: "How many revisions are included?", a: "Most projects include one reasonable revision round for small adjustments. Larger changes, major restructuring, extra versions, or new creative direction after editing has started may require an additional quote." },
+  { q: "Do you provide raw footage?", a: "Raw footage may be available as an add-on depending on the project. Raw footage is not the same as a finished film and may require extra transfer, storage, and organization time." },
+  { q: "Do you travel?", a: "Yes. We are based in Rhode Island and available for projects across Providence, Warwick, Newport, Cranston, Pawtucket, East Providence, South County, Massachusetts, Connecticut, and New England by quote." },
+  { q: "How is final pricing calculated?", a: "Final pricing depends on the date, location, coverage time, number of videos, editing complexity, turnaround needs, travel, and whether extra crew, drone footage, interviews, or additional versions are needed." },
 ];
-
 const ADD_ONS = [
   "Extra coverage hour: $75–$125 per hour",
   "Second videographer: Starting at $350",
