@@ -77,6 +77,11 @@ export function Footer() {
               </a>
             </li>
             <li>
+              <Link to="/for-businesses" className="hover:text-primary">
+                For Businesses
+              </Link>
+            </li>
+            <li>
               <Link to="/business-video" className="hover:text-primary">
                 Business Video
               </Link>
