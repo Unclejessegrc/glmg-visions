@@ -32,6 +32,7 @@ export const SEO_SERVICES = [
   "Wedding video packages Rhode Island",
   "Rhode Island event videographer",
   "Rhode Island commercial video production",
+  "Commercial video for Rhode Island businesses",
   "Rhode Island music video production",
   "Business video Rhode Island",
   "New England videographer",
