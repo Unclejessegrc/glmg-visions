@@ -74,11 +74,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#231f20" },
-      { title: "Rhode Island Wedding Videographer | Good Looks Media Group" },
+      { title: "Rhode Island Videographer & Media Company | Good Looks Media Group" },
       {
         name: "description",
         content:
-          "Good Looks Media Group is a Rhode Island wedding videographer creating cinematic wedding films, event videos, music videos, and brand content across RI, MA, and New England.",
+          "Good Looks Media Group is a Rhode Island videographer and media company filming weddings, events, business videos, music videos, reels, pet films, documentaries, and custom projects across RI and New England.",
       },
       { name: "author", content: SITE_NAME },
       { property: "og:site_name", content: SITE_NAME },
@@ -86,21 +86,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       {
         property: "og:title",
-        content: "Rhode Island Wedding Videographer | Good Looks Media Group",
+        content: "Rhode Island Videographer & Media Company | Good Looks Media Group",
       },
       {
         name: "twitter:title",
-        content: "Rhode Island Wedding Videographer | Good Looks Media Group",
+        content: "Rhode Island Videographer & Media Company | Good Looks Media Group",
       },
       {
         property: "og:description",
         content:
-          "Good Looks Media Group creates cinematic wedding films, event videos, music videos, and brand content across RI, MA, and New England.",
+          "Good Looks Media Group films weddings, events, business videos, music videos, reels, pet films, documentaries, and custom projects across RI and New England.",
       },
       {
         name: "twitter:description",
         content:
-          "Good Looks Media Group creates cinematic wedding films, event videos, music videos, and brand content across RI, MA, and New England.",
+          "Good Looks Media Group films weddings, events, business videos, music videos, reels, pet films, documentaries, and custom projects across RI and New England.",
       },
       { property: "og:image", content: OG_IMAGE },
       { name: "twitter:image", content: OG_IMAGE },
