@@ -7,9 +7,11 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 import { OG_IMAGE, SITE_NAME } from "@/data/seo";
+import { trackEvent } from "@/lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -74,11 +76,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#231f20" },
-      { title: "Rhode Island Videographer & Media Company | Good Looks Media Group" },
+      { title: "Good Looks Media Group | Rhode Island Video Production" },
       {
         name: "description",
         content:
-          "Good Looks Media Group is a Rhode Island videographer and media company filming weddings, events, business videos, music videos, reels, pet films, documentaries, and custom projects across RI and New England.",
+          "Event recap, music video, wedding films, and commercial video for Rhode Island. Real production experience. Clear pricing. Request a quote today.",
       },
       { name: "author", content: SITE_NAME },
       { property: "og:site_name", content: SITE_NAME },
@@ -86,21 +88,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       {
         property: "og:title",
-        content: "Rhode Island Videographer & Media Company | Good Looks Media Group",
+        content: "Good Looks Media Group | Rhode Island Video Production",
       },
       {
         name: "twitter:title",
-        content: "Rhode Island Videographer & Media Company | Good Looks Media Group",
+        content: "Good Looks Media Group | Rhode Island Video Production",
       },
       {
         property: "og:description",
         content:
-          "Good Looks Media Group films weddings, events, business videos, music videos, reels, pet films, documentaries, and custom projects across RI and New England.",
+          "Event recap, music video, wedding films, and commercial video for Rhode Island. Real production experience. Clear pricing. Request a quote today.",
       },
       {
         name: "twitter:description",
         content:
-          "Good Looks Media Group films weddings, events, business videos, music videos, reels, pet films, documentaries, and custom projects across RI and New England.",
+          "Event recap, music video, wedding films, and commercial video for Rhode Island. Real production experience. Clear pricing. Request a quote today.",
       },
       { property: "og:image", content: OG_IMAGE },
       { name: "twitter:image", content: OG_IMAGE },
@@ -148,30 +150,31 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <body>
         {/* Hidden static fallback so Netlify detects the React inquiry form at build time. */}
         <form
-          name="goodlooks-contact"
+          name="good-looks-inquiry"
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
           hidden
         >
-          <input type="hidden" name="form-name" value="goodlooks-contact" />
+          <input type="hidden" name="form-name" value="good-looks-inquiry" />
           <input
             type="hidden"
             name="subject"
             value="New Good Looks Media Group inquiry from %{formName} (%{submissionId})"
           />
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <input type="tel" name="phone" />
-          <input type="text" name="preferred_contact_method" />
           <input type="text" name="project_type" />
-          <input type="text" name="event_date_or_deadline" />
-          <input type="text" name="location" />
-          <input type="text" name="estimated_guest_count" />
-          <input type="text" name="services_needed" />
+          <input type="text" name="event_or_shoot_date" />
+          <input type="text" name="location_city" />
           <input type="text" name="budget_range" />
-          <textarea name="project_description"></textarea>
-          <input type="checkbox" name="needs_package_help" />
+          <input type="text" name="name" />
+          <input type="text" name="email_or_phone" />
+          <textarea name="project_details"></textarea>
+          <input type="text" name="package_name" />
+          <input type="text" name="page_path" />
+          <input type="text" name="inquiry_source" />
+          <input type="text" name="utm_source" />
+          <input type="text" name="utm_medium" />
+          <input type="text" name="utm_campaign" />
           <input type="text" name="bot-field" />
         </form>
         {children}
@@ -183,6 +186,23 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const target = event.target as Element | null;
+      const tracked = target?.closest<HTMLElement>("[data-track-event]");
+      if (!tracked) return;
+
+      trackEvent(tracked.dataset.trackEvent ?? "cta_click", {
+        service_lane: tracked.dataset.serviceLane,
+        package_name: tracked.dataset.packageName,
+        page_path: window.location.pathname,
+      });
+    };
+
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -7,6 +7,7 @@ export interface PackageData {
   bestFor: string;
   includes: string[];
   category: string;
+  serviceLane?: "event" | "artist" | "wedding" | "business" | "custom";
   featured?: boolean;
 }
 
@@ -20,7 +21,7 @@ export function PackageCard({ pkg }: { pkg: PackageData }) {
     >
       {pkg.featured && (
         <span className="absolute -top-3 left-6 bg-primary text-primary-foreground text-xs uppercase tracking-widest px-3 py-1 rounded-full">
-          Most popular
+          Best fit
         </span>
       )}
       <p className="timecode">{pkg.category}</p>
@@ -39,9 +40,11 @@ export function PackageCard({ pkg }: { pkg: PackageData }) {
       <a
         href={`/contact?${params.toString()}`}
         className="mt-6 inline-flex justify-center items-center bg-primary text-primary-foreground px-5 py-3 rounded-md uppercase tracking-wider text-sm font-medium hover:opacity-90"
-        data-analytics="cta_click_pricing"
+        data-track-event="package_button_click"
+        data-service-lane={pkg.serviceLane ?? pkg.category.toLowerCase()}
+        data-package-name={pkg.name}
       >
-        Request a Custom Quote
+        Request a Quote
       </a>
     </div>
   );

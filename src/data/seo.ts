@@ -16,10 +16,9 @@ export const SERVICE_AREAS = [
   "East Greenwich, RI",
   "Narragansett, RI",
   "South County, RI",
-  "East Providence, RI",
-  "Connecticut",
-  "Massachusetts",
-  "New England",
+  "Massachusetts by quote",
+  "Connecticut by quote",
+  "New England by quote",
 ];
 
 export const SEO_SERVICES = [
@@ -44,6 +43,7 @@ export const SEO_SERVICES = [
   "Business video production",
   "Commercial video production",
   "Music video production",
+  "Artist performance video",
   "Reels and short-form content",
 ];
 
@@ -61,7 +61,7 @@ export function businessJsonLd() {
     image: OG_IMAGE,
     logo: OG_IMAGE,
     description:
-      "Good Looks Media Group is a Rhode Island videographer and media company serving Rhode Island, Connecticut, Massachusetts, and New England with weddings, events, business video, commercials, music videos, reels, pet films, documentaries, and custom story films.",
+      "Good Looks Media Group is a Rhode Island video production company serving Rhode Island and nearby New England with event recaps, artist visuals, wedding films, commercial video, reels, and custom stories.",
     telephone: "+1-401-465-1529",
     email: CONTACT.email,
     priceRange: "$$",

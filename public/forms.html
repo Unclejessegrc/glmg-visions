@@ -5,19 +5,22 @@
     <title>Good Looks Media Group Forms</title>
   </head>
   <body>
-    <form name="goodlooks-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-      <input type="hidden" name="form-name" value="goodlooks-contact" />
+    <form name="good-looks-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="good-looks-inquiry" />
       <input type="hidden" name="subject" value="New Good Looks Media Group inquiry from %{formName} (%{submissionId})" />
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="tel" name="phone" />
-      <input type="text" name="preferred_contact_method" />
       <input type="text" name="project_type" />
-      <input type="text" name="event_date_or_deadline" />
-      <input type="text" name="location" />
+      <input type="text" name="event_or_shoot_date" />
+      <input type="text" name="location_city" />
       <input type="text" name="budget_range" />
-      <textarea name="project_description"></textarea>
-      <input type="checkbox" name="needs_package_help" />
+      <input type="text" name="name" />
+      <input type="text" name="email_or_phone" />
+      <textarea name="project_details"></textarea>
+      <input type="text" name="package_name" />
+      <input type="text" name="page_path" />
+      <input type="text" name="inquiry_source" />
+      <input type="text" name="utm_source" />
+      <input type="text" name="utm_medium" />
+      <input type="text" name="utm_campaign" />
       <input type="text" name="bot-field" />
     </form>
   </body>

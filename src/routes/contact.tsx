@@ -1,61 +1,74 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
+import { CheckCircle2, Instagram, Mail, MessageSquare, Phone, Youtube } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { CONTACT } from "@/data/contact";
 import { absoluteUrl, pageJsonLd } from "@/data/seo";
-import { Phone, MessageSquare, Mail, Instagram, Youtube, CheckCircle2 } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Book a Rhode Island Videographer | Good Looks Media Group" },
-      { name: "description", content: "Request pricing or check availability for Rhode Island, Connecticut, Massachusetts, and New England video production. Weddings, event media, business video, music videos, reels, and custom projects." },
-      { property: "og:title", content: "Contact — Good Looks Media Group" },
-      { property: "og:description", content: "Tell us about your project and get next steps for video production across RI, CT, MA, and New England." },
+      { title: "Contact & Quote Request | Good Looks Media Group" },
+      {
+        name: "description",
+        content:
+          "Request a quote for event, wedding, music video, or commercial video in Rhode Island. Send the details and Good Looks will respond.",
+      },
+      { property: "og:title", content: "Contact & Quote Request | Good Looks Media Group" },
+      {
+        property: "og:description",
+        content:
+          "Request a quote for event, wedding, music video, or commercial video in Rhode Island.",
+      },
       { property: "og:url", content: absoluteUrl("/contact") },
+      { name: "twitter:title", content: "Contact & Quote Request | Good Looks Media Group" },
+      {
+        name: "twitter:description",
+        content:
+          "Request a quote for event, wedding, music video, or commercial video in Rhode Island.",
+      },
     ],
     links: [{ rel: "canonical", href: absoluteUrl("/contact") }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify(pageJsonLd({
-        name: "Book a Rhode Island Videographer",
-        description: "Contact Good Looks Media Group for videography and video production pricing across Rhode Island, Connecticut, Massachusetts, and New England.",
-        path: "/contact",
-      })),
-    }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          pageJsonLd({
+            name: "Contact & Quote Request",
+            description:
+              "Request a quote for event, wedding, music video, or commercial video in Rhode Island.",
+            path: "/contact",
+          }),
+        ),
+      },
+    ],
   }),
   component: ContactPage,
 });
 
 const PROJECT_TYPES = [
+  "Event Recap",
+  "Music/Artist Video",
   "Wedding",
-  "Baby shower",
-  "Birthday or party",
-  "Business promo",
-  "Commercial",
-  "Music video",
-  "Live show",
-  "Event recap",
-  "Reels and social content",
-  "Pet video",
-  "Documentary",
-  "Custom project",
-];
+  "B2B/Commercial",
+  "Custom Project",
+] as const;
 
 const BUDGETS = [
-  "Under $400",
-  "$400–$800",
-  "$800–$1,500",
-  "$1,500–$2,500",
-  "$2,500–$4,000",
-  "$4,000+",
+  "Under $600",
+  "$600 to $1,200",
+  "$1,200 to $2,500",
+  "$2,500+",
   "Not sure yet",
-];
+] as const;
 
 function ContactPage() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [preset, setPreset] = useState<{ projectType?: string; pkg?: string }>({});
+  const [preset, setPreset] = useState<{ projectType?: string; pkg?: string; utm: Record<string, string> }>({
+    utm: {},
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -63,6 +76,11 @@ function ContactPage() {
     setPreset({
       projectType: sp.get("projectType") || undefined,
       pkg: sp.get("package") || undefined,
+      utm: {
+        utm_source: sp.get("utm_source") || "",
+        utm_medium: sp.get("utm_medium") || "",
+        utm_campaign: sp.get("utm_campaign") || "",
+      },
     });
   }, []);
 
@@ -90,6 +108,11 @@ function ContactPage() {
         throw new Error("Form submission failed");
       }
 
+      trackEvent("quote_form_submit", {
+        service_lane: serviceLaneFromProject(formData.get("project_type")?.toString()),
+        package_name: formData.get("package_name")?.toString(),
+        page_path: window.location.pathname,
+      });
       setStatus("success");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
@@ -104,15 +127,19 @@ function ContactPage() {
         <section className="min-h-[60vh] flex items-center justify-center text-center px-4 py-24">
           <div className="max-w-xl">
             <CheckCircle2 className="w-16 h-16 text-primary mx-auto mb-6" />
-            <h1 className="font-display text-4xl md:text-5xl uppercase">Thanks!</h1>
+            <h1 className="font-display text-4xl md:text-5xl uppercase">Thanks.</h1>
             <p className="mt-4 text-muted-foreground text-lg">
-              Thanks! We got your project request. We will review the details and reach out as soon as possible.
-            </p>
-            <p className="mt-4 text-muted-foreground">
-              Need a faster reply? Call us directly.
+              Thanks. We got your request. Good Looks will review the details and get back to you
+              as soon as possible.
             </p>
             <div className="mt-8 flex justify-center gap-3 flex-wrap">
-              <a href={CONTACT.telHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">Call us</a>
+              <a
+                href={CONTACT.telHref}
+                className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold"
+                data-track-event="phone_click"
+              >
+                Call {CONTACT.phoneDisplay}
+              </a>
             </div>
           </div>
         </section>
@@ -127,14 +154,23 @@ function ContactPage() {
           <div className="max-w-xl">
             <h1 className="font-display text-4xl md:text-5xl uppercase">Message not sent.</h1>
             <p className="mt-4 text-muted-foreground text-lg">
-              Something went wrong and your message may not have gone through. Please call or email us directly.
+              Something went wrong and your message may not have gone through. Please call or email
+              us directly.
             </p>
             <div className="mt-8 flex justify-center gap-3 flex-wrap">
-              <a href={CONTACT.emailHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">
-                Email {CONTACT.email}
+              <a
+                href={CONTACT.emailHref}
+                className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold"
+                data-track-event="email_click"
+              >
+                Email
               </a>
-              <a href={CONTACT.telHref} className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold">
-                Call {CONTACT.phoneDisplay}
+              <a
+                href={CONTACT.telHref}
+                className="border border-foreground/30 px-5 py-3 rounded-md uppercase tracking-widest text-sm font-semibold"
+                data-track-event="phone_click"
+              >
+                Call
               </a>
             </div>
           </div>
@@ -147,12 +183,13 @@ function ContactPage() {
     <SiteLayout>
       <section className="pt-20 pb-12 md:pt-28 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="timecode mb-3">● BOOKING · INQUIRIES</p>
+          <p className="timecode mb-3">QUOTE REQUEST</p>
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] max-w-4xl">
-            Tell us about your <span className="text-primary">project.</span>
+            Request a <span className="text-primary">Quote.</span>
           </h1>
           <p className="mt-5 text-muted-foreground text-lg max-w-2xl">
-            Fill this out and we'll come back with next steps. Prefer call or text? Use the direct options below.
+            Tell us the date, city, project type, and budget range. We will help shape the right
+            coverage and send a custom quote.
           </p>
         </div>
       </section>
@@ -160,21 +197,32 @@ function ContactPage() {
       <section className="pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8 grid md:grid-cols-3 gap-4">
-            <a href={CONTACT.telHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_call">
+            <a
+              href={CONTACT.telHref}
+              className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition"
+              data-track-event="phone_click"
+            >
               <Phone className="w-6 h-6 text-primary" />
               <div>
                 <p className="font-medium">Call</p>
                 <p className="text-sm text-muted-foreground">{CONTACT.phoneDisplay}</p>
               </div>
             </a>
-            <a href={CONTACT.smsHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition" data-analytics="click_text">
+            <a
+              href={CONTACT.smsHref}
+              className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition"
+            >
               <MessageSquare className="w-6 h-6 text-primary" />
               <div>
                 <p className="font-medium">Text us</p>
                 <p className="text-sm text-muted-foreground">{CONTACT.textResponseNote}</p>
               </div>
             </a>
-            <a href={CONTACT.emailHref} className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
+            <a
+              href={CONTACT.emailHref}
+              className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition"
+              data-track-event="email_click"
+            >
               <Mail className="w-6 h-6 text-primary" />
               <div>
                 <p className="font-medium">Email</p>
@@ -185,76 +233,99 @@ function ContactPage() {
 
           <div className="grid lg:grid-cols-3 gap-10">
             <form
-              name="goodlooks-contact"
+              name="good-looks-inquiry"
               method="POST"
               data-netlify="true"
               netlify-honeypot="bot-field"
               onSubmit={onSubmit}
-              data-analytics="form_start"
               className="order-2 lg:order-1 lg:col-span-2 bg-card border border-border rounded-2xl p-6 md:p-10 grid gap-5"
             >
-              {/* Netlify dashboard step required: After deploy, go to Netlify -> Project configuration -> Notifications -> Emails and webhooks -> Form submission notifications. Create an email notification for the form "goodlooks-contact". Recipient: goodlooksmediagroup@gmail.com. Subject: New Good Looks Media Group inquiry. This dashboard step is required so Netlify emails a copy of each verified form submission. */}
-              <input type="hidden" name="form-name" value="goodlooks-contact" />
-              <input type="hidden" name="subject" value="New Good Looks Media Group inquiry from %{formName} (%{submissionId})" />
+              <input type="hidden" name="form-name" value="good-looks-inquiry" />
+              <input
+                type="hidden"
+                name="subject"
+                value="New Good Looks Media Group inquiry from %{formName} (%{submissionId})"
+              />
+              <input type="hidden" name="package_name" value={preset.pkg ?? ""} readOnly />
+              <input
+                type="hidden"
+                name="page_path"
+                value={typeof window === "undefined" ? "/contact" : window.location.pathname}
+                readOnly
+              />
+              <input type="hidden" name="inquiry_source" value="website_quote_form" readOnly />
+              <input type="hidden" name="utm_source" value={preset.utm.utm_source ?? ""} readOnly />
+              <input type="hidden" name="utm_medium" value={preset.utm.utm_medium ?? ""} readOnly />
+              <input type="hidden" name="utm_campaign" value={preset.utm.utm_campaign ?? ""} readOnly />
               <p style={{ display: "none" }}>
                 <label>
                   Do not fill this out:
                   <input name="bot-field" />
                 </label>
               </p>
+
               {preset.pkg && (
                 <div className="bg-primary/10 border border-primary/30 rounded-lg p-3 text-sm">
                   Requesting: <strong className="text-primary">{preset.pkg}</strong>
                 </div>
               )}
+
               <div className="grid md:grid-cols-2 gap-5">
-                <Field label="Name" name="name" required />
-                <Field label="Email" name="email" type="email" required />
-                <Field label="Phone" name="phone" type="tel" required />
-                <Select label="Preferred contact method" name="preferred_contact_method" options={["Call", "Text", "Email"]} required />
+                <Select
+                  label="Project type"
+                  name="project_type"
+                  options={PROJECT_TYPES}
+                  defaultValue={normalizeProjectType(preset.projectType)}
+                  required
+                />
+                <Field label="Event or shoot date" name="event_or_shoot_date" required />
               </div>
               <div className="grid md:grid-cols-2 gap-5">
-                <Select label="Project type" name="project_type" options={PROJECT_TYPES} defaultValue={preset.projectType} required />
-                <Field label="Event date / deadline" name="event_date_or_deadline" placeholder="Date, deadline, or not sure yet" required />
-              </div>
-              <div className="grid md:grid-cols-2 gap-5">
-                <Field label="Location" name="location" placeholder="City, venue, or service area" required />
+                <Field label="Location / city" name="location_city" required />
                 <Select label="Budget range" name="budget_range" options={BUDGETS} required />
               </div>
+              <div className="grid md:grid-cols-2 gap-5">
+                <Field label="Name" name="name" required />
+                <Field label="Email or phone" name="email_or_phone" required />
+              </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Short project description<span className="text-primary"> *</span></label>
+                <label className="block text-sm font-medium mb-2">Tell us about your project</label>
                 <textarea
-                  name="project_description"
+                  name="project_details"
                   rows={5}
-                  required
                   className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="What are you imagining? Vibe, vision, references — anything helps."
+                  placeholder="Type of event, vibe, deliverables, timing, or anything else we should know."
                 />
               </div>
-              <label className="flex items-start gap-3 text-sm">
-                <input type="checkbox" name="needs_package_help" value="Yes" className="mt-1 w-4 h-4 accent-[oklch(0.55_0.21_25)]" />
-                <span>I want help choosing the right package.</span>
-              </label>
               <button
                 type="submit"
                 disabled={status === "submitting"}
                 className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90 red-glow"
-                data-analytics="form_submit"
               >
-                {status === "submitting" ? "Sending..." : "Send My Project"}
+                {status === "submitting" ? "Sending..." : "Request a Quote"}
               </button>
             </form>
 
             <aside className="order-1 lg:order-2 space-y-4">
-              <SectionHeading eyebrow="Social" title="See more." />
-              <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
+              <SectionHeading eyebrow="Recent work" title="See the feel." />
+              <a
+                href={CONTACT.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition"
+              >
                 <Instagram className="w-6 h-6 text-primary" />
                 <div>
                   <p className="font-medium">Instagram</p>
                   <p className="text-sm text-muted-foreground">{CONTACT.instagramLabel}</p>
                 </div>
               </a>
-              <a href={CONTACT.youtubeUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition">
+              <a
+                href={CONTACT.youtubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 bg-card border border-border rounded-xl p-5 hover:border-primary transition"
+              >
                 <Youtube className="w-6 h-6 text-primary" />
                 <div>
                   <p className="font-medium">YouTube</p>
@@ -269,27 +340,44 @@ function ContactPage() {
   );
 }
 
+function serviceLaneFromProject(projectType?: string) {
+  if (!projectType) return "custom";
+  if (projectType.includes("Event")) return "event";
+  if (projectType.includes("Music")) return "artist";
+  if (projectType.includes("Wedding")) return "wedding";
+  if (projectType.includes("B2B")) return "business";
+  return "custom";
+}
+
+function normalizeProjectType(projectType?: string) {
+  if (!projectType) return undefined;
+  if (projectType === "Events") return "Event Recap";
+  if (projectType === "Artist Video" || projectType === "Music") return "Music/Artist Video";
+  if (projectType === "Business") return "B2B/Commercial";
+  return PROJECT_TYPES.find((option) => option === projectType);
+}
+
 function Field({
   label,
   name,
   type = "text",
   required,
-  placeholder,
 }: {
   label: string;
   name: string;
   type?: string;
   required?: boolean;
-  placeholder?: string;
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium mb-2">{label}{required && <span className="text-primary"> *</span>}</label>
+      <label className="block text-sm font-medium mb-2">
+        {label}
+        {required && <span className="text-primary"> *</span>}
+      </label>
       <input
         type={type}
         name={name}
         required={required}
-        placeholder={placeholder}
         className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
       />
     </div>
@@ -311,15 +399,23 @@ function Select({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium mb-2">{label}{required && <span className="text-primary"> *</span>}</label>
+      <label className="block text-sm font-medium mb-2">
+        {label}
+        {required && <span className="text-primary"> *</span>}
+      </label>
       <select
+        key={defaultValue ?? "empty"}
         name={name}
         defaultValue={defaultValue}
         required={required}
         className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
       >
-        <option value="">Select…</option>
-        {options.map(o => <option key={o} value={o}>{o}</option>)}
+        <option value="">Select...</option>
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
       </select>
     </div>
   );

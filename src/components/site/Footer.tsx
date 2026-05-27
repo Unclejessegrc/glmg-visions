@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube, Mail, Phone, MessageSquare } from "lucide-react";
 import { CONTACT } from "@/data/contact";
-import { SHOW_PORTFOLIO } from "@/config/features";
 
 export function Footer() {
   const year = new Date().getFullYear();
+
   return (
     <footer className="bg-card border-t border-border mt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 grid gap-12 md:grid-cols-4">
@@ -16,9 +16,11 @@ export function Footer() {
             </span>
           </div>
           <p className="text-muted-foreground text-sm max-w-md leading-relaxed">
-            Good Looks Media Group — Rhode Island video production and media company since 2018.
-            Weddings, music videos, business ads, events, reels, pet films, documentaries, and
-            stories worth remembering.
+            Good Looks Media Group. Rhode Island video production since 2018. Event recaps,
+            artist visuals, wedding films, and commercial video.
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Serving Rhode Island and nearby New England.
           </p>
           <div className="flex gap-3 mt-5">
             <a
@@ -43,6 +45,7 @@ export function Footer() {
               href={CONTACT.emailHref}
               className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition"
               aria-label="Email"
+              data-track-event="email_click"
             >
               <Mail className="w-4 h-4" />
             </a>
@@ -50,6 +53,7 @@ export function Footer() {
               href={CONTACT.telHref}
               className="p-2 border border-border rounded-md hover:border-primary hover:text-primary transition"
               aria-label="Phone"
+              data-track-event="phone_click"
             >
               <Phone className="w-4 h-4" />
             </a>
@@ -67,38 +71,18 @@ export function Footer() {
           <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4">Services</h4>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link to="/weddings" className="hover:text-primary">
-                Wedding Videography
+              <Link to="/events-recaps" className="hover:text-primary">
+                Events & Music Video
               </Link>
             </li>
             <li>
-              <a href="/packages#weddings" className="hover:text-primary">
-                Wedding Packages
-              </a>
+              <Link to="/weddings" className="hover:text-primary">
+                Weddings
+              </Link>
             </li>
             <li>
               <Link to="/for-businesses" className="hover:text-primary">
-                For Businesses
-              </Link>
-            </li>
-            <li>
-              <Link to="/business-video" className="hover:text-primary">
-                Business Video
-              </Link>
-            </li>
-            <li>
-              <Link to="/events-recaps" className="hover:text-primary">
-                Events & Recaps
-              </Link>
-            </li>
-            <li>
-              <Link to="/music-videos" className="hover:text-primary">
-                Music Videos
-              </Link>
-            </li>
-            <li>
-              <Link to="/services" className="hover:text-primary">
-                All Services
+                B2B Commercial
               </Link>
             </li>
             <li>
@@ -106,13 +90,11 @@ export function Footer() {
                 Packages
               </Link>
             </li>
-            {SHOW_PORTFOLIO && (
-              <li>
-                <Link to="/work" className="hover:text-primary">
-                  Work
-                </Link>
-              </li>
-            )}
+            <li>
+              <Link to="/contact" className="hover:text-primary">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -121,7 +103,7 @@ export function Footer() {
           <ul className="space-y-2 text-sm">
             <li>
               <Link to="/contact" className="hover:text-primary">
-                Get Pricing
+                Request a Quote
               </Link>
             </li>
             <li>
@@ -130,18 +112,18 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="hover:text-primary">
-                Contact
-              </Link>
+              <a href={CONTACT.telHref} className="hover:text-primary" data-track-event="phone_click">
+                {CONTACT.phoneDisplay}
+              </a>
             </li>
             <li>
-              <a href={CONTACT.telHref} className="hover:text-primary">
-                Call
+              <a href={CONTACT.emailHref} className="hover:text-primary" data-track-event="email_click">
+                {CONTACT.email}
               </a>
             </li>
             <li className="text-muted-foreground text-xs pt-2">
-              Service area: Rhode Island — Providence, Warwick, Newport, Cranston, East Greenwich,
-              Narragansett, South County. Massachusetts, Connecticut & New England by quote.
+              Service area: Rhode Island, Providence, Warwick, Cranston, Newport, East Greenwich,
+              Narragansett, South County. Massachusetts, Connecticut, and New England by quote.
             </li>
           </ul>
         </div>
@@ -149,7 +131,7 @@ export function Footer() {
       <div className="border-t border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between gap-2 text-xs text-muted-foreground">
           <p>© {year} Good Looks Media Group · Rhode Island video production</p>
-          <p className="timecode">REC ● 00:00:{String(year % 100).padStart(2, "0")}:18</p>
+          <p className="timecode">REC - 00:00:{String(year % 100).padStart(2, "0")}:18</p>
         </div>
       </div>
     </footer>
