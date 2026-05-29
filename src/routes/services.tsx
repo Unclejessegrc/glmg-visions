@@ -40,7 +40,7 @@ const SERVICES = [
     id: "family",
     title: "Baby Showers & Family Milestones",
     copy: "Beautiful coverage for baby showers, birthdays, anniversaries, graduations, family parties, and once-in-a-lifetime milestones.",
-    bestFor: "Families who want a real keepsake — not just phone photos.",
+    bestFor: "Families who want a real keepsake, not just phone photos.",
     deliverables: "Recap film, social cutdowns, online delivery.",
     price: "Starting at $400",
     packageHref: "/packages#events-recaps",
@@ -107,15 +107,15 @@ const SERVICES = [
     packageLabel: "View Business Packages",
   },
   {
-    id: "video-editing",
-    title: "Video Editing & Post-Production",
+    id: "editing",
+    title: "Editing",
     copy: "Already have footage? Send it to us and we'll turn it into a polished reel, promo, recap, music video, highlight film, or business edit.",
     bestFor: "Businesses, creators, artists, couples, event hosts, and families with footage already shot.",
     deliverables: "Edited video, audio and color polish where possible, captions or text as needed, platform exports.",
     price: "Starting at $175",
-    packageHref: "/packages#editing-post-production",
+    packageHref: "/editing",
     packageLabel: "View Editing Packages",
-    projectType: "Editing Only / Post-Production",
+    contactHref: "/contact?service=editing",
     contactLabel: "I need this edited",
   },
   {
@@ -155,7 +155,7 @@ function ServicesPage() {
     <SiteLayout>
       <section className="pt-20 pb-12 md:pt-28 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="timecode mb-3">● SERVICES</p>
+          <p className="timecode mb-3">SERVICES</p>
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] max-w-4xl">
             Everything we <span className="text-primary">film.</span>
           </h1>
@@ -196,8 +196,10 @@ function ServicesPage() {
                     {s.packageLabel} <ArrowRight className="w-4 h-4" />
                   </a>
                   <a
-                    href={`/contact?projectType=${encodeURIComponent("projectType" in s ? s.projectType : s.title)}`}
+                    href={"contactHref" in s ? s.contactHref : `/contact?projectType=${encodeURIComponent(s.title)}`}
                     className="inline-flex items-center justify-center border border-foreground/30 px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10"
+                    data-track-event={"contactHref" in s ? "click_editing_quote" : undefined}
+                    data-service-lane={"contactHref" in s ? "editing" : undefined}
                   >
                     {"contactLabel" in s ? s.contactLabel : "I need this filmed"}
                   </a>
