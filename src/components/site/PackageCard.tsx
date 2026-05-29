@@ -13,6 +13,8 @@ export interface PackageData {
 
 export function PackageCard({ pkg }: { pkg: PackageData }) {
   const params = new URLSearchParams({ projectType: pkg.category, package: pkg.name });
+  const href = pkg.serviceLane === "editing" ? "/contact?service=editing" : `/contact?${params.toString()}`;
+
   return (
     <div
       className={`relative flex flex-col bg-card border rounded-2xl p-6 md:p-8 transition hover:-translate-y-1 hover:shadow-card ${
@@ -38,9 +40,9 @@ export function PackageCard({ pkg }: { pkg: PackageData }) {
         ))}
       </ul>
       <a
-        href={`/contact?${params.toString()}`}
+        href={href}
         className="mt-6 inline-flex justify-center items-center bg-primary text-primary-foreground px-5 py-3 rounded-md uppercase tracking-wider text-sm font-medium hover:opacity-90"
-        data-track-event="package_button_click"
+        data-track-event={pkg.serviceLane === "editing" ? "click_editing_quote" : "package_button_click"}
         data-service-lane={pkg.serviceLane ?? pkg.category.toLowerCase()}
         data-package-name={pkg.name}
       >
