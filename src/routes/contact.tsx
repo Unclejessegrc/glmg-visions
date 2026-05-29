@@ -7,7 +7,24 @@ import { CONTACT } from "@/data/contact";
 import { absoluteUrl, pageJsonLd } from "@/data/seo";
 import { trackEvent } from "@/lib/analytics";
 
+type ContactSearch = {
+  service?: string;
+  projectType?: string;
+  package?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+};
+
 export const Route = createFileRoute("/contact")({
+  validateSearch: (search: Record<string, unknown>): ContactSearch => ({
+    service: readSearchString(search.service),
+    projectType: readSearchString(search.projectType),
+    package: readSearchString(search.package),
+    utm_source: readSearchString(search.utm_source),
+    utm_medium: readSearchString(search.utm_medium),
+    utm_campaign: readSearchString(search.utm_campaign),
+  }),
   head: () => ({
     meta: [
       { title: "Contact & Quote Request | Good Looks Media Group" },
@@ -53,7 +70,7 @@ const PROJECT_TYPES = [
   "Music/Artist Video",
   "Wedding",
   "B2B/Commercial",
-  "Editing Only / Post-Production",
+  "Editing Only",
   "Custom Project",
 ] as const;
 
@@ -68,25 +85,44 @@ const BUDGETS = [
 
 const YES_NO_MAYBE = ["Yes", "No", "Not sure"] as const;
 
+function readSearchString(value: unknown) {
+  return typeof value === "string" ? value : undefined;
+}
+
+function presetFromSearch(search: ContactSearch) {
+  return {
+    projectType: search.service === "editing" ? "Editing Only" : search.projectType,
+    pkg: search.package,
+    utm: {
+      utm_source: search.utm_source || "",
+      utm_medium: search.utm_medium || "",
+      utm_campaign: search.utm_campaign || "",
+    },
+  };
+}
+
 function ContactPage() {
+  const search = Route.useSearch();
+  const searchPreset = presetFromSearch(search);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [preset, setPreset] = useState<{ projectType?: string; pkg?: string; utm: Record<string, string> }>({
-    utm: {},
+  const [preset, setPreset] = useState<{ projectType?: string; pkg?: string; utm: Record<string, string> }>(
+    searchPreset,
+  );
+  const [projectTypeValue, setProjectTypeValue] = useState(() => {
+    return normalizeProjectType(searchPreset.projectType) ?? "";
   });
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const sp = new URLSearchParams(window.location.search);
-    setPreset({
-      projectType: sp.get("projectType") || undefined,
-      pkg: sp.get("package") || undefined,
-      utm: {
-        utm_source: sp.get("utm_source") || "",
-        utm_medium: sp.get("utm_medium") || "",
-        utm_campaign: sp.get("utm_campaign") || "",
-      },
-    });
-  }, []);
+    setPreset(searchPreset);
+    setProjectTypeValue(normalizeProjectType(searchPreset.projectType) ?? "");
+  }, [
+    search.package,
+    search.projectType,
+    search.service,
+    search.utm_campaign,
+    search.utm_medium,
+    search.utm_source,
+  ]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -112,11 +148,21 @@ function ContactPage() {
         throw new Error("Form submission failed");
       }
 
+      const projectType = formData.get("project_type")?.toString();
+      const serviceLane = serviceLaneFromProject(projectType);
+
       trackEvent("quote_form_submit", {
-        service_lane: serviceLaneFromProject(formData.get("project_type")?.toString()),
+        service_lane: serviceLane,
         package_name: formData.get("package_name")?.toString(),
         page_path: window.location.pathname,
       });
+      if (projectType === "Editing Only") {
+        trackEvent("generate_lead", {
+          service_lane: "editing",
+          package_name: formData.get("package_name")?.toString(),
+          page_path: window.location.pathname,
+        });
+      }
       setStatus("success");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
@@ -279,7 +325,16 @@ function ContactPage() {
                   label="Project type"
                   name="project_type"
                   options={PROJECT_TYPES}
-                  defaultValue={normalizeProjectType(preset.projectType)}
+                  value={projectTypeValue}
+                  onChange={(value) => {
+                    setProjectTypeValue(value);
+                    if (value === "Editing Only") {
+                      trackEvent("select_service_editing", {
+                        service_lane: "editing",
+                        page_path: window.location.pathname,
+                      });
+                    }
+                  }}
                   required
                 />
                 <Field label="Event or shoot date" name="event_or_shoot_date" required />
@@ -381,7 +436,7 @@ function serviceLaneFromProject(projectType?: string) {
   if (projectType.includes("Music")) return "artist";
   if (projectType.includes("Wedding")) return "wedding";
   if (projectType.includes("B2B")) return "business";
-  if (projectType.includes("Editing") || projectType.includes("Post-Production")) return "editing";
+  if (projectType.includes("Editing")) return "editing";
   return "custom";
 }
 
@@ -390,7 +445,9 @@ function normalizeProjectType(projectType?: string) {
   if (projectType === "Events") return "Event Recap";
   if (projectType === "Artist Video" || projectType === "Music") return "Music/Artist Video";
   if (projectType === "Business") return "B2B/Commercial";
-  if (projectType === "Editing") return "Editing Only / Post-Production";
+  if (projectType === "Editing" || projectType === "editing") {
+    return "Editing Only";
+  }
   return PROJECT_TYPES.find((option) => option === projectType);
 }
 
@@ -425,13 +482,17 @@ function Select({
   label,
   name,
   options,
+  value,
   defaultValue,
+  onChange,
   required,
 }: {
   label: string;
   name: string;
   options: readonly string[];
+  value?: string;
   defaultValue?: string;
+  onChange?: (value: string) => void;
   required?: boolean;
 }) {
   return (
@@ -441,10 +502,12 @@ function Select({
         {required && <span className="text-primary"> *</span>}
       </label>
       <select
-        key={defaultValue ?? "empty"}
+        key={value ?? defaultValue ?? "empty"}
         name={name}
-        defaultValue={defaultValue}
+        value={value}
+        defaultValue={value === undefined ? defaultValue : undefined}
         required={required}
+        onChange={(event) => onChange?.(event.currentTarget.value)}
         className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
       >
         <option value="">Select...</option>
