@@ -14,6 +14,7 @@ import {
 } from "@/data/packages";
 import { absoluteUrl, pageJsonLd } from "@/data/seo";
 import { trackEvent } from "@/lib/analytics";
+import heroImage from "@/assets/hero.jpg";
 
 export const Route = createFileRoute("/packages")({
   head: () => ({
@@ -61,7 +62,7 @@ const PACKAGE_GROUPS = [
   { id: "music-videos", title: "Music / Artist Performance Video", packages: MUSIC_PACKAGES },
   { id: "weddings", title: "Weddings", packages: WEDDING_PACKAGES },
   { id: "business-video", title: "B2B Commercial Video", packages: BUSINESS_PACKAGES },
-  { id: "editing-post-production", title: "Editing & Post-Production", packages: EDITING_PACKAGES },
+  { id: "editing", title: "Editing", packages: EDITING_PACKAGES },
   { id: "custom-projects", title: "Custom Projects", packages: CUSTOM_PACKAGES },
 ] as const;
 
@@ -131,7 +132,7 @@ function PackagesPage() {
       </section>
 
       <section className="pb-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-5">
           <div className="bg-card border border-primary/40 rounded-2xl p-7 md:p-10 grid md:grid-cols-[1fr_auto] gap-6 items-center red-glow">
             <div>
               <p className="timecode mb-3">CURRENT FOCUS</p>
@@ -153,6 +154,30 @@ function PackagesPage() {
               Request a Quote
             </Link>
           </div>
+
+          <div className="bg-card border border-border rounded-2xl overflow-hidden grid md:grid-cols-[1fr_280px]">
+            <div className="p-7 md:p-10">
+              <p className="timecode mb-3">EDITING</p>
+              <h2 className="font-display text-4xl uppercase leading-none">Need editing only?</h2>
+              <p className="mt-4 text-muted-foreground max-w-3xl">
+                Already have footage? View our editing and post-production packages.
+              </p>
+              <Link
+                to="/editing"
+                className="mt-6 inline-flex justify-center bg-primary text-primary-foreground px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold"
+                data-track-event="click_editing_packages_box"
+                data-service-lane="editing"
+              >
+                View Editing Packages
+              </Link>
+            </div>
+            <img
+              src={heroImage}
+              alt="Post-production editing screen for Good Looks Media Group editing packages"
+              className="h-full min-h-56 w-full object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
       </section>
 
@@ -166,13 +191,13 @@ function PackagesPage() {
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeading title={group.title} />
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {group.packages.map((pkg) => (
                 <PackageCard key={pkg.name} pkg={pkg} />
               ))}
             </div>
             <p className="mt-6 text-sm text-muted-foreground max-w-4xl">
-              {group.id === "editing-post-production"
+              {group.id === "editing"
                 ? "Starting prices. Final quote depends on raw footage length, file organization, audio quality, edit complexity, revision needs, turnaround time, and final deliverables."
                 : "Introductory starting ranges. Final quote depends on date, location, coverage time, audio needs, edit complexity, crew size, revisions, and deliverables."}
             </p>
@@ -201,8 +226,8 @@ function PackagesPage() {
                   ["Artist Video - Visual Story", "$1,200 to $2,000", "Performance plus concept"],
                   ["Weddings - Highlight", "$2,000 to $2,800", "Most couples"],
                   ["Business - Brand Builder", "$1,200 to $2,200", "Most businesses"],
-                  ["Editing - Quick Reel Edit", "Starting at $175", "Footage already filmed"],
-                  ["Editing - Wedding Highlight Edit", "Starting at $900", "Organized wedding footage"],
+                  ["Editing - Quick Cut", "Starting at $175", "Short edits from footage already filmed"],
+                  ["Editing - Full Edit", "Starting at $650", "Longer or more involved edits"],
                 ].map((row) => (
                   <tr key={row[0]} className="hover:bg-card/60">
                     <td className="p-4 font-medium">{row[0]}</td>
