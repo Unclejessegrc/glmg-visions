@@ -14,20 +14,20 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Request a quote for event, wedding, music video, or commercial video in Rhode Island. Send the details and Good Looks will respond.",
+          "Request a quote for event, wedding, music video, editing, or commercial video in Rhode Island. Send the details and Good Looks will respond.",
       },
       { property: "og:title", content: "Contact & Quote Request | Good Looks Media Group" },
       {
         property: "og:description",
         content:
-          "Request a quote for event, wedding, music video, or commercial video in Rhode Island.",
+          "Request a quote for event, wedding, music video, editing, or commercial video in Rhode Island.",
       },
       { property: "og:url", content: absoluteUrl("/contact") },
       { name: "twitter:title", content: "Contact & Quote Request | Good Looks Media Group" },
       {
         name: "twitter:description",
         content:
-          "Request a quote for event, wedding, music video, or commercial video in Rhode Island.",
+          "Request a quote for event, wedding, music video, editing, or commercial video in Rhode Island.",
       },
     ],
     links: [{ rel: "canonical", href: absoluteUrl("/contact") }],
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/contact")({
           pageJsonLd({
             name: "Contact & Quote Request",
             description:
-              "Request a quote for event, wedding, music video, or commercial video in Rhode Island.",
+              "Request a quote for event, wedding, music video, editing, or commercial video in Rhode Island.",
             path: "/contact",
           }),
         ),
@@ -53,16 +53,20 @@ const PROJECT_TYPES = [
   "Music/Artist Video",
   "Wedding",
   "B2B/Commercial",
+  "Editing Only / Post-Production",
   "Custom Project",
 ] as const;
 
 const BUDGETS = [
-  "Under $600",
+  "Under $250",
+  "$250 to $600",
   "$600 to $1,200",
   "$1,200 to $2,500",
   "$2,500+",
   "Not sure yet",
 ] as const;
+
+const YES_NO_MAYBE = ["Yes", "No", "Not sure"] as const;
 
 function ContactPage() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -289,12 +293,43 @@ function ContactPage() {
                 <Field label="Email or phone" name="email_or_phone" required />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Tell us about your project</label>
+                <label className="block text-sm font-medium mb-2">
+                  Tell us about your project
+                </label>
                 <textarea
                   name="project_details"
                   rows={5}
                   className="w-full bg-background border border-input rounded-md px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Type of event, vibe, deliverables, timing, or anything else we should know."
+                />
+              </div>
+              <div className="border-t border-border pt-5 grid gap-5">
+                <div>
+                  <p className="timecode mb-2">Editing details</p>
+                  <p className="text-sm text-muted-foreground">
+                    If you already have footage, these details help us quote the edit cleanly.
+                  </p>
+                </div>
+                <div className="grid md:grid-cols-2 gap-5">
+                  <Field label="What kind of footage do you have?" name="footage_type" />
+                  <Field label="Rough amount of footage" name="footage_amount" />
+                </div>
+                <div className="grid md:grid-cols-2 gap-5">
+                  <Field label="Desired finished video length" name="finished_video_length" />
+                  <Field label="Desired deadline" name="desired_deadline" />
+                </div>
+                <div className="grid md:grid-cols-3 gap-5">
+                  <Select label="Do you need captions?" name="needs_captions" options={YES_NO_MAYBE} />
+                  <Select label="Do you need music?" name="needs_music" options={YES_NO_MAYBE} />
+                  <Select
+                    label="Do you need color correction?"
+                    name="needs_color_correction"
+                    options={YES_NO_MAYBE}
+                  />
+                </div>
+                <Field
+                  label="Paste Google Drive / Dropbox / WeTransfer link"
+                  name="footage_link"
                 />
               </div>
               <button
@@ -346,6 +381,7 @@ function serviceLaneFromProject(projectType?: string) {
   if (projectType.includes("Music")) return "artist";
   if (projectType.includes("Wedding")) return "wedding";
   if (projectType.includes("B2B")) return "business";
+  if (projectType.includes("Editing") || projectType.includes("Post-Production")) return "editing";
   return "custom";
 }
 
@@ -354,6 +390,7 @@ function normalizeProjectType(projectType?: string) {
   if (projectType === "Events") return "Event Recap";
   if (projectType === "Artist Video" || projectType === "Music") return "Music/Artist Video";
   if (projectType === "Business") return "B2B/Commercial";
+  if (projectType === "Editing") return "Editing Only / Post-Production";
   return PROJECT_TYPES.find((option) => option === projectType);
 }
 

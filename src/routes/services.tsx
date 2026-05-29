@@ -7,7 +7,7 @@ export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title: "Video Production Services in Rhode Island | Good Looks Media Group" },
-      { name: "description", content: "Rhode Island videographer serving RI, CT, MA, and New England with wedding films, event media, business commercials, music videos, reels, pet videos, documentaries, and custom projects." },
+      { name: "description", content: "Rhode Island videographer serving RI, CT, MA, and New England with wedding films, event media, business commercials, music videos, editing, reels, documentaries, and custom projects." },
       { property: "og:title", content: "Video Production Services in Rhode Island | Good Looks Media Group" },
       { property: "og:description", content: "Video production services across Rhode Island, Connecticut, Massachusetts, and New England." },
       { property: "og:url", content: absoluteUrl("/services") },
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/services")({
       type: "application/ld+json",
       children: JSON.stringify(pageJsonLd({
         name: "Video Production Services in Rhode Island, Connecticut, Massachusetts, and New England",
-        description: "Service lanes for wedding videography, Rhode Island event media, business video production, music videos, reels, pet videos, documentaries, and custom projects.",
+        description: "Service lanes for wedding videography, Rhode Island event media, business video production, music videos, editing, reels, documentaries, and custom projects.",
         path: "/services",
       })),
     }],
@@ -107,6 +107,18 @@ const SERVICES = [
     packageLabel: "View Business Packages",
   },
   {
+    id: "video-editing",
+    title: "Video Editing & Post-Production",
+    copy: "Already have footage? Send it to us and we'll turn it into a polished reel, promo, recap, music video, highlight film, or business edit.",
+    bestFor: "Businesses, creators, artists, couples, event hosts, and families with footage already shot.",
+    deliverables: "Edited video, audio and color polish where possible, captions or text as needed, platform exports.",
+    price: "Starting at $175",
+    packageHref: "/packages#editing-post-production",
+    packageLabel: "View Editing Packages",
+    projectType: "Editing Only / Post-Production",
+    contactLabel: "I need this edited",
+  },
+  {
     id: "pets",
     title: "Pet Videos",
     copy: "Pet films, memorial keepsakes, funny pet reels, adoption videos, breeder content, and family pet documentaries.",
@@ -184,10 +196,10 @@ function ServicesPage() {
                     {s.packageLabel} <ArrowRight className="w-4 h-4" />
                   </a>
                   <a
-                    href={`/contact?projectType=${encodeURIComponent(s.title)}`}
+                    href={`/contact?projectType=${encodeURIComponent("projectType" in s ? s.projectType : s.title)}`}
                     className="inline-flex items-center justify-center border border-foreground/30 px-6 py-3 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10"
                   >
-                    I need this filmed
+                    {"contactLabel" in s ? s.contactLabel : "I need this filmed"}
                   </a>
                 </div>
               </div>

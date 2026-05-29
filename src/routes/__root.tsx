@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Event recap, music video, wedding films, and commercial video for Rhode Island. Real production experience. Clear pricing. Request a quote today.",
+          "Event recap, music video, wedding films, commercial video, and editing for Rhode Island. Real production experience. Clear pricing. Request a quote today.",
       },
       { name: "author", content: SITE_NAME },
       { property: "og:site_name", content: SITE_NAME },
@@ -97,12 +97,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Event recap, music video, wedding films, and commercial video for Rhode Island. Real production experience. Clear pricing. Request a quote today.",
+          "Event recap, music video, wedding films, commercial video, and editing for Rhode Island. Real production experience. Clear pricing. Request a quote today.",
       },
       {
         name: "twitter:description",
         content:
-          "Event recap, music video, wedding films, and commercial video for Rhode Island. Real production experience. Clear pricing. Request a quote today.",
+          "Event recap, music video, wedding films, commercial video, and editing for Rhode Island. Real production experience. Clear pricing. Request a quote today.",
       },
       { property: "og:image", content: OG_IMAGE },
       { name: "twitter:image", content: OG_IMAGE },
@@ -169,6 +169,14 @@ function RootShell({ children }: { children: React.ReactNode }) {
           <input type="text" name="name" />
           <input type="text" name="email_or_phone" />
           <textarea name="project_details"></textarea>
+          <input type="text" name="footage_type" />
+          <input type="text" name="footage_amount" />
+          <input type="text" name="finished_video_length" />
+          <input type="text" name="desired_deadline" />
+          <input type="text" name="needs_captions" />
+          <input type="text" name="needs_music" />
+          <input type="text" name="needs_color_correction" />
+          <input type="text" name="footage_link" />
           <input type="text" name="package_name" />
           <input type="text" name="page_path" />
           <input type="text" name="inquiry_source" />

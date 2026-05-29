@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, MessageSquare, FileText } from "lucide-react";
+import { Phone, MessageSquare, DollarSign } from "lucide-react";
 import { CONTACT } from "@/data/contact";
 
 export function MobileCtaBar() {
@@ -9,7 +9,7 @@ export function MobileCtaBar() {
         <a
           href={CONTACT.telHref}
           className="flex flex-col items-center py-3 text-foreground"
-          data-track-event="phone_click"
+          data-analytics="click_call"
         >
           <Phone className="w-5 h-5 mb-0.5" />
           <span className="text-xs uppercase tracking-wider">Call</span>
@@ -17,18 +17,18 @@ export function MobileCtaBar() {
         <a
           href={CONTACT.smsHref}
           className="flex flex-col items-center py-3 text-foreground"
+          data-analytics="click_text"
         >
           <MessageSquare className="w-5 h-5 mb-0.5" />
           <span className="text-xs uppercase tracking-wider">Text</span>
         </a>
         <Link
-          to="/contact"
+          to="/packages"
           className="flex flex-col items-center py-3 bg-primary text-primary-foreground"
-          data-track-event="quote_cta_click"
-          data-service-lane="event"
+          data-analytics="cta_click_pricing"
         >
-          <FileText className="w-5 h-5 mb-0.5" />
-          <span className="text-xs uppercase tracking-wider font-semibold">Quote</span>
+          <DollarSign className="w-5 h-5 mb-0.5" />
+          <span className="text-xs uppercase tracking-wider font-semibold">Pricing</span>
         </Link>
       </div>
     </div>

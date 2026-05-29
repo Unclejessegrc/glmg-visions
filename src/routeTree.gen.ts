@@ -11,11 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as WeddingsRouteImport } from './routes/weddings'
+import { Route as VideoEditingRouteImport } from './routes/video-editing'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PackagesRouteImport } from './routes/packages'
 import { Route as MusicVideosRouteImport } from './routes/music-videos'
+import { Route as ForBusinessesRouteImport } from './routes/for-businesses'
 import { Route as EventsRecapsRouteImport } from './routes/events-recaps'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BusinessVideoRouteImport } from './routes/business-video'
@@ -30,6 +32,11 @@ const WorkRoute = WorkRouteImport.update({
 const WeddingsRoute = WeddingsRouteImport.update({
   id: '/weddings',
   path: '/weddings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideoEditingRoute = VideoEditingRouteImport.update({
+  id: '/video-editing',
+  path: '/video-editing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -55,6 +62,11 @@ const PackagesRoute = PackagesRouteImport.update({
 const MusicVideosRoute = MusicVideosRouteImport.update({
   id: '/music-videos',
   path: '/music-videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForBusinessesRoute = ForBusinessesRouteImport.update({
+  id: '/for-businesses',
+  path: '/for-businesses',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsRecapsRoute = EventsRecapsRouteImport.update({
@@ -89,11 +101,13 @@ export interface FileRoutesByFullPath {
   '/business-video': typeof BusinessVideoRoute
   '/contact': typeof ContactRoute
   '/events-recaps': typeof EventsRecapsRoute
+  '/for-businesses': typeof ForBusinessesRoute
   '/music-videos': typeof MusicVideosRoute
   '/packages': typeof PackagesRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/video-editing': typeof VideoEditingRoute
   '/weddings': typeof WeddingsRoute
   '/work': typeof WorkRoute
 }
@@ -103,11 +117,13 @@ export interface FileRoutesByTo {
   '/business-video': typeof BusinessVideoRoute
   '/contact': typeof ContactRoute
   '/events-recaps': typeof EventsRecapsRoute
+  '/for-businesses': typeof ForBusinessesRoute
   '/music-videos': typeof MusicVideosRoute
   '/packages': typeof PackagesRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/video-editing': typeof VideoEditingRoute
   '/weddings': typeof WeddingsRoute
   '/work': typeof WorkRoute
 }
@@ -118,11 +134,13 @@ export interface FileRoutesById {
   '/business-video': typeof BusinessVideoRoute
   '/contact': typeof ContactRoute
   '/events-recaps': typeof EventsRecapsRoute
+  '/for-businesses': typeof ForBusinessesRoute
   '/music-videos': typeof MusicVideosRoute
   '/packages': typeof PackagesRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/video-editing': typeof VideoEditingRoute
   '/weddings': typeof WeddingsRoute
   '/work': typeof WorkRoute
 }
@@ -134,11 +152,13 @@ export interface FileRouteTypes {
     | '/business-video'
     | '/contact'
     | '/events-recaps'
+    | '/for-businesses'
     | '/music-videos'
     | '/packages'
     | '/portfolio'
     | '/services'
     | '/sitemap.xml'
+    | '/video-editing'
     | '/weddings'
     | '/work'
   fileRoutesByTo: FileRoutesByTo
@@ -148,11 +168,13 @@ export interface FileRouteTypes {
     | '/business-video'
     | '/contact'
     | '/events-recaps'
+    | '/for-businesses'
     | '/music-videos'
     | '/packages'
     | '/portfolio'
     | '/services'
     | '/sitemap.xml'
+    | '/video-editing'
     | '/weddings'
     | '/work'
   id:
@@ -162,11 +184,13 @@ export interface FileRouteTypes {
     | '/business-video'
     | '/contact'
     | '/events-recaps'
+    | '/for-businesses'
     | '/music-videos'
     | '/packages'
     | '/portfolio'
     | '/services'
     | '/sitemap.xml'
+    | '/video-editing'
     | '/weddings'
     | '/work'
   fileRoutesById: FileRoutesById
@@ -177,11 +201,13 @@ export interface RootRouteChildren {
   BusinessVideoRoute: typeof BusinessVideoRoute
   ContactRoute: typeof ContactRoute
   EventsRecapsRoute: typeof EventsRecapsRoute
+  ForBusinessesRoute: typeof ForBusinessesRoute
   MusicVideosRoute: typeof MusicVideosRoute
   PackagesRoute: typeof PackagesRoute
   PortfolioRoute: typeof PortfolioRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  VideoEditingRoute: typeof VideoEditingRoute
   WeddingsRoute: typeof WeddingsRoute
   WorkRoute: typeof WorkRoute
 }
@@ -200,6 +226,13 @@ declare module '@tanstack/react-router' {
       path: '/weddings'
       fullPath: '/weddings'
       preLoaderRoute: typeof WeddingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/video-editing': {
+      id: '/video-editing'
+      path: '/video-editing'
+      fullPath: '/video-editing'
+      preLoaderRoute: typeof VideoEditingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -235,6 +268,13 @@ declare module '@tanstack/react-router' {
       path: '/music-videos'
       fullPath: '/music-videos'
       preLoaderRoute: typeof MusicVideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-businesses': {
+      id: '/for-businesses'
+      path: '/for-businesses'
+      fullPath: '/for-businesses'
+      preLoaderRoute: typeof ForBusinessesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events-recaps': {
@@ -281,11 +321,13 @@ const rootRouteChildren: RootRouteChildren = {
   BusinessVideoRoute: BusinessVideoRoute,
   ContactRoute: ContactRoute,
   EventsRecapsRoute: EventsRecapsRoute,
+  ForBusinessesRoute: ForBusinessesRoute,
   MusicVideosRoute: MusicVideosRoute,
   PackagesRoute: PackagesRoute,
   PortfolioRoute: PortfolioRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  VideoEditingRoute: VideoEditingRoute,
   WeddingsRoute: WeddingsRoute,
   WorkRoute: WorkRoute,
 }

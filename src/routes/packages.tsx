@@ -7,6 +7,7 @@ import { FaqAccordion } from "@/components/site/FaqAccordion";
 import {
   BUSINESS_PACKAGES,
   CUSTOM_PACKAGES,
+  EDITING_PACKAGES,
   EVENT_PACKAGES,
   MUSIC_PACKAGES,
   WEDDING_PACKAGES,
@@ -21,20 +22,20 @@ export const Route = createFileRoute("/packages")({
       {
         name: "description",
         content:
-          "Clear video package ranges for events, music videos, weddings, and business video in Rhode Island. Compare options and request a quote.",
+          "Clear video package ranges for events, music videos, weddings, business video, and editing in Rhode Island. Compare options and request a quote.",
       },
       { property: "og:title", content: "Videography Packages Rhode Island | Good Looks Media Group" },
       {
         property: "og:description",
         content:
-          "Clear video package ranges for events, music videos, weddings, and business video in Rhode Island. Compare options and request a quote.",
+          "Clear video package ranges for events, music videos, weddings, business video, and editing in Rhode Island. Compare options and request a quote.",
       },
       { property: "og:url", content: absoluteUrl("/packages") },
       { name: "twitter:title", content: "Videography Packages Rhode Island | Good Looks Media Group" },
       {
         name: "twitter:description",
         content:
-          "Clear video package ranges for events, music videos, weddings, and business video in Rhode Island.",
+          "Clear video package ranges for events, music videos, weddings, business video, and editing in Rhode Island.",
       },
     ],
     links: [{ rel: "canonical", href: absoluteUrl("/packages") }],
@@ -45,7 +46,7 @@ export const Route = createFileRoute("/packages")({
           pageJsonLd({
             name: "Videography Packages Rhode Island",
             description:
-              "Clear video package ranges for events, music videos, weddings, and business video in Rhode Island.",
+              "Clear video package ranges for events, music videos, weddings, business video, and editing in Rhode Island.",
             path: "/packages",
           }),
         ),
@@ -60,6 +61,7 @@ const PACKAGE_GROUPS = [
   { id: "music-videos", title: "Music / Artist Performance Video", packages: MUSIC_PACKAGES },
   { id: "weddings", title: "Weddings", packages: WEDDING_PACKAGES },
   { id: "business-video", title: "B2B Commercial Video", packages: BUSINESS_PACKAGES },
+  { id: "editing-post-production", title: "Editing & Post-Production", packages: EDITING_PACKAGES },
   { id: "custom-projects", title: "Custom Projects", packages: CUSTOM_PACKAGES },
 ] as const;
 
@@ -123,6 +125,7 @@ function PackagesPage() {
           <p className="mt-5 text-muted-foreground text-lg max-w-3xl">
             Compare starting ranges for Rhode Island event recaps, artist visuals, wedding films,
             commercial video, and custom projects.
+            Need help with footage you already shot? See the editing-only packages below.
           </p>
         </div>
       </section>
@@ -169,8 +172,9 @@ function PackagesPage() {
               ))}
             </div>
             <p className="mt-6 text-sm text-muted-foreground max-w-4xl">
-              Introductory starting ranges. Final quote depends on date, location, coverage time,
-              audio needs, edit complexity, crew size, revisions, and deliverables.
+              {group.id === "editing-post-production"
+                ? "Starting prices. Final quote depends on raw footage length, file organization, audio quality, edit complexity, revision needs, turnaround time, and final deliverables."
+                : "Introductory starting ranges. Final quote depends on date, location, coverage time, audio needs, edit complexity, crew size, revisions, and deliverables."}
             </p>
           </div>
         </section>
@@ -197,6 +201,8 @@ function PackagesPage() {
                   ["Artist Video - Visual Story", "$1,200 to $2,000", "Performance plus concept"],
                   ["Weddings - Highlight", "$2,000 to $2,800", "Most couples"],
                   ["Business - Brand Builder", "$1,200 to $2,200", "Most businesses"],
+                  ["Editing - Quick Reel Edit", "Starting at $175", "Footage already filmed"],
+                  ["Editing - Wedding Highlight Edit", "Starting at $900", "Organized wedding footage"],
                 ].map((row) => (
                   <tr key={row[0]} className="hover:bg-card/60">
                     <td className="p-4 font-medium">{row[0]}</td>

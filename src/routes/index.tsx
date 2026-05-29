@@ -1,5 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Briefcase, Check, Heart, Music, PartyPopper, Play, Video } from "lucide-react";
+import {
+  ArrowRight,
+  Briefcase,
+  Check,
+  Heart,
+  Music,
+  PartyPopper,
+  Play,
+  Scissors,
+  Video,
+} from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PortfolioCard } from "@/components/site/PortfolioCard";
@@ -92,6 +102,37 @@ const TRUST_POINTS = [
   "Clear starting ranges and custom quotes",
   "Social-ready clips available",
 ];
+
+const ADDITIONAL_SERVICES = [
+  {
+    title: "Reels & Short-Form",
+    copy: "Fast vertical edits for campaigns, launches, and social-ready moments.",
+    icon: Video,
+    to: "/packages#custom-projects",
+    cta: "View Custom Packages",
+  },
+  {
+    title: "Artist Visuals",
+    copy: "Performance visuals and music-driven edits connected to the events lane.",
+    icon: Music,
+    to: "/events-recaps",
+    cta: "View Artist Visuals",
+  },
+  {
+    title: "Video Editing & Post-Production",
+    copy: "Already have footage? Send it to us and we'll turn it into a polished reel, promo, recap, music video, highlight film, or business edit.",
+    icon: Scissors,
+    to: "/video-editing",
+    cta: "Get an Editing Quote",
+  },
+  {
+    title: "Custom Projects",
+    copy: "Documentary-style edits, personal stories, and unusual ideas quoted when the project fits.",
+    icon: Play,
+    to: "/packages#custom-projects",
+    cta: "View Custom Packages",
+  },
+] as const;
 
 function HomePage() {
   return (
@@ -215,16 +256,10 @@ function HomePage() {
             />
           </div>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/events-recaps"
-              className="inline-flex items-center gap-2 text-primary uppercase tracking-widest text-sm hover:underline"
-            >
+            <Link to="/events-recaps" className="inline-flex items-center gap-2 text-primary uppercase tracking-widest text-sm hover:underline">
               Event recap video Rhode Island <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link
-              to="/packages"
-              className="inline-flex items-center gap-2 text-primary uppercase tracking-widest text-sm hover:underline"
-            >
+            <Link to="/packages" className="inline-flex items-center gap-2 text-primary uppercase tracking-widest text-sm hover:underline">
               Rhode Island event videography packages <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -236,10 +271,7 @@ function HomePage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-end mb-10 gap-4 flex-wrap">
               <SectionHeading eyebrow="Selected work" title="Artist visuals and video work." />
-              <Link
-                to="/work"
-                className="text-primary uppercase tracking-widest text-sm hover:underline whitespace-nowrap"
-              >
+              <Link to="/work" className="text-primary uppercase tracking-widest text-sm hover:underline whitespace-nowrap">
                 View Recent Work
               </Link>
             </div>
@@ -267,20 +299,13 @@ function HomePage() {
           </div>
           <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-card">
             <div className="absolute inset-0">
-              <img
-                src={heroImage}
-                alt="Good Looks Media Group cinematic production still"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
+              <img src={heroImage} alt="Good Looks Media Group cinematic production still" className="w-full h-full object-cover" loading="lazy" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
             <div className="absolute inset-0 film-grain" />
             <div className="absolute bottom-6 left-6 right-6">
               <p className="timecode mb-2">GOOD LOOKS MEDIA</p>
-              <p className="font-display text-3xl md:text-4xl uppercase">
-                Real events. Real energy. Filmed right.
-              </p>
+              <p className="font-display text-3xl md:text-4xl uppercase">Real events. Real energy. Filmed right.</p>
             </div>
           </div>
         </div>
@@ -293,19 +318,15 @@ function HomePage() {
             title="Custom stories stay available, lower on the list."
             subtitle="Need something outside the main lanes? We still quote custom stories, reels, documentary-style edits, and unusual ideas when the project fits."
           />
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              ["Reels & Short-Form", Video, "/packages#custom-projects"],
-              ["Artist Visuals", Music, "/events-recaps"],
-              ["Custom Projects", Play, "/packages#custom-projects"],
-            ].map(([title, Icon, to]) => (
-              <Link
-                key={title as string}
-                to={to as string}
-                className="bg-card border border-border rounded-xl p-6 hover:border-primary transition"
-              >
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {ADDITIONAL_SERVICES.map(({ title, copy, icon: Icon, to, cta }) => (
+              <Link key={title} to={to} className="bg-card border border-border rounded-xl p-6 hover:border-primary transition">
                 <Icon className="w-7 h-7 text-primary" />
-                <h3 className="font-display text-2xl uppercase mt-4">{title as string}</h3>
+                <h3 className="font-display text-2xl uppercase mt-4">{title}</h3>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{copy}</p>
+                <span className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-foreground">
+                  {cta} <ArrowRight className="w-4 h-4" />
+                </span>
               </Link>
             ))}
           </div>
@@ -316,26 +337,16 @@ function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-background" />
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="timecode mb-4">READY WHEN YOU ARE</p>
-          <h2 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance">
-            Ready to film your event?
-          </h2>
+          <h2 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance">Ready to film your event?</h2>
           <p className="mt-5 text-muted-foreground text-lg max-w-2xl mx-auto">
             Tell us the date, location, type of event, and the kind of video you need. We will help
             you choose the right coverage and send a custom quote.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/contact"
-              className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold red-glow"
-              data-track-event="quote_cta_click"
-              data-service-lane="event"
-            >
+            <Link to="/contact" className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold red-glow" data-track-event="quote_cta_click" data-service-lane="event">
               Request a Quote
             </Link>
-            <Link
-              to="/packages"
-              className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold"
-            >
+            <Link to="/packages" className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold">
               View Packages
             </Link>
           </div>

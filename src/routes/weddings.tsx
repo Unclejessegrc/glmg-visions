@@ -1,13 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { ArrowRight, Check, Heart } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PackageCard } from "@/components/site/PackageCard";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { WEDDING_PACKAGES } from "@/data/packages";
 import { absoluteUrl, businessJsonLd, pageJsonLd, serviceJsonLd, websiteJsonLd } from "@/data/seo";
-import { trackEvent } from "@/lib/analytics";
 
 export const Route = createFileRoute("/weddings")({
   head: () => ({
@@ -16,21 +13,27 @@ export const Route = createFileRoute("/weddings")({
       {
         name: "description",
         content:
-          "Wedding highlight films and full stories for Rhode Island couples. Clear packages starting at $1,200. Watch samples and check your date.",
+          "Good Looks Media Group is a Rhode Island wedding videographer creating cinematic wedding films, highlight videos, ceremony coverage, reception coverage, drone footage, and social media wedding teasers across Rhode Island and New England.",
       },
       { name: "robots", content: "index, follow" },
-      { property: "og:title", content: "Rhode Island Wedding Videographer | Good Looks Media Group" },
+      {
+        property: "og:title",
+        content: "Rhode Island Wedding Videographer | Good Looks Media Group",
+      },
       {
         property: "og:description",
         content:
-          "Wedding highlight films and full stories for Rhode Island couples. Clear packages starting at $1,200.",
+          "Good Looks Media Group creates cinematic wedding films, highlight videos, ceremony coverage, reception coverage, drone footage, and social media wedding teasers across Rhode Island and New England.",
       },
       { property: "og:url", content: absoluteUrl("/weddings") },
-      { name: "twitter:title", content: "Rhode Island Wedding Videographer | Good Looks Media Group" },
+      {
+        name: "twitter:title",
+        content: "Rhode Island Wedding Videographer | Good Looks Media Group",
+      },
       {
         name: "twitter:description",
         content:
-          "Wedding highlight films and full stories for Rhode Island couples. Clear packages starting at $1,200.",
+          "Cinematic wedding films, ceremony coverage, reception coverage, drone footage, and social media wedding teasers across Rhode Island and New England.",
       },
     ],
     links: [{ rel: "canonical", href: absoluteUrl("/weddings") }],
@@ -45,13 +48,13 @@ export const Route = createFileRoute("/weddings")({
             pageJsonLd({
               name: "Rhode Island Wedding Videographer",
               description:
-                "Wedding highlight films and full stories for Rhode Island and nearby New England couples.",
+                "Good Looks Media Group is a Rhode Island wedding videographer creating cinematic wedding films across Rhode Island and New England.",
               path: "/weddings",
             }),
             serviceJsonLd({
-              name: "Rhode Island Wedding Videographer",
+              name: "Wedding Videography",
               description:
-                "Wedding teasers, highlight films, and full story edits for Rhode Island and nearby New England couples.",
+                "Cinematic wedding films, ceremony coverage, reception coverage, highlight films, drone wedding footage, social media wedding teasers, and full wedding stories for couples in Rhode Island and New England.",
               path: "/weddings",
             }),
           ],
@@ -62,83 +65,111 @@ export const Route = createFileRoute("/weddings")({
   component: WeddingsPage,
 });
 
-const DELIVERABLES = [
-  "Filming coverage based on package",
-  "Edited teaser or highlight film",
-  "Audio moments when possible",
-  "Color correction",
-  "Online delivery",
-  "Revisions based on package",
-  "Optional add-ons by quote",
+const WEDDING_SERVICES = [
+  "Ceremony coverage",
+  "Reception coverage",
+  "Cinematic highlight films",
+  "Full ceremony edits",
+  "Toasts and speeches",
+  "Drone wedding footage",
+  "Social media teaser edits",
+  "Elopements and small weddings",
+];
+
+const WHY_COUPLES_CHOOSE_US = [
+  "Two-person video team",
+  "Direct communication with the people filming and editing",
+  "Cinematic but natural style",
+  "Wedding films that feel personal, not generic",
+  "Drone footage available when weather, location, airspace rules, and licensing allow",
+  "Flexible packages for small weddings, elopements, and full wedding days",
+];
+
+const ADDONS = [
+  ["Extra coverage hour", "$75–$125 / hr"],
+  ["Second videographer", "Starting at $350"],
+  [
+    "Drone footage",
+    "Starting at $200 (weather, location, airspace rules, and licensing permitting)",
+  ],
+  ["Raw footage", "Starting at $200"],
+  ["48-hour teaser", "Starting at $150"],
+  ["Rehearsal dinner coverage", "Custom quote"],
+  ["Vertical social clip bundle", "Starting at $150"],
 ];
 
 const FAQ = [
   {
-    q: "What is the turnaround time?",
-    a: "Turnaround depends on the package, season, and edit complexity. We will give you an estimated delivery window before booking.",
+    q: "How far in advance should we book?",
+    a: "Most couples book 6–12 months out. Peak season fills up fast — earlier is better, but we'll always check availability if your date is soon.",
   },
   {
-    q: "Do you travel outside Rhode Island?",
-    a: "Yes. Rhode Island is home base. Weddings in nearby New England are available by quote.",
+    q: "Do you travel?",
+    a: "Yes. Rhode Island is home base. Massachusetts and the rest of New England are by quote. Travel beyond the planned shoot radius gets factored into the quote.",
   },
   {
-    q: "How many revisions are included?",
-    a: "Most wedding packages include one reasonable revision round. Larger restructuring or extra versions may require an additional quote.",
+    q: "When do we get the final film?",
+    a: "Standard turnaround is 6–10 weeks depending on package. A 48-hour teaser is available as an add-on.",
   },
   {
-    q: "What is the deposit to book?",
-    a: "A non-refundable retainer reserves your date. The exact deposit depends on the package and will be listed in the quote.",
+    q: "How many revisions?",
+    a: "One round of revisions on the final film is included. Additional revisions are billed hourly.",
   },
   {
-    q: "What format do I receive the final video in?",
-    a: "Final films are delivered through an online link in web-ready formats. Vertical teaser exports can be added by package or quote.",
-  },
-  {
-    q: "Do you film ceremonies and speeches?",
-    a: "Yes. Ceremony and speech coverage can be included depending on the package and audio setup.",
-  },
-  {
-    q: "Can we add extra hours?",
-    a: "Yes. Extra coverage can be added by quote when the schedule needs more time.",
-  },
-  {
-    q: "Do you travel for weddings outside Rhode Island?",
-    a: "Yes. Massachusetts, Connecticut, and nearby New England weddings are available by quote.",
+    q: "Is a deposit required?",
+    a: "Yes — a non-refundable retainer reserves your date. The balance is due before final delivery.",
   },
 ];
 
 function WeddingsPage() {
-  useEffect(() => {
-    trackEvent("wedding_page_view", { service_lane: "wedding" });
-  }, []);
-
   return (
     <SiteLayout>
       <section className="pt-20 pb-12 md:pt-28 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="timecode mb-3">WEDDINGS</p>
+          <p className="timecode mb-3">● WEDDINGS</p>
           <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] max-w-4xl">
-            Rhode Island Wedding Videographer
+            Rhode Island Wedding <span className="text-primary">Videographer</span>
           </h1>
           <p className="mt-5 text-muted-foreground text-lg max-w-3xl leading-relaxed">
-            Wedding films for Rhode Island and nearby New England couples who want the real
-            moments, the energy, and the story of the day captured clearly.
+            Good Looks Media Group is a Rhode Island wedding videographer creating cinematic,
+            personal wedding films for couples across Rhode Island, Massachusetts, Connecticut, and
+            New England. We film ceremonies, receptions, speeches, first looks, drone footage,
+            highlight films, teasers, and full wedding stories.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/contact"
               className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:opacity-90 red-glow"
-              data-track-event="quote_cta_click"
-              data-service-lane="wedding"
             >
-              Request a Quote
+              Check Availability
             </Link>
             <a
-              href="#wedding-packages"
+              href="/packages#weddings"
               className="border border-foreground/30 text-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold hover:bg-foreground/10"
             >
-              View Wedding Packages
+              Wedding Packages
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-card/40 border-y border-border">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Wedding Services"
+            title="Wedding Videography Services in Rhode Island"
+            subtitle="Coverage can stay simple for an elopement or expand into a fuller wedding story with ceremony, reception, speeches, teasers, and add-ons."
+          />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {WEDDING_SERVICES.map((service) => (
+              <article
+                key={service}
+                className="bg-card border border-border rounded-2xl p-6 hover:border-primary transition"
+              >
+                <p className="timecode mb-3">Wedding Film</p>
+                <h2 className="font-display text-2xl uppercase leading-tight">{service}</h2>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -148,101 +179,102 @@ function WeddingsPage() {
           <div className="relative aspect-video rounded-2xl overflow-hidden border border-border bg-black red-glow">
             <img
               src="/AdobeStock_2007799559.jpeg"
-              alt="Wedding ceremony video coverage"
+              alt="Outdoor wedding ceremony with drone videography"
               className="w-full h-full object-cover object-center"
               loading="lazy"
             />
-          </div>
-          <p className="mt-5 text-sm text-muted-foreground max-w-3xl">
-            Wedding samples are shared when couples clear projects for public use. We keep the
-            process direct from inquiry to delivery, with timeline and turnaround discussed before
-            booking.
-          </p>
-        </div>
-      </section>
-
-      <section id="wedding-packages" className="scroll-mt-32 py-16 md:py-24 bg-card/40 border-y border-border">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Packages"
-            title="Rhode Island wedding videography packages."
-            subtitle="Clear starting ranges. Every final quote depends on date, location, coverage time, audio needs, edit complexity, crew size, revisions, and deliverables."
-          />
-          <div className="grid md:grid-cols-3 gap-6 mt-8">
-            {WEDDING_PACKAGES.map((pkg) => (
-              <PackageCard key={pkg.name} pkg={pkg} />
-            ))}
           </div>
         </div>
       </section>
 
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
           <div>
-            <SectionHeading eyebrow="Deliverables" title="What your wedding package can include." />
-            <ul className="grid sm:grid-cols-2 gap-3">
-              {DELIVERABLES.map((item) => (
-                <li key={item} className="bg-card border border-border rounded-xl p-4 flex gap-3">
-                  <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                  <span className="text-sm">{item}</span>
-                </li>
-              ))}
-            </ul>
+            <p className="timecode mb-3">● LOCAL WEDDINGS</p>
+            <h2 className="font-display text-4xl md:text-6xl uppercase leading-[0.95]">
+              Rhode Island Wedding Locations We Serve
+            </h2>
           </div>
           <div className="bg-card border border-border rounded-2xl p-7 md:p-9">
-            <Heart className="w-8 h-8 text-primary" />
-            <h2 className="font-display text-4xl uppercase leading-none mt-4">
-              Serving Rhode Island and nearby New England.
-            </h2>
-            <p className="mt-5 text-muted-foreground leading-relaxed">
-              Planning a party, shower, or post-wedding event too? See{" "}
-              <Link to="/events-recaps" className="text-primary underline underline-offset-4">
-                event recap video Rhode Island
-              </Link>
-              . Need video for your venue or local brand? We also create{" "}
-              <Link to="/for-businesses" className="text-primary underline underline-offset-4">
-                commercial video for local businesses
-              </Link>
-              .
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              We are based in Rhode Island and available for wedding videography throughout
+              Providence, Warwick, Cranston, Newport, Pawtucket, East Providence, South County,
+              Bristol, and Narragansett. We also film weddings in Massachusetts, Connecticut, and
+              the greater New England area by quote.
             </p>
           </div>
         </div>
       </section>
 
       <section className="py-16 md:py-24 bg-card/40 border-y border-border">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Why Good Looks"
+            title="Why Couples Choose Good Looks Media Group"
+            subtitle="A wedding film should feel like your day, not a template. We keep the process clear, personal, and close to the people doing the actual filming and editing."
+          />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {WHY_COUPLES_CHOOSE_US.map((point) => (
+              <article key={point} className="bg-card border border-border rounded-2xl p-6">
+                <p className="timecode mb-3">Good Looks</p>
+                <h2 className="font-display text-2xl uppercase leading-tight">{point}</h2>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Packages"
+            title="Three ways to film your day."
+            subtitle="Every wedding gets a custom final quote. These are introductory starting ranges."
+          />
+          <div className="grid md:grid-cols-3 gap-6 mt-8">
+            {WEDDING_PACKAGES.map((p) => (
+              <PackageCard key={p.name} pkg={p} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-card/40 border-y border-border">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading eyebrow="Add-ons" title="Make it yours." />
+          <div className="grid sm:grid-cols-2 gap-3">
+            {ADDONS.map(([name, price]) => (
+              <div
+                key={name}
+                className="flex justify-between items-center bg-card border border-border rounded-lg p-4"
+              >
+                <span className="font-medium">{name}</span>
+                <span className="text-primary text-sm">{price}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow="FAQ" title="Wedding video questions." />
+          <SectionHeading eyebrow="FAQ" title="Common questions." />
           <FaqAccordion items={FAQ} />
         </div>
       </section>
 
-      <section className="py-24 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-background" />
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="timecode mb-4">CHECK YOUR DATE</p>
-          <h2 className="font-display text-5xl md:text-7xl uppercase leading-[0.95] text-balance">
-            Ready to talk wedding video?
-          </h2>
-          <p className="mt-6 text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            Send the date, city, venue if you have one, and the kind of film you want. We will help
-            shape the right package.
+      <section className="py-20 text-center">
+        <div className="mx-auto max-w-3xl px-4">
+          <h2 className="font-display text-4xl md:text-5xl uppercase">Check your date.</h2>
+          <p className="mt-3 text-muted-foreground">
+            Tell us when, where, and what you're imagining. We'll come back with a real quote.
           </p>
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/contact"
-              className="bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold red-glow"
-              data-track-event="quote_cta_click"
-              data-service-lane="wedding"
-            >
-              Request a Quote
-            </Link>
-            <Link
-              to="/packages#weddings"
-              className="border border-foreground/30 px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold inline-flex items-center gap-2"
-            >
-              View Packages <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+          <Link
+            to="/contact"
+            className="mt-7 inline-block bg-primary text-primary-foreground px-7 py-4 rounded-md uppercase tracking-widest text-sm font-semibold red-glow"
+          >
+            Check Availability
+          </Link>
         </div>
       </section>
     </SiteLayout>

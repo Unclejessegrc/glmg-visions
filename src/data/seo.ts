@@ -44,6 +44,8 @@ export const SEO_SERVICES = [
   "Commercial video production",
   "Music video production",
   "Artist performance video",
+  "Video editing services RI",
+  "Post-production services",
   "Reels and short-form content",
 ];
 

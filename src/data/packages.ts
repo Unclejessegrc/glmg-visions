@@ -219,6 +219,140 @@ export const BUSINESS_PACKAGES: PackageData[] = [
   },
 ];
 
+export const EDITING_PACKAGES: PackageData[] = [
+  {
+    category: "Editing",
+    serviceLane: "editing",
+    name: "Quick Reel Edit",
+    price: "$175",
+    priceLabel: "Starting at",
+    bestFor: "Best for one reel up to 60 seconds from footage you already have.",
+    includes: [
+      "One reel up to 60 seconds",
+      "Basic captions or text",
+      "Music sync",
+      "Light color correction",
+      "One revision",
+      "One platform-ready export",
+    ],
+  },
+  {
+    category: "Editing",
+    serviceLane: "editing",
+    name: "Short-Form Batch",
+    price: "4 for $600",
+    priceLabel: "Bundle price",
+    bestFor: "Best for creators and businesses that need a small batch of short edits.",
+    includes: [
+      "Four short edits from client footage",
+      "Light captions or text overlays",
+      "Platform-ready exports",
+      "One revision per video",
+    ],
+  },
+  {
+    category: "Editing",
+    serviceLane: "editing",
+    name: "Business Promo Edit",
+    price: "$450",
+    priceLabel: "Starting at",
+    bestFor: "Best for one polished promo, talking-head video, or client-shot business edit.",
+    includes: [
+      "One polished promo or talking-head video",
+      "Basic audio cleanup",
+      "Color correction",
+      "Simple graphics",
+      "Up to two revisions",
+    ],
+  },
+  {
+    category: "Editing",
+    serviceLane: "editing",
+    name: "Long-Form Edit",
+    price: "$650",
+    priceLabel: "Starting at",
+    bestFor: "Best for YouTube, interview, explainer, or recap-style edits.",
+    includes: [
+      "One long-form edit up to roughly 10 to 15 minutes",
+      "Story structure and pacing",
+      "Audio and color polish where possible",
+      "Up to two revisions",
+    ],
+  },
+  {
+    category: "Editing",
+    serviceLane: "editing",
+    name: "Event Recap Edit",
+    price: "$450",
+    priceLabel: "Starting at",
+    bestFor: "Best for turning client-shot event footage into a clean recap.",
+    includes: [
+      "One recap cut from client-shot event footage",
+      "Music-led pacing",
+      "Light cleanup",
+      "One to two revisions",
+    ],
+  },
+  {
+    category: "Editing",
+    serviceLane: "editing",
+    name: "Music Video Edit",
+    price: "$650",
+    priceLabel: "Starting at",
+    bestFor: "Best for artists with performance or concept footage already captured.",
+    includes: [
+      "Performance or concept editing",
+      "Sync",
+      "Color polish",
+      "Creative pacing",
+      "Up to two revisions",
+    ],
+  },
+  {
+    category: "Editing",
+    serviceLane: "editing",
+    name: "Wedding Highlight Edit",
+    price: "$900",
+    priceLabel: "Starting at",
+    bestFor: "Best for a 3 to 6 minute highlight film from organized client footage.",
+    includes: [
+      "One 3 to 6 minute highlight film",
+      "Music and pacing",
+      "Color and audio polish where possible",
+      "Up to two revisions",
+    ],
+  },
+  {
+    category: "Editing",
+    serviceLane: "editing",
+    name: "Ceremony or Speeches Edit",
+    price: "$300 to $500 each",
+    priceLabel: "Range",
+    bestFor: "Best for ceremony, vows, speeches, or individual key moments.",
+    includes: [
+      "Documentary-style editing",
+      "Clean sequence assembly",
+      "Audio polish where possible",
+      "Online delivery",
+    ],
+  },
+  {
+    category: "Editing",
+    serviceLane: "editing",
+    name: "Monthly Editing Retainer",
+    price: "$650/month",
+    priceLabel: "Starting at",
+    bestFor:
+      "Limited-scope recurring editing. Monthly retainers are quoted based on volume and complexity.",
+    includes: [
+      "Recurring editing plan",
+      "Quoted based on volume and complexity",
+      "Platform-ready exports",
+      "Revisions based on scope",
+    ],
+  },
+];
+
 export const CUSTOM_PACKAGES: PackageData[] = [
   {
     category: "Custom",
@@ -244,5 +378,6 @@ export const ALL_PACKAGES = [
   ...MUSIC_PACKAGES,
   ...WEDDING_PACKAGES,
   ...BUSINESS_PACKAGES,
+  ...EDITING_PACKAGES,
   ...CUSTOM_PACKAGES,
 ];

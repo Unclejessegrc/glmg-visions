@@ -7,7 +7,7 @@ export interface PackageData {
   bestFor: string;
   includes: string[];
   category: string;
-  serviceLane?: "event" | "artist" | "wedding" | "business" | "custom";
+  serviceLane?: "event" | "artist" | "wedding" | "business" | "editing" | "custom";
   featured?: boolean;
 }
 

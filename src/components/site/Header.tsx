@@ -2,14 +2,17 @@ import { Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { CONTACT } from "@/data/contact";
+import { SHOW_PORTFOLIO } from "@/config/features";
 
 const NAV = [
-  { to: "/events-recaps", label: "Events & Music Video", primary: true },
-  { to: "/weddings", label: "Weddings" },
-  { to: "/for-businesses", label: "B2B Commercial" },
+  { to: "/", label: "Home" },
+  { to: "/services", label: "Services" },
   { to: "/packages", label: "Packages" },
-  { to: "/contact", label: "Contact" },
+  ...(SHOW_PORTFOLIO ? [{ to: "/work", label: "Portfolio" }] : []),
+  { to: "/about", label: "About" },
 ] as const;
+
+const MOBILE_NAV = [...NAV, { to: "/for-businesses", label: "For Businesses" }, { to: "/contact", label: "Contact" }] as const;
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -41,12 +44,9 @@ export function Header() {
             <Link
               key={n.to}
               to={n.to}
-              className={`text-xs uppercase tracking-wider transition ${
-                "primary" in n && n.primary
-                  ? "text-foreground font-semibold"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-              activeProps={{ className: "text-primary" }}
+              className="text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition"
+              activeProps={{ className: "text-foreground" }}
+              activeOptions={{ exact: n.to === "/" }}
             >
               {n.label}
             </Link>
@@ -54,20 +54,33 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-5 xl:gap-6">
+          <Link
+            to="/for-businesses"
+            className="inline-flex items-center border border-foreground/20 px-3.5 py-2 rounded-md text-xs font-medium uppercase tracking-wider text-foreground hover:border-primary hover:text-primary transition"
+            activeProps={{ className: "border-primary text-primary" }}
+          >
+            For Businesses
+          </Link>
+          <Link
+            to="/contact"
+            className="text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition"
+            activeProps={{ className: "text-foreground" }}
+          >
+            Contact
+          </Link>
           <a
             href={CONTACT.telHref}
             className="text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground flex items-center gap-2 transition"
-            data-track-event="phone_click"
+            data-analytics="click_call"
           >
             <Phone className="w-4 h-4" /> Call
           </a>
           <Link
             to="/contact"
             className="inline-flex items-center bg-primary text-primary-foreground px-4 py-2 rounded-md text-xs font-medium uppercase tracking-wider hover:opacity-90 red-glow"
-            data-track-event="quote_cta_click"
-            data-service-lane="event"
+            data-analytics="cta_click_pricing"
           >
-            Request a Quote
+            Get Pricing
           </Link>
         </div>
 
@@ -83,14 +96,12 @@ export function Header() {
       {open && (
         <div className="lg:hidden bg-background/95 backdrop-blur border-t border-border">
           <nav className="flex flex-col p-4 gap-1">
-            {NAV.map((n) => (
+            {MOBILE_NAV.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
                 onClick={() => setOpen(false)}
-                className={`text-base py-3 px-2 border-b border-border ${
-                  "primary" in n && n.primary ? "text-primary font-semibold" : "text-foreground"
-                }`}
+                className="text-base py-3 px-2 border-b border-border text-foreground"
               >
                 {n.label}
               </Link>
@@ -99,7 +110,7 @@ export function Header() {
               href={CONTACT.telHref}
               onClick={() => setOpen(false)}
               className="text-base py-3 px-2 border-b border-border text-foreground flex items-center gap-2"
-              data-track-event="phone_click"
+              data-analytics="click_call"
             >
               <Phone className="w-4 h-4" /> Call
             </a>
@@ -107,10 +118,8 @@ export function Header() {
               to="/contact"
               onClick={() => setOpen(false)}
               className="mt-3 bg-primary text-primary-foreground text-center py-3 rounded-md font-medium uppercase tracking-wider"
-              data-track-event="quote_cta_click"
-              data-service-lane="event"
             >
-              Request a Quote
+              Get Pricing
             </Link>
           </nav>
         </div>
