@@ -19,6 +19,7 @@ import { Route as PackagesRouteImport } from './routes/packages'
 import { Route as MusicVideosRouteImport } from './routes/music-videos'
 import { Route as ForBusinessesRouteImport } from './routes/for-businesses'
 import { Route as EventsRecapsRouteImport } from './routes/events-recaps'
+import { Route as EditingRouteImport } from './routes/editing'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BusinessVideoRouteImport } from './routes/business-video'
 import { Route as AboutRouteImport } from './routes/about'
@@ -74,6 +75,11 @@ const EventsRecapsRoute = EventsRecapsRouteImport.update({
   path: '/events-recaps',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EditingRoute = EditingRouteImport.update({
+  id: '/editing',
+  path: '/editing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/business-video': typeof BusinessVideoRoute
   '/contact': typeof ContactRoute
+  '/editing': typeof EditingRoute
   '/events-recaps': typeof EventsRecapsRoute
   '/for-businesses': typeof ForBusinessesRoute
   '/music-videos': typeof MusicVideosRoute
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/business-video': typeof BusinessVideoRoute
   '/contact': typeof ContactRoute
+  '/editing': typeof EditingRoute
   '/events-recaps': typeof EventsRecapsRoute
   '/for-businesses': typeof ForBusinessesRoute
   '/music-videos': typeof MusicVideosRoute
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/business-video': typeof BusinessVideoRoute
   '/contact': typeof ContactRoute
+  '/editing': typeof EditingRoute
   '/events-recaps': typeof EventsRecapsRoute
   '/for-businesses': typeof ForBusinessesRoute
   '/music-videos': typeof MusicVideosRoute
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/business-video'
     | '/contact'
+    | '/editing'
     | '/events-recaps'
     | '/for-businesses'
     | '/music-videos'
@@ -167,6 +177,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/business-video'
     | '/contact'
+    | '/editing'
     | '/events-recaps'
     | '/for-businesses'
     | '/music-videos'
@@ -183,6 +194,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/business-video'
     | '/contact'
+    | '/editing'
     | '/events-recaps'
     | '/for-businesses'
     | '/music-videos'
@@ -200,6 +212,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BusinessVideoRoute: typeof BusinessVideoRoute
   ContactRoute: typeof ContactRoute
+  EditingRoute: typeof EditingRoute
   EventsRecapsRoute: typeof EventsRecapsRoute
   ForBusinessesRoute: typeof ForBusinessesRoute
   MusicVideosRoute: typeof MusicVideosRoute
@@ -284,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EventsRecapsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/editing': {
+      id: '/editing'
+      path: '/editing'
+      fullPath: '/editing'
+      preLoaderRoute: typeof EditingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -320,6 +340,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BusinessVideoRoute: BusinessVideoRoute,
   ContactRoute: ContactRoute,
+  EditingRoute: EditingRoute,
   EventsRecapsRoute: EventsRecapsRoute,
   ForBusinessesRoute: ForBusinessesRoute,
   MusicVideosRoute: MusicVideosRoute,
