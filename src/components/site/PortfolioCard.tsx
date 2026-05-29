@@ -6,7 +6,7 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
   const [open, setOpen] = useState(false);
   const hasVideo = Boolean(item.youtubeId || item.embedUrl || item.autoplayEmbedUrl);
   const embedSrc = getAutoplayEmbedSrc(item);
-  const ctaLabel = item.ctaLabel ?? "I want something like this →";
+  const ctaLabel = item.ctaLabel ?? "Request something like this";
 
   return (
     <>
@@ -22,22 +22,28 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/15" />
           </>
         ) : (
-          <div className={`absolute inset-0 bg-gradient-to-br ${item.posterGradient} opacity-90 group-hover:opacity-100 transition`} />
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${item.posterGradient} opacity-90 group-hover:opacity-100 transition`}
+          />
         )}
         <div className="absolute inset-0 film-grain" />
         <button
           type="button"
-          onClick={() => setOpen(true)}
-          aria-label={`Play ${item.title}`}
+          onClick={() => hasVideo && setOpen(true)}
+          aria-label={hasVideo ? `Play ${item.title}` : item.title}
           className="absolute inset-0 flex flex-col justify-end p-5 text-left"
-          data-analytics="portfolio_video_play"
+          data-track-event={hasVideo ? "portfolio_video_play" : undefined}
         >
-          <div className="absolute top-4 right-4 timecode bg-black/60 px-2 py-1 rounded">{item.category}</div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="w-14 h-14 rounded-full bg-primary/90 text-primary-foreground flex items-center justify-center group-hover:scale-110 transition red-glow">
-              <Play className="w-6 h-6 ml-0.5 fill-current" />
-            </span>
+          <div className="absolute top-4 right-4 timecode bg-black/60 px-2 py-1 rounded">
+            {item.category}
           </div>
+          {hasVideo && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="w-14 h-14 rounded-full bg-primary/90 text-primary-foreground flex items-center justify-center group-hover:scale-110 transition red-glow">
+                <Play className="w-6 h-6 ml-0.5 fill-current" />
+              </span>
+            </div>
+          )}
           <div className="relative">
             <h3 className="font-display text-xl md:text-2xl uppercase">{item.title}</h3>
             <p className="text-sm text-zinc-300/90 mt-1">{item.description}</p>
@@ -46,16 +52,24 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
             )}
             <span className="mt-3 inline-flex flex-wrap gap-x-4 gap-y-1 text-xs uppercase tracking-widest text-primary">
               <span>{ctaLabel}</span>
-              {!item.ctaLabel && <span>Get a quote →</span>}
+              {!item.ctaLabel && <span>Request a Quote</span>}
             </span>
           </div>
         </button>
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-[60] bg-black/90 backdrop-blur flex items-center justify-center p-4" onClick={() => setOpen(false)}>
-          <button className="absolute top-4 right-4 text-white p-2" aria-label="Close"><X className="w-6 h-6" /></button>
-          <div className="w-full max-w-5xl aspect-video bg-black border border-border rounded-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="fixed inset-0 z-[60] bg-black/90 backdrop-blur flex items-center justify-center p-4"
+          onClick={() => setOpen(false)}
+        >
+          <button className="absolute top-4 right-4 text-white p-2" aria-label="Close">
+            <X className="w-6 h-6" />
+          </button>
+          <div
+            className="w-full max-w-5xl aspect-video bg-black border border-border rounded-xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
             {hasVideo ? (
               <iframe
                 src={embedSrc}
@@ -66,12 +80,10 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
                 title={item.iframeTitle ?? item.title}
               />
             ) : (
-              <div className={`w-full h-full bg-gradient-to-br ${item.posterGradient} flex items-center justify-center text-center p-8`}>
-                <div>
-                  <p className="timecode mb-2">PLACEHOLDER</p>
-                  <h3 className="font-display text-3xl uppercase">{item.title}</h3>
-                  <p className="text-zinc-300 mt-2 text-sm">Replace with real YouTube ID in <code>src/data/portfolio.ts</code></p>
-                </div>
+              <div
+                className={`w-full h-full bg-gradient-to-br ${item.posterGradient} flex items-center justify-center text-center p-8`}
+              >
+                <h3 className="font-display text-3xl uppercase">{item.title}</h3>
               </div>
             )}
           </div>
